@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" 
+					content="default-src 'self'; 
+							 script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.com *.museografo.dev;
+							 style-src 'self' 'unsafe-inline'
+							 img-src * ;
+							 connect-src *.museografo.com *.museografo.dev http://museografo.com http://museografo.dev;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="page" class="main">
+		
+		<section class="feed_container" data-role="content">
+			
+			
+		
+
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script id="subcategory_template" type="text/x-handlebars-template">
+		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i><span>{{data.parent_name}}</span></a>
+		<article class="no_box border_e clearfix subcategory">
+			{{#data.parent_is_following}}
+				<a class="_nav_unfollow_category unfollow_category" id="_nav_follow_category" data-id="{{../data.parent}}"><i class="fa fa-check"></i> Siguiendo</a>
+			{{/data.parent_is_following}}
+			{{^data.parent_is_following}}
+				<a class="_nav_follow_category follow_category" id="_nav_follow_category" data-id="{{../data.parent}}"><i class="fa fa-plus-circle"></i> Seguir</a>
+			{{/data.parent_is_following}}
+			{{#data.parent_thumbnail}}
+				<section class="parent_thumb">
+					<div class="ornament"></div>
+					<img src="{{.}}">
+				</section>
+			{{/data.parent_thumbnail}}
+		</article>
+		{{#each data.pool}}
+			<article class="half_box border_e each_category" data-id="{{ID}}">
+
+				{{#if has_description}}
+					<a href="category_detail.html?cat_id={{ID}}" rel="external">
+				{{/if }}
+				{{^if has_description}}
+					<a href="subcategories.html?parent={{ID}}" rel="external">
+				{{/if }}
+					{{#thumbnail}}
+						<div class="image_wrapper">
+							<i class="fa fa-info-circle image_wrapper_floating"></i>
+							<img src="{{.}}" alt="{{../title}}">
+						</div>
+					{{/thumbnail}}
+					<h2 class="box">
+						{{title}}
+						{{#is_following}}
+							<a class="_nav_unfollow_category unfollow_category inline" id="_nav_follow_category" data-id="{{ID}}"><i class="fa fa-check"></i></a>
+						{{/is_following}}
+						{{^is_following}}
+							<a class="_nav_follow_category follow_category inline" id="_nav_follow_category" data-id="{{ID}}"><i class="fa fa-plus-circle"></i></a>
+						{{/is_following}}
+					</h2>
+				</a>
+			</article>
+		{{/each}}
+	</script>
+
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		var GET = app.getUrlVars();
+		app.render_subcategories(GET.parent);
+	</script>
+</html>
