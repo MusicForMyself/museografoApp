@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" 
+					content="default-src 'self'; 
+							 script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.com *.museografo.dev;
+							 style-src 'self' 'unsafe-inline'
+							 img-src * ;
+							 connect-src *.museografo.com *.museografo.dev http://museografo.com http://museografo.dev;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+		<div data-role="page" id="user_profile" class="main">
+
+			<section class="feed_container" data-role="content">
+		
+			</section><!-- feed_container -->
+		</div>
+	</body>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script id="user_profile_template" type="text/x-handlebars-template">
+		{{!-- <a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a> --}}
+		<article class="border_c user_profile clearfix">
+			
+			{{#user_avatar}}
+				<img src="{{.}}" alt="{{..user_display}}">
+			{{/user_avatar}}
+			{{^user_avatar}}
+				<img src="images/profile_placeholder.png" alt="{{..user_display}}">
+			{{/user_avatar}}
+			<section class="user_info">
+				<h1>{{user_display}}</h1>
+				<p>
+					{{#unless is_venue}}
+						{{#../is_gender_hombre}}
+							<i class="fa fa-mars"></i>
+						{{/../is_gender_hombre}}
+						{{#../is_gender_mujer}}
+							<i class="fa fa-venus"></i>
+						{{/../is_gender_mujer}}
+						{{^../gender}}
+							<i class="fa fa-circle-thin"></i>
+						{{/../gender}}
+						{{#../first_name}}
+							{{.}}
+						{{/../first_name}}
+						{{#../last_name}}
+							{{.}}
+						{{/../last_name}}
+					{{/unless}}
+				</p>
+			</section>
+			<div class="clearfix"></div>
+			<section class="bio">
+				{{{user_bio}}}
+			</section>
+			<p class="city">
+				{{#country}}
+					<i class="fa fa-map-marker"></i> {{.}}
+				{{/country}}
+				{{#city}}
+					, {{.}}
+				{{/city}}
+			</p>
+			{{#unless is_venue}}
+				<ul class="activity_list clearfix">
+					<li><a id="venue_followee_count" href="followees-archive.html?user={{../user_login}}" rel="external">{{follows.all}} <span>Siguiendo</span></a></li>
+					<li><a id="artista_followee_count" href="followers-archive.html?user={{../user_login}}" rel="external">{{followers.all}} <span>Seguidores</span></a></li>
+					<li><a class="">{{../comment_count}} <span>Reseñas</span></a></li>
+					<li><a class="">{{../upload_count}} <span>Fotos</span></a></li>
+				</ul>
+			{{/unless}}
+			{{#if is_following}}
+				<a class="floating_awesome_button realcircle special_icon unfollow_user" data-userlogin="{{user_nicename}}" data-id="{{ID}}" data-userrole="{{role_prefix}}" id="unfollow_user"><i class="fa fa-user"></i>
+									<i class="fa fa-check superscript"></i></a>
+			{{else}}
+				<a class="floating_awesome_button realcircle special_icon follow_user" data-userlogin="{{user_nicename}}" data-id="{{ID}}" data-userrole="{{role_prefix}}" id="follow_user"><i class="fa fa-user"></i>
+									<i class="fa fa-plus superscript"></i></a>
+			{{/if}}
+		</article>
+		{{^is_private}}
+			<!-- TABBED -->
+			<section data-role="tabs" class="tabbed_content" >
+				<div data-role="navbar">
+					<ul>
+						<li><a class="ui-btn-active" href="#past_events">Eventos pasados</a></li>
+						<li><a href="#future_events">Eventos futuros</a></li>
+					</ul>
+				</div>
+				<div id="past_events">
+					{{#each events.results.past}}
+						<article class="box border_a each_feed_element">
+							<h2><a href="single-event.html?event={{ID}}" rel="external">{{event_title}}</a></h2>
+							<a class="close" data-id="{{ID}}"><i class="fa fa-times"></i></a>
+							<ul class="article_details">
+								{{#latlong}}
+									<li class="location">
+										<a href="geo:{{.}}"><i class="fa fa-map-marker"></i></a>
+									</li>
+								{{/latlong}}
+								<li class="timestamp">
+									{{#date_start}}
+										<i class="fa fa-clock-o"></i>
+										<p>
+											Desde {{.}}
+									{{/date_start}} 
+									{{#date_end}}<br>hasta {{.}}{{/date_end}}</p>
+								</li>
+							</ul>
+							{{#event_thumbnail}}
+								<a href="single-event.html?event={{../ID}}" rel="external">
+									<img src="{{.}}">
+								</a>
+							{{/event_thumbnail}}
+							{{^event_thumbnail}}
+								<a href="single-event.html?event={{../ID}}" rel="external">
+									<img src="images/event_placeholder.png">
+								</a>
+							{{/event_thumbnail}}
+						</article>
+					{{/each}}
+					{{#unless events.results.past}}
+						<article class="box border_d">
+							<h1>No hay eventos pasados</h1>
+						</article>
+					{{/unless}}
+				</div>
+				<div id="future_events">
+					{{#each events.results.future}}
+						<article class="box border_a each_feed_element clearfix">
+							<h2>{{event_title}}</h2>
+							{{#if attended}}
+								<i class="chech_attended fa fa-check-circle-o"></i>
+							{{/if}}
+							<ul class="article_details">
+								
+								<li class="location">
+									<i class="fa fa-map-marker"></i>
+								</li>
+								<li class="timestamp">
+									<p>
+										{{date_start}} <br>
+										{{date_end}}
+									</p>
+								</li>
+							</ul>
+							<img src="{{event_thumbnail}}" alt="{{event_title}}">
+						</article>
+					{{/each}}
+					{{#unless events.results.future}}
+						<article class="box border_d">
+							<h1>No hay eventos futuros</h1>
+						</article>
+					{{/unless}}
+				</div>
+				
+			</section>
+		{{/is_private}}
+		{{#is_private}}
+			<article class="private_profile">
+				<i class="fa fa-lock"></i>
+				<h2>Lo sentimos, el perfil de este usuario es privado</h2>
+			</article>
+		{{/is_private}}
+	</script>
+
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		var GET = app.getUrlVars();
+		app.render_user_profile(GET.user);
+	</script>
+</html>

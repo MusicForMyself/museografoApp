@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" 
+					content="default-src 'self'; 
+							 script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.com *.museografo.dev;
+							 style-src 'self' 'unsafe-inline'
+							 img-src * ;
+							 connect-src *.museografo.com *.museografo.dev http://museografo.com http://museografo.dev;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="page" id="agenda_eventos" class="main">
+		
+		<section class="feed_container" data-role="content">
+			
+
+		</section><!-- feed_container -->
+		
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script id="event_popup_template" type="text/x-handlebars-template">
+		<div data-role="popup" class="ui-content" id="recomend_pop" data-position-to="window" data-transition="slide">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close_dialog" >Close</a>
+			Recomendar evento a:
+			<form id="recomend_to" class="recomend_to">
+				<input type="text" name="user_rec" id="user_rec" placeholder="username">
+				<ul class='hidden_list' id='hidden_list'>
+				</ul>
+				<input type="hidden" name="event_id" value="{{event_id}}">
+				<textarea id="comment" name="comment" rows="3" placeholder="mensaje"></textarea>
+				<input type="submit" value="Recomendar!">
+			</form>
+		</div>
+	</script>
+
+	<script id="event_gallery_template" type="text/x-handlebars-template">
+		<section class="gallery">
+			<ul class="gallery_list">
+				<div class="cycle-pager"></div>
+				{{#each images}}
+					<li><img src="{{this}}"></li>
+				{{/each}}
+			</ul>
+		</section>
+	</script>
+
+	<script id="event_single_template" type="text/x-handlebars-template">
+		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i><span>{{event_title}}</span></a>
+		<article class="no_box border_a each_feed_element expanded single clearfix">
+			<section class="event_thumbnail">
+				<img src="{{event_thumbnail}}">
+			</section>
+			<section class="info_venue">
+				<img class="profile_pic" src="{{venue_avatar}}">
+				<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
+			</section>
+			<section class="append_gallery hidden"></section>
+			{{#if scheduled}}
+				{{#attended}}
+					<a class="attended_event" id="attended_event" >Asistido <i class="fa fa-check-square-o"></i></a>
+				{{/attended}}
+				{{^attended}}
+					<a class="attend_event" id="attend_event" data-eventid="{{../ID}}" >Asistí <i class="fa fa-square-o"></i></a>
+				{{/attended}}
+			{{/if}}
+			<section class="info">
+				{{#event_content}}<article class="event_description">{{{.}}}</article>{{/event_content}}
+				<footer class="footer_menu single clearfix">
+					<input type="hidden" value="{{ID}}" id="hidden_event_id">
+					<ul class="clearfix">
+						{{#if scheduled}}
+							<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+						{{/if}}
+						{{#unless scheduled}}
+							<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
+						{{/unless}}
+						<li><a href="#recomend_pop" data-rel="popup" data-transition="flip"><i class="fa fa-paper-plane-o"></i></a></li>
+						<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+					</ul>
+				</footer>
+				{{#latlong}}
+					<a href="geo:{{.}}"><img src="http://maps.googleapis.com/maps/api/staticmap?center={{.}}&zoom=16&size=320x120&markers=color:blue%7Ccolor:blue%7Clabel:C%7C{{.}}&sensor=false" alt="{{../venue}}"></a>
+				{{/latlong}}
+				<p> 
+					{{#date_start}}<b>Inaugura:</b> {{.}}<br>{{/date_start}}
+					{{#date_end}}<b>Termina:</b> {{.}}<br>{{/date_end}}
+					{{!-- <b>Horario:</b> {{lol}} <br> --}}
+					{{#costo}}<b>Admisión:</b> {{.}} <br>{{/costo}}
+					{{#address}}<b>Dirección:</b> {{.}}<br>{{/address}}
+					{{#type}}<b>Tipo de Evento:</b> {{.}} <br>{{/type}}
+					{{#category}}<b>Categorías:</b> {{.}} <br>{{/category}}
+				</p>
+				<a role="none" data-eventid="{{ID}}" class="event_file_upload" id="event_file_upload" ><i class="fa fa-camera-retro"></i></a>
+			</section>
+
+		</article>
+	</script>
+	
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		var GET = app.getUrlVars();
+		app.render_event(GET.event);
+		app.render_event_popup(GET.event);
+		// document.addEventListener("deviceready", _onDeviceReady, false);
+		// function _onDeviceReady(){	
+		// 	app.initialize_file_transfer();
+		// }
+	</script>
+	
+</html>

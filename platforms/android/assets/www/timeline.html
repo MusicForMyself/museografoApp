@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" 
+					content="default-src 'self'; 
+							 script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.com *.museografo.dev;
+							 style-src 'self' 'unsafe-inline'
+							 img-src * ;
+							 connect-src *.museografo.com *.museografo.dev http://museografo.com http://museografo.dev;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="page" class="main">
+		
+		<section class="feed_container timeline scrollable" data-role="content">
+			<h1>Actividad</h1>
+			
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<!-- FEED ELEMENT TEMPLATE -->
+	<script id="event_entry_template" type="text/x-handlebars-template">
+		{{#each results}}
+			
+				{{^evento}}
+				<article class="no_box {{#if agendo}}border_c{{/if}} {{#if media}}border_g{{/if}} {{#if resena}}border_c{{/if}} {{#if siguiendo}}border_f{{/if}} each_feed_element {{type}} clearfix">
+					<section class="activity_user clearfix" id="activity_user">
+						{{#if siguiendo}}
+							<a href="user.html?user={{user_login}}" rel="external"><img class="avatar" src="{{user_avatar}}" alt="{{user_nicename}}"></a>
+							<a class="user_clickable" href="user.html?user={{user_login}}" rel="external" data-user-id="{{user_login}}">{{user_nicename}}</a> 
+							<section class="copy_activity">
+								<p>acaba de seguir a <a href="user.html?user={{postuser_login}}" rel="external">{{postuser_name}}</a></p>
+							</section>
+						{{/if}}
+						{{#if agendo}}
+							<a href="user.html?user={{user_login}}" rel="external">
+								<img class="avatar" src="{{user_avatar}}" alt="{{user_nicename}}">
+							</a>
+							<a class="user_clickable" href="user.html?user={{user_login}}" rel="external" data-user-id="{{user_id}}">{{user_nicename}}</a>
+							<section class="copy_activity">
+								<p>asistirá al evento  <a class="" href="single-event.html?event={{event_id}}" rel="external">{{event_title}}</a> </p>
+							</section>
+						{{/if}}
+
+						{{#if media}}
+							<a href="user.html?user={{user_login}}" rel="external">
+								<img class="avatar" src="{{user_avatar}}" alt="{{user_nicename}}">
+							</a>
+							<a class="user_clickable" href="user.html?user={{user_login}}" rel="external" data-user-id="{{user_id}}">{{user_nicename}}</a>
+							<section class="copy_activity">
+								<p>ha posteado una imagen al evento <a class="" href="single-event.html?event={{event_id}}" rel="external">{{event_title}}</a></p>
+							</section>
+							{{#media_thumbnail}}
+								<a href="single-event.html?event={{../event_id}}" rel="external">
+									<img class="event_thumbnail" src="{{{.}}}">
+								</a>
+							{{/media_thumbnail}}
+						{{/if}}
+						
+						{{#if resena}}
+							<a href="user.html?user={{user_login}}" rel="external">
+								<img class="avatar" src="{{user_avatar}}" alt="{{user_nicename}}">
+							</a>
+							<a class="user_clickable" href="user.html?user={{user_login}}" rel="external" data-user-id="{{user_id}}">{{user_nicename}}</a>
+							<section class="copy_activity">
+							<p> ha publicado una reseña en el evento <a href="single-event.html?event={{event_id}}" rel="external">{{event_title}}</a> </p>
+							</section>
+							{{#data_excerpt}}
+								<p class="resena_content"><i class="fa fa-comment-o"></i> "{{.}}"</p>
+							{{/data_excerpt}}
+
+						{{/if}}
+					</section>
+				</article>
+				{{/evento}}
+				{{#if evento}}
+					<article class="no_box border_a each_feed_element expanded clearfix">
+						<section class="info_venue">
+							{{#venue_avatar}}
+								<a href="venue.html?venue={{../venue_id}}" rel="external" >
+									<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+								</a>
+							{{/venue_avatar}}
+							{{^venue_avatar}}
+								<a href="venue.html?venue={{../venue_id}}" rel="external" >
+									<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+								</a>
+							{{/venue_avatar}}
+
+							<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
+						</section>
+						{{#event_thumbnail}}
+							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+								<img src="{{.}}" alt="{{../event_title}}">
+								<h2>{{../event_title}}</h2>
+							</a>
+						{{/event_thumbnail}}
+						{{^event_thumbnail}}
+							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+								<img src="images/event_placeholder.png" alt="{{..event_title}}">
+								<h2>{{../event_title}}</h2>
+							</a>
+						{{/event_thumbnail}}
+						<section class="info">
+							{{#address}}
+								<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
+							{{/address}}
+							{{#event_description}}
+								<p>{{{.}}} </p>
+							{{/event_description}}
+							<p>
+								{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+								{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+								{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+							</p>
+						</section>
+						<footer class="footer_menu single">
+							<ul class="clearfix">
+								{{#if scheduled}}
+									<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+								{{/if}}
+								{{#unless scheduled}}
+									<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
+								{{/unless}}
+								<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+							</ul>
+						</footer>
+					</article>
+				{{/if}}
+		{{/each}}
+	</script>
+	
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		app.get_user_timeline(0);
+	</script>
+</html>
