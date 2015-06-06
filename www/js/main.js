@@ -1,4 +1,4 @@
-   /*     _                        _     _           _   
+	 /*     _                        _     _           _   
 	*    / \   _ __  _ __     ___ | |__ (_) ___  ___| |_ 
 	*   / _ \ | '_ \| '_ \   / _ \| '_ \| |/ _ \/ __| __|
 	*  / ___ \| |_) | |_) | | (_) | |_) | |  __/ (__| |_ 
@@ -13,7 +13,7 @@
 			this.bindEvents();
 			/* IMPORTANT to set requests to be syncronous */
 			$.ajaxSetup({
-			   async: false
+				 async: false
 			});
 			// localStorage init
 			this.ls 		= window.localStorage;
@@ -43,7 +43,7 @@
 					// window.location.assign('index.html');
 					return;
 				}
-			   
+				 
 			}
 			/* Executing robots request first of all */
 			console.log(JSON.stringify(apiRH.getRequest('robots', null)));
@@ -98,36 +98,36 @@
 		},
 		isObjEmpty: function (obj) {
 
-		    if (obj == null) return true;
+				if (obj == null) return true;
 
-		    if (obj.length > 0)    return false;
-		    if (obj.length === 0)  return true;
+				if (obj.length > 0)    return false;
+				if (obj.length === 0)  return true;
 
-		    for (var key in obj) {
-		        if (hasOwnProperty.call(obj, key)) return false;
-		    }
-		    return true;
+				for (var key in obj) {
+						if (hasOwnProperty.call(obj, key)) return false;
+				}
+				return true;
 		},
 		header_partial: function(){ return "\
 	<div id='spinner' class='spinner'>\
-	  <div class='spinner-container container1'>\
-	    <div class='circle1'></div>\
-	    <div class='circle2'></div>\
-	    <div class='circle3'></div>\
-	    <div class='circle4'></div>\
-	  </div>\
-	  <div class='spinner-container container2'>\
-	    <div class='circle1'></div>\
-	    <div class='circle2'></div>\
-	    <div class='circle3'></div>\
-	    <div class='circle4'></div>\
-	  </div>\
-	  <div class='spinner-container container3'>\
-	    <div class='circle1'></div>\
-	    <div class='circle2'></div>\
-	    <div class='circle3'></div>\
-	    <div class='circle4'></div>\
-	  </div>\
+		<div class='spinner-container container1'>\
+			<div class='circle1'></div>\
+			<div class='circle2'></div>\
+			<div class='circle3'></div>\
+			<div class='circle4'></div>\
+		</div>\
+		<div class='spinner-container container2'>\
+			<div class='circle1'></div>\
+			<div class='circle2'></div>\
+			<div class='circle3'></div>\
+			<div class='circle4'></div>\
+		</div>\
+		<div class='spinner-container container3'>\
+			<div class='circle1'></div>\
+			<div class='circle2'></div>\
+			<div class='circle3'></div>\
+			<div class='circle4'></div>\
+		</div>\
 	</div>\
 	<div data-role='panel' id='main_drop' class='menu' data-position='left' data-display='push'>\
 		<ul>\
@@ -423,7 +423,7 @@
 		},
 		set_selected_filter: function(filter){
 			$(".tab_button").filter(function() {
-			    return $(this).data('rel') == filter; 
+					return $(this).data('rel') == filter; 
 			}).addClass('selected');
 		},
 		set_query_title: function(queried_term){
@@ -448,7 +448,7 @@
 			$('#spinner').show();
 		},
 		hideLoader: function(){
- 			$('#spinner').hide();
+			$('#spinner').hide();
 		},
 		toast: function(message, bottom){
 			// console.log('Toasting this: '+message);
@@ -464,10 +464,54 @@
 				alert(message);
 			}
 			return;
-		}
+		},
+		gallery_partial: function(){ return "\
+						<div class='pswp' tabindex='-1' role='dialog' aria-hidden='true'>\
+								<div class='pswp__bg'></div>\
+								<div class='pswp__scroll-wrap'>\
+										<div class='pswp__container'>\
+												<div class='pswp__item'></div>\
+												<div class='pswp__item'></div>\
+												<div class='pswp__item'></div>\
+										</div>\
+										<div class='pswp__ui pswp__ui--hidden'>\
+												<div class='pswp__top-bar'>\
+														<div class='pswp__counter'></div>\
+														<button class='pswp__button pswp__button--close' title='Close (Esc)'></button>\
+														<div class='pswp__preloader'>\
+																<div class='pswp__preloader__icn'>\
+																	<div class='pswp__preloader__cut'>\
+																		<div class='pswp__preloader__donut'></div>\
+																	</div>\
+																</div>\
+														</div>\
+												</div>\
+												<div class='pswp__share-modal pswp__share-modal--hidden pswp__single-tap'>\
+														<div class='pswp__share-tooltip'></div>\
+												</div>\
+												<button class='pswp__button pswp__button--arrow--left' title='Previous (arrow left)'>\
+												</button>\
+												<button class='pswp__button pswp__button--arrow--right' title='Next (arrow right)'>\
+												</button>\
+												<div class='pswp__caption'>\
+														<div class='pswp__caption__center'></div>\
+												</div>\
+										</div>\
+								</div>\
+						</div>";
+		},
+		render_event_gallery_partial : function(){
+			
+			$.getJSON(api_base_url+user+'/notifications', function(response){
+				var source   = app.header_partial();
+				var template = Handlebars.compile(source);
+				$('.main').prepend( template(response) ).trigger('create');
+			});
+			
+		},
 	};
 
-   /*      _                                       _                        _       
+	 /*      _                                       _                        _       
 	*   __| | ___   ___ _   _ _ __ ___   ___ _ __ | |_   _ __ ___  __ _  __| |_   _ 
 	*  / _` |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __| | '__/ _ \/ _` |/ _` | | | |
 	* | (_| | (_) | (__| |_| | | | | | |  __/ | | | |_  | | |  __/ (_| | (_| | |_| |
@@ -821,26 +865,26 @@
 			response.data.forEach(function(value){
 				render += "<li class='fill_input' data-value='"+value+"'>"+value+"</li>";
 			});
-	        $("#hidden_list").html(render).show().delay(6000).fadeOut('fast');
-	    });
+					$("#hidden_list").html(render).show().delay(6000).fadeOut('fast');
+			});
 
-	    /* change value when suggested username is clicked */
-	    $(document).on('tap', '.fill_input', function(){
-	    	var value = $(this).data('value');
-	    	$('#user_rec').val(value);
-	    	$("#hidden_list").html('').fadeOut('fast');
-	    });
+			/* change value when suggested username is clicked */
+			$(document).on('tap', '.fill_input', function(){
+				var value = $(this).data('value');
+				$('#user_rec').val(value);
+				$("#hidden_list").html('').fadeOut('fast');
+			});
 
-	    $(document).on('tap', 'a[rel=external]', function(){
-	    	app.showLoader();
-	    });
+			$(document).on('tap', 'a[rel=external]', function(){
+				app.showLoader();
+			});
 
-	    /* Category follow events */
-	    $(document).on('tap', '._nav_follow_category', function(e){
-	    	e.preventDefault();
-	    	var $context 	= $(this);
-	    	var cat_id 		= $(this).data('id');
-	    	var response 	= apiRH.makeRequest(user+'/categories/follow/', {'cat_id': cat_id});
+			/* Category follow events */
+			$(document).on('tap', '._nav_follow_category', function(e){
+				e.preventDefault();
+				var $context 	= $(this);
+				var cat_id 		= $(this).data('id');
+				var response 	= apiRH.makeRequest(user+'/categories/follow/', {'cat_id': cat_id});
 			console.log(response);
 			e.stopPropagation();
 			if(response.success){
@@ -855,16 +899,16 @@
 				return;
 			}
 			return app.toast('Oops! ocurrió un error');
-	    });
+			});
 
 		/* Category follow events */
-	    $(document).on('tap', '._nav_unfollow_category', function(e){
-	    	e.preventDefault();
-	    	var $context 	= $(this);
-	    	var cat_id 		= $(this).data('id');
-	    	var response 	= apiRH.makeRequest(user+'/categories/unfollow/', {'cat_id': cat_id});
-	    	console.log(response);
-	    	e.stopPropagation();
+			$(document).on('tap', '._nav_unfollow_category', function(e){
+				e.preventDefault();
+				var $context 	= $(this);
+				var cat_id 		= $(this).data('id');
+				var response 	= apiRH.makeRequest(user+'/categories/unfollow/', {'cat_id': cat_id});
+				console.log(response);
+				e.stopPropagation();
 			if(response.success){
 				app.toast('Dejaste de seguir una categoría');
 				$context.removeClass('_nav_unfollow_category unfollow_category').addClass('_nav_follow_category follow_category');
@@ -877,18 +921,18 @@
 				return;	
 			}
 			return app.toast('Oops! ocurrió un error');
-	    });
+			});
 
-	    /* Upload event image */
-	    $('#event_file_upload').on('tap', function(){
-	    	var ls = window.localStorage;
-	    	ls.setItem('museo_last_selected_event', $(this).data('eventid'));
-	    	app.get_file_from_gallery('event');
-	    });
+			/* Upload event image */
+			$('#event_file_upload').on('tap', function(){
+				var ls = window.localStorage;
+				ls.setItem('museo_last_selected_event', $(this).data('eventid'));
+				app.get_file_from_gallery('event');
+			});
 		
 		/* Upload user profile pic */
-	    $('#mod_user_profile').on('tap', function(){
-	    	app.get_file_from_gallery('profile');
-	    });
+			$('#mod_user_profile').on('tap', function(){
+				app.get_file_from_gallery('profile');
+			});
 
 	});

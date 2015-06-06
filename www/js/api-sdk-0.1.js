@@ -11,10 +11,10 @@ function requestHandlerAPI(){
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
-	window.api_base_url = "http://museografo.com/rest/v1/"; 
+	// window.api_base_url = "http://museografo.com/rest/v1/"; 
 
 	/* Development local API URL */
-	// window.api_base_url = "http://museografo.dev/rest/v1/";
+	window.api_base_url = "http://museografo.dev/rest/v1/";
 	
 	this.ls = window.localStorage;
 
