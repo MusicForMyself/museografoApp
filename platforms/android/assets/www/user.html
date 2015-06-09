@@ -74,8 +74,8 @@
 				</ul>
 			{{/unless}}
 				<ul class="activity_list just_two clearfix">
-					<li><a id="artista_followee_count" href="followers-archive.html?user={{../user_login}}" rel="external">{{followers.all}} <span>Seguidores</span></a></li>
-					<li><a id="venue_followee_count" href="followees-archive.html?user={{../user_login}}" rel="external">{{follows.all}} <span>Siguiendo</span></a></li>
+					<li><a id="artista_followee_count" href="followers-archive.html?user={{user_login}}" rel="external">{{followers.all}} <span>Seguidores</span></a></li>
+					<li><a id="venue_followee_count" href="followees-archive.html?user={{user_login}}" rel="external">{{follows.all}} <span>Siguiendo</span></a></li>
 				</ul>
 			{{#if is_following}}
 				<a class="floating_awesome_button realcircle special_icon unfollow_user" data-userlogin="{{user_nicename}}" data-id="{{ID}}" data-userrole="{{role_prefix}}" id="unfollow_user"><i class="fa fa-user"></i>

@@ -8,6 +8,11 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+        "id": "cordova-plugin-whitelist.whitelist",
+        "runs": true
+    },
+    {
         "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
         "id": "cordova-plugin-inappbrowser.inappbrowser",
         "clobbers": [
@@ -20,6 +25,7 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "com.oauthio.plugins.oauthio": "0.2.4",
+    "cordova-plugin-whitelist": "1.0.0",
     "cordova-plugin-inappbrowser": "1.0.0"
 }
 // BOTTOM OF METADATA

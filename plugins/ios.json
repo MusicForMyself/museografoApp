@@ -10,7 +10,7 @@
                     "CoreGraphics.framework": [
                         {
                             "xml": false,
-                            "count": 4
+                            "count": 3
                         }
                     ],
                     "ImageIO.framework": [
@@ -48,10 +48,6 @@
             "config.xml": {
                 "parents": {
                     "/*": [
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
-                        },
                         {
                             "xml": "<access origin=\"https://oauth.io\" />",
                             "count": 1
