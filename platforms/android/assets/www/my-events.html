@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.min.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="page" class="main">
+		
+
+		<section class="feed_container my_events" data-role="content">
+
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.min.js"></script>
+	<script src="js/main.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<!-- FEED ELEMENT TEMPLATE -->
+	<script id="event_single_template" type="text/x-handlebars-template">
+		<h1>Mi agenda</h1>
+		{{#each results}}
+			<article class="no_box border_a each_feed_element expanded clearfix">
+				<a class="close" data-id="{{ID}}"><i class="fa fa-times"></i></a>
+				<section class="info_venue">
+					{{#venue_avatar}}
+						<a href="venue.html?venue={{../venue_id}}" rel="external" >
+							<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+						</a>
+					{{/venue_avatar}}
+					{{^venue_avatar}}
+						<a href="venue.html?venue={{../venue_id}}" rel="external" >
+							<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+						</a>
+					{{/venue_avatar}}
+
+					<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
+				</section>
+				{{#event_thumbnail}}
+					<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+						<img src="{{.}}" alt="{{../event_title}}">
+						<h2>{{../event_title}}</h2>
+					</a>
+				{{/event_thumbnail}}
+				{{^event_thumbnail}}
+					<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+						<img src="images/event_placeholder.png" alt="{{..event_title}}">
+						<h2>{{../event_title}}</h2>
+					</a>
+				{{/event_thumbnail}}
+				<section class="info">
+					{{#address}}
+						<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
+					{{/address}}
+					<p>
+						{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+						{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+						{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+					</p>
+				</section>
+			</article>
+		{{/each}}
+	</script>
+	
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		app.render_my_schedule(0);
+	</script>
+</html>

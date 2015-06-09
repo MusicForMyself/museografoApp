@@ -57,10 +57,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
                             "count": 1
                         },
@@ -105,9 +101,6 @@
     },
     "installed_plugins": {
         "com.oauthio.plugins.oauthio": {
-            "PACKAGE_NAME": "com.museografo.app"
-        },
-        "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "com.museografo.app"
         },
         "cordova-plugin-camera": {

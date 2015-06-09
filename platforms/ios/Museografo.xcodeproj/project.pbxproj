@@ -40,8 +40,6 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		E47363D30E254245979274D1 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BFBF4FF94D4B929280FB72 /* CDVInAppBrowser.m */; };
-		62AF44DC45A94BCEB9CD8F94 /* AppDelegate+notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3427221F2CC14938BD1D4B86 /* AppDelegate+notification.m */; };
-		29B922DF3C0B4FD691A23198 /* PushPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B9F4B3B4A04ADAAACC4B08 /* PushPlugin.m */; };
 		A519245638CD46589D4D4F5E /* UIImage+CropScaleOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABF11F9EF424490A9AC88FC /* UIImage+CropScaleOrientation.m */; };
 		21D2BB34785B4E15B6731B67 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = A583C76229AA4815BF79431F /* CDVCamera.m */; };
 		10507546B1B849FFA28806E3 /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D77196993F4757BAC3966E /* CDVJpegHeaderWriter.m */; };
@@ -123,10 +121,6 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Museografo/config.xml"; sourceTree = "<group>"; };
 		E7BFBF4FF94D4B929280FB72 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		06AFEA844E63456DAD8EFBED /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		3427221F2CC14938BD1D4B86 /* AppDelegate+notification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+notification.m"; path = "com.phonegap.plugins.PushPlugin/AppDelegate+notification.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		31B9F4B3B4A04ADAAACC4B08 /* PushPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "PushPlugin.m"; path = "com.phonegap.plugins.PushPlugin/PushPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		6DBE63B29E314956A1273BCE /* AppDelegate+notification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+notification.h"; path = "com.phonegap.plugins.PushPlugin/AppDelegate+notification.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		11829D9635F94B7C9654AB27 /* PushPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PushPlugin.h"; path = "com.phonegap.plugins.PushPlugin/PushPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		2ABF11F9EF424490A9AC88FC /* UIImage+CropScaleOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CropScaleOrientation.m"; path = "cordova-plugin-camera/UIImage+CropScaleOrientation.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		A583C76229AA4815BF79431F /* CDVCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCamera.m"; path = "cordova-plugin-camera/CDVCamera.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		39D77196993F4757BAC3966E /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVJpegHeaderWriter.m"; path = "cordova-plugin-camera/CDVJpegHeaderWriter.m"; sourceTree = "<group>"; fileEncoding = 4; };
@@ -259,10 +253,6 @@
 			children = (
 				E7BFBF4FF94D4B929280FB72 /* CDVInAppBrowser.m */,
 				06AFEA844E63456DAD8EFBED /* CDVInAppBrowser.h */,
-				3427221F2CC14938BD1D4B86 /* AppDelegate+notification.m */,
-				31B9F4B3B4A04ADAAACC4B08 /* PushPlugin.m */,
-				6DBE63B29E314956A1273BCE /* AppDelegate+notification.h */,
-				11829D9635F94B7C9654AB27 /* PushPlugin.h */,
 				2ABF11F9EF424490A9AC88FC /* UIImage+CropScaleOrientation.m */,
 				A583C76229AA4815BF79431F /* CDVCamera.m */,
 				39D77196993F4757BAC3966E /* CDVJpegHeaderWriter.m */,
@@ -471,8 +461,6 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				E47363D30E254245979274D1 /* CDVInAppBrowser.m in Sources */,
-				62AF44DC45A94BCEB9CD8F94 /* AppDelegate+notification.m in Sources */,
-				29B922DF3C0B4FD691A23198 /* PushPlugin.m in Sources */,
 				A519245638CD46589D4D4F5E /* UIImage+CropScaleOrientation.m in Sources */,
 				21D2BB34785B4E15B6731B67 /* CDVCamera.m in Sources */,
 				10507546B1B849FFA28806E3 /* CDVJpegHeaderWriter.m in Sources */,

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.min.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="page" class="main">
+		
+		<section class="feed_container" data-role="content">
+			
+			
+		
+
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.min.js"></script>
+	<script src="js/main.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script id="category_detail_template" type="text/x-handlebars-template">
+		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a>
+		<article class="no_box category_detail explore border_e clearfix" data-id="{{ID}}">
+			{{#thumbnail}}
+				<figure class="cat_image_wrapper">
+					<div class="ornament"></div>
+					<img src="{{.}}" alt="{{../title}}">
+				</figure>
+			{{/thumbnail}}
+			{{^thumbnail}}
+				<figure class="cat_image_wrapper">
+					<div class="ornament"></div>
+					<img src="images/profile_placeholder.png" alt="{{../title}}">
+				</figure>
+			{{/thumbnail}}
+			<h1><i class="fa fa-tag"></i> {{title}}</h1>
+			{{#has_description}}<p>{{../description}}</p>{{/has_description}}
+			{{#is_following}}
+				<a class="_nav_follow_category unfollow_category" id="_nav_follow_category" data-id="{{../ID}}"><i class="fa fa-check"></i></a>
+			{{/is_following}}
+			{{^is_following}}
+				<a class="_nav_follow_category follow_category" id="_nav_follow_category" data-id="{{../ID}}"><i class="fa fa-plus-circle"></i></a>
+			{{/is_following}}
+			
+			<div class="clearfix"></div>
+			<h2><i class="fa fa-globe"></i> Explora</h2>
+			<section class="explore_section explore_venues" id="explore_venues">
+				{{#if explore_venues}}
+					<h2>Venues</h2>
+					{{#each explore_venues}}
+						<article class="each_explore_venue">
+							<a href="user.html?user={{slug}}" rel="external">
+								{{#thumbnail}}
+									<img src="{{.}}" alt="{{../title}}">
+								{{/thumbnail}}
+								{{^thumbnail}}
+									<img src="images/profile_placeholder.png" alt="{{../title}}">
+								{{/thumbnail}}
+							</a>
+						</article>
+					{{/each}}
+				{{/if}}
+			</section>
+			<section class="explore_section explore_artists" id="explore_artists">
+				{{#if explore_artists}}
+					<h2>Artistas</h2>
+					{{#each explore_artists}}
+						<article class="each_explore_artist">
+							<a href="user.html?user={{slug}}" rel="external">
+								{{#thumbnail}}
+									<img src="{{.}}" alt="{{../title}}">
+								{{/thumbnail}}
+								{{^thumbnail}}
+									<img src="images/profile_placeholder.png" alt="{{../title}}">
+								{{/thumbnail}}
+							</a>
+						</article>
+					{{/each}}
+				{{/if}}
+			</section>
+			<section class="explore_section explore_events" id="explore_events">
+				{{#if explore_events}}
+					<h2>Eventos</h2>
+					{{#each explore_events}}
+						<article class="no_box border_a each_feed_element expanded clearfix">
+							<section class="info_venue">
+								<a href="venue.html?venue={{venue_id}}" rel="external" >
+									{{#venue_avatar}}
+										<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+									{{/venue_avatar}}
+									{{^venue_avatar}}
+										<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+									{{/venue_avatar}}
+								</a>
+
+								<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
+							</section>
+							{{#event_thumbnail}}
+								<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+									<img src="{{.}}" alt="{{../event_title}}">
+									<h2>{{../event_title}}</h2>
+								</a>
+							{{/event_thumbnail}}
+							{{^event_thumbnail}}
+								<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+									<img src="images/event_placeholder.png" alt="{{..event_title}}">
+									<h2>{{../event_title}}</h2>
+								</a>
+							{{/event_thumbnail}}
+							<section class="info">
+								{{#address}}
+									<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
+								{{/address}}
+								{{#event_description}}
+									<p>{{{.}}} </p>
+								{{/event_description}}
+								<p>
+									{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+									{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+									{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+								</p>
+							</section>
+							<footer class="footer_menu single">
+								<ul class="clearfix">
+									{{#if scheduled}}
+										<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+									{{/if}}
+									{{#unless scheduled}}
+										<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
+									{{/unless}}
+									<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+								</ul>
+							</footer>
+						</article>
+					{{/each}}
+				{{/if}}
+			</section>
+		</article>
+	</script>
+
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		var GET = app.getUrlVars();
+		app.render_category_detail(GET.cat_id);
+	</script>
+</html>

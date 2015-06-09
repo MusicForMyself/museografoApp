@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.min.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+
+	<body>
+		<div id="index_container" data-role="main">
+
+		</div> <!-- END main -->
+	</body>
+	<!-- Load app's main scripts and styles -->
+	<script src="js/api-sdk-0.1.min.js"></script>
+	<script src="js/main.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script id="login_screen_template" type="text/x-handlebars-template">
+		<header data-role="header" data-tap-toggle="false" class="home_header">
+			<img src="{{login_image}}">
+			<h1 class="logo"></h1>
+		</header>
+
+		<section class="register" data-role="ui-content">
+			<section class="login_area">
+				<p></p>	
+				<!-- Login with Fb or Twitter -->
+				<a href="#" class="ui-btn no_border button login_button facebook upper" data-provider="facebook"></a>
+				<a href="#" class="ui-btn no_border button login_button twitter upper" data-provider="twitter"></a>
+				<!-- Login -->
+				<p>Usuarios registrados</p>
+				<form id="login_form">
+					<input class="login_input" data-corners="false" type="text" name="user_login" id="user_login" placeholder="usuario">
+					<input class="login_input" data-corners="false" type="password" name="user_password" id="user_password" placeholder="contraseña">
+					<input type="submit" value="Entrar" data-role="none" class="join ui-btn">
+				</form>
+			</section>
+			<!-- Register -->
+			<p class="add_text">Si aún no tienes una cuenta</p>
+			<a id="register_us" class="register_us ui-btn button gray no_border">Comienza aquí!</a>
+			<form id="register_form" class="hidden">
+				<input class="login_input" data-corners="false" type="text" name="user_login_reg" id="user_login_reg" placeholder="nombre de usuario">
+				<input class="login_input" data-corners="false" type="text" name="user_email_reg" id="user_email_reg" placeholder="email">
+				<select id="user_country" name="user_country">
+					<option value="">Selecciona tu país</option>
+					<option value="mexico">México</option>
+					<option value="argentina">Argentina</option>
+					<option value="espana">España</option>
+					<option value="estados-unidos">Estados Unidos</option>
+					<option value="other">Otro</option>
+				</select>
+				<section id="insert_select" class="insert_select">
+
+				</section>
+				<input class="login_input" data-corners="false" type="password" name"user_password_reg" id="user_password_reg" placeholder="contraseña">
+				<input type="checkbox" id="i_accept_terms" name="i_accept_terms">
+				<label for="i_accept_terms">Acepto los <a onclick="window.open('http://app.museografo.com/aviso-de-privacidad', '_blank', 'location=yes');">Términos y Condiciones</a></label>
+				<input type="submit" value="continuar" data-role="none" class="join ui-btn">
+			</form>
+		</section> <!-- END register -->
+	</script>
+	<script type="text/javascript">
+		/* Initialize app object and perform initial login check */
+		window.is_home = true;
+		app.initialize();
+		app.render_login_content();
+	</script>
+</html>

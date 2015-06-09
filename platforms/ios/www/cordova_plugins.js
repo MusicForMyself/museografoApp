@@ -8,13 +8,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
-        "id": "com.phonegap.plugins.PushPlugin.PushNotification",
-        "clobbers": [
-            "PushNotification"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
         "id": "cordova-plugin-camera.Camera",
         "clobbers": [
@@ -247,7 +240,6 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "com.oauthio.plugins.oauthio": "0.2.4",
-    "com.phonegap.plugins.PushPlugin": "2.4.0",
     "cordova-plugin-camera": "1.1.0",
     "cordova-plugin-console": "1.0.0",
     "cordova-plugin-file": "2.0.0",

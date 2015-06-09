@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.min.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="page" id="venue_profile" class="main">
+
+		<section class="feed_container venue" data-role="content">
+			
+
+			
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.min.js"></script>
+	<script src="js/main.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script id="venue_profile_template" type="text/x-handlebars-template">
+		<article class="border_b user_profile clearfix">
+			{{#venue_avatar}}
+				<img src="{{.}}" alt="{{..venue_name}}">
+			{{/venue_avatar}}
+			{{^venue_avatar}}
+				<img src="images/profile_placeholder.png" alt="{{..venue_name}}">
+			{{/venue_avatar}}
+			<section class="user_info">
+				<h1>{{venue_name}}</h1>
+				{{#venue_city}}<p class="city_venue">{{.}}</p>{{/venue_city}}
+			</section>
+			<div class="clearfix"></div>
+			<section class="bio">
+				{{{venue_bio}}}
+			</section>
+			<ul class="activity_list just_two clearfix">
+				<li><a id="artista_follower_count" href="followers-archive.html?user={{venue_slug}}" rel="external">{{followers.all}} <span>Seguidores</span></a></li>
+				<li><a class="">{{event_count}} <span>Eventos</span></a></li>
+			</ul>
+
+			{{#venue_address}}<p class="city_venue"><i class="fa fa-map-marker"></i> {{.}}</p>{{/venue_address}}
+			{{#venue_phone}}<p class="phone"><i class="fa fa-phone"></i> {{.}} </p> {{/venue_phone}}
+			{{#venue_hours}}<p class="hours"><i class="fa fa-clock-o"></i> {{.}} </p> {{/venue_hours}}
+			
+			{{#if is_following}}
+				<a class="floating_awesome_button realcircle special_icon unfollow_user" data-userlogin="{{user_nicename}}" data-id="{{ID}}" data-userrole="{{role_prefix}}" id="unfollow_user"><i class="fa fa-user"></i>
+									<i class="fa fa-check superscript"></i></a>
+			{{else}}
+				<a class="floating_awesome_button realcircle special_icon follow_user" data-userlogin="{{user_nicename}}" data-id="{{ID}}" data-userrole="{{role_prefix}}" id="follow_user"><i class="fa fa-user"></i>
+									<i class="fa fa-plus superscript"></i></a>
+			{{/if}}
+			
+		</article>
+
+		<!-- TABBED -->
+		<section data-role="tabs" class="tabbed_content" >
+			<div data-role="navbar">
+				<ul>
+					<li><a class="ui-btn-active"  href="#future_events">Eventos futuros</a></li>
+					<li><a href="#history">Historial</a></li>
+				</ul>
+			</div>
+			<div id="future_events">
+				{{#each events.results.ontime}}
+					<article class="no_box border_a each_feed_element expanded clearfix">
+						<section class="info_venue">
+							{{#venue_avatar}}
+								<a href="venue.html?venue={{../venue_id}}" rel="external" >
+									<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+								</a>
+							{{/venue_avatar}}
+							{{^venue_avatar}}
+								<a href="venue.html?venue={{../venue_id}}" rel="external" >
+									<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+								</a>
+							{{/venue_avatar}}
+
+							<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
+						</section>
+						{{#event_thumbnail}}
+							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+								<img src="{{.}}" alt="{{../event_title}}">
+								<h2>{{../event_title}}</h2>
+							</a>
+						{{/event_thumbnail}}
+						{{^event_thumbnail}}
+							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+								<img src="images/event_placeholder.png" alt="{{..event_title}}">
+								<h2>{{../event_title}}</h2>
+							</a>
+						{{/event_thumbnail}}
+						<section class="info">
+							<p>
+								{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+								{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+								{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+							</p>
+						</section>
+						<footer class="footer_menu single">
+							<ul class="clearfix">
+								{{#if scheduled}}
+									<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+								{{/if}}
+								{{#unless scheduled}}
+									<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
+								{{/unless}}
+								<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+							</ul>
+						</footer>
+					</article>
+				{{/each}}
+				{{#unless events.results.ontime}}
+					<article class="box border_d">
+						<h1>No hay eventos futuros</h1>
+					</article>
+				{{/unless}}
+			</div>
+			<div id="history">
+				{{#each events.results.history}}
+					<article class="no_box border_a each_feed_element expanded clearfix">
+						<section class="info_venue">
+							{{#venue_avatar}}
+								<a href="venue.html?venue={{../venue_id}}" rel="external" >
+									<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+								</a>
+							{{/venue_avatar}}
+							{{^venue_avatar}}
+								<a href="venue.html?venue={{../venue_id}}" rel="external" >
+									<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+								</a>
+							{{/venue_avatar}}
+
+							<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
+						</section>
+						{{#event_thumbnail}}
+							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+								<img src="{{.}}" alt="{{../event_title}}">
+								<h2>{{../event_title}}</h2>
+							</a>
+						{{/event_thumbnail}}
+						{{^event_thumbnail}}
+							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+								<img src="images/event_placeholder.png" alt="{{..event_title}}">
+								<h2>{{../event_title}}</h2>
+							</a>
+						{{/event_thumbnail}}
+						<section class="info">
+							<p>
+								{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+								{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+								{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+							</p>
+						</section>
+						<footer class="footer_menu single">
+							<ul class="clearfix">
+								<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+							</ul>
+						</footer>
+					</article>
+				{{/each}}
+				{{#unless events.results.history}}
+					<article class="box border_d">
+						<h1>No hay eventos pasados</h1>
+					</article>
+				{{/unless}}
+			</div>
+		</section>
+	</script>
+
+	<script type="text/javascript">
+		app.initialize();
+		app.render_header();
+		var GET = app.getUrlVars();
+		app.render_venue_profile(GET.venue);
+	</script>
+</html>

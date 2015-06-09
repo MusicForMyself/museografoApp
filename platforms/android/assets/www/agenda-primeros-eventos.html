@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		<link rel="stylesheet" href="css/museografo.min.css" />
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+
+		<!-- Vendor libraries and plugins -->
+		<script src='cordova.js'></script>
+		<script src="js/jquery1.11.1.js"></script>
+		<script src="js/plugins.min.js"></script>
+		<script src="js/jquery.mobile-1.4.3.min.js"></script>
+		
+		<!-- Load app's main scripts and styles -->
+		<script src="js/api-sdk-0.1.min.js"></script>
+		<script src="js/main.min.js"></script>
+		<link rel="stylesheet" href="style.min.css">
+
+	</head>
+	<body>
+		
+	<div data-role="page" id="agenda_eventos" class="main">
+		
+		<section class="feed_container" data-role="content">
+			
+			<article class="box border_d">
+				<h1>Agenda tus primeros eventos</h1>
+			</article>
+
+
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script id="event_entry_template" type="text/x-handlebars-template">
+		{{#each results.future}}
+		<article class="box border_a each_feed_element expanded clearfix">
+			<img class="profile_pic" src="{{venue_avatar}}" alt="{{venue}}">
+			<section class="info_venue">
+				<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
+				<h2><a href="single-event.html?event={{ID}}" rel="external">{{event_title}}</a></h2>
+			</section>
+			<img src="{{event_thumbnail}}" alt="{{event_title}}">
+			<section class="info">
+				<p> <b>Empieza:</b> {{date_start}} <br>
+					<b>Acaba:</b> {{date_end}} <br>
+					<b>Dirección:</b> {{address}} <br>
+					<b>Descripción:</b> {{event_description}} <br>
+					<b>Tipo de Evento:</b> {{event_type}}
+				</p>
+			</section>
+			<footer class="footer_menu single">
+				<ul class="clearfix">
+					<li><a href="single-event.html?event={{ID}}" rel="external"><i class="fa fa-eye"></i><span>Ver</span></a></li>
+					{{#if scheduled}}
+						<li data-id="{{ID}}" class="active unschedule_this"><i class="fa fa-calendar"></i><span>Desagendar</span></li>
+					{{/if}}
+					{{#unless scheduled}}
+						<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i><span>Agendar</span></li>
+					{{/unless}}
+					<li><a onclick="window.plugins.socialsharing.share({{event_title}}, null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i><span>Compartir</span></a></li>
+				</ul>
+			</footer>
+		</article>
+		{{/each }}
+	</script>
+	<script>
+		app.initialize();
+		app.render_header();
+		app.render_schedule_first_events();
+	</script>
+</html>

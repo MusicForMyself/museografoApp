@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<title>Museógrafo mobile app</title>
+		<!-- Vendor styles -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
+		
+		<link rel="stylesheet" href="style.min.css">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico" sizes="32x32">
+		<!-- Vendor libraries and plugins -->
+		<script src="js/jquery1.11.1.js"></script>
+	</head>
+	<body>
+		
+	<div data-role="main">
+		<div data-role="panel" id="main_drop" class="menu" data-position="left" data-display="push">
+			<ul>
+				<li class="divider">Menú</li>
+				<li class="agenda"><i class="fa fa-calendar"></i> Agenda</li>
+				<li class="feed"><i class="fa fa-home"></i> Feed</li>
+				<li class="divider">Settings</li>
+				<li class="profile"><i class="fa fa-user"></i> Editar Perfil</li>
+				<li class="logout"><i class="fa fa-sign-out"></i> Logout</li>
+			</ul>
+		</div><!-- panel -->
+		
+		<div data-role="panel" id="notifications_drop" class="menu" data-position="right" data-display="push">
+			<ul>
+				<li class="divider">Notifications</li>
+				
+				<li class="clearfix">
+					<p><strong>Gonz</strong> te ha empezado a seguir Lorem ipsum dolor sit amet.<span>hace 3hrs</span></p>
+					<a href="#" class="plus_btn right"><i class="fa fa-plus-circle"></i></a>
+				</li>
+				
+			</ul>
+		</div><!-- panel -->
+		<div data-role="header" data-tap-toggle="false" class="fixed_header" data-position="fixed">
+			<a data-role="none" data-corners="false" href="#main_drop"  class="ui-btn-left menu_trigger"><i class="fa fa-bars"></i></a>
+		 	<h1 class="page_title">Mi Perfil</h1>
+		 	<a data-role="none" href="#notifications_drop" data-corners="false" class="ui-btn-right circle notifications notifications_trigger">2</a>
+		</div>
+
+		<section class="feed_container" data-role="content">
+			
+			<article class="box border_c">
+				<h1>Completa tu perfil</h1>
+				
+				<form id="modify_profile" class="profile_form" action="">
+					<img class="profile_pic" src="http://placehold.it/120x120" alt="">
+
+					<input type="text" placeholder="Username">
+					<input type="text" placeholder="Apellido">
+					<input type="mail" placeholder="E-mail">
+					<input type="text" placeholder="Location">	
+					<textarea name="bio_profile" id="bio_profile" placeholder="Bio"></textarea>
+					<input data-role="none" type="radio" name="sex" value="H"><span>H</span> &nbsp;
+					<input data-role="none" type="radio" name="sex" value="M"><span>M</span> &nbsp;
+					<input data-role="none" type="radio" name="sex" value="O"><span>O</span>
+					<input data-role="none" class="ui-btn ui-shadow-icon" type="submit" value="Guardar">
+				</form>
+				
+			</article>
+
+		</section><!-- feed_container -->
+
+	</div>
+	</body>
+	<script src="js/api-sdk-0.1.min.js"></script>
+	<script src="js/main.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<!-- <script type="text/javascript">
+		app.initialize();
+	</script> -->
+</html>

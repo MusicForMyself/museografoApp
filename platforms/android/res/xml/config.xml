@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.museografo.app" version="1.4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <access origin="https://oauth.io" />
+    <allow-intent href="market:*" />
+    <name>Museografo</name>
+    <description>
+        Museógrafo Agenda Cultural, los mejores eventos cerca de ti
+    </description>
+    <author email="john@pixel-muffin.com" href="http://johnfalcon.me">
+       John Falcon
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="splashscreen" value="splash" />
+    <preference name="splash-screen-duration" value="5000" />
+</widget>
