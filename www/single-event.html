@@ -19,7 +19,7 @@
 		
 	<div data-role="page" id="agenda_eventos" class="main">
 		
-		<section class="feed_container" data-role="content">
+		<section class="feed_container event_single_container" data-role="content">
 			
 
 		</section><!-- feed_container -->
@@ -87,23 +87,23 @@
 						<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
 					</ul>
 				</footer>
-				{{#event_content}}<article class="event_description">{{{.}}}</article>{{/event_content}}
+				{{#event_description}}<article class="event_description">{{{.}}}</article>{{/event_description}}
 				<section class="info_venue">
-					Se presenta en:
+					<p>Se presenta en:</p>
 					<img class="profile_pic" src="{{venue_avatar}}">
 					<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
-					{{#address}}<a href="geo:{{../latlong}}" class="location_link">{{.}}</a>{{/address}}
+					{{#address}}<a href="geo:{{../latlong}}" class="location_link"><i class="fa fa-map-marker"></i> {{.}}</a>{{/address}}
 				</section>
 				{{#latlong}}
 					<a href="geo:{{.}}"><img src="http://maps.googleapis.com/maps/api/staticmap?center={{.}}&zoom=16&size=320x120&markers=color:blue%7Ccolor:blue%7Clabel:C%7C{{.}}&sensor=false" alt="{{../venue}}"></a>
 				{{/latlong}}
 				{{#if artists}}<p> <b>Artistas:</b>{{#each artists}} <a class="artist_clickable" href="user.html?user={{slug}}" rel="external">{{name}}</a>{{/each}}</p>{{/if}}
-				{{#if categories}}<p> <b>Categorías:</b>{{#each categories}} <a class="category_clickable" href="{{ID}}" rel="external">{{name}}</a>{{/each}}</p>{{/if}}
+				{{#if categories}}<p> <b>Categorías:</b>{{#each categories}} <a class="category_clickable" href="{{#is_last_of_branch}}category_detail.html?cat_id={{/is_last_of_branch}}{{^is_last_of_branch}}subcategories.html?parent={{/is_last_of_branch}}{{ID}}" rel="external">{{name}}</a>{{/each}}</p>{{/if}}
 				<p> {{#date_start}}<b>Inaugura:</b> {{.}}</p>{{/date_start}}
 				<p> {{#date_end}}<b>Termina:</b> {{.}}</p>{{/date_end}}
 				<p> {{!-- <b>Horario:</b> {{lol}}  --}}
 				<p> {{#costo}}<b>Admisión:</b> {{.}} </p>{{/costo}}
-				<p> {{#type}}<b>Tipo de Evento:</b> {{.}} </p>{{/type}}
+				<p> {{#event_type}}<b>Tipo de Evento:</b> {{.}} </p>{{/event_type}}
 				
 				<a role="none" data-eventid="{{ID}}" class="event_file_upload" id="event_file_upload" ><i class="fa fa-camera-retro"></i></a>
 			</section>

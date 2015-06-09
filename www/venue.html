@@ -33,7 +33,6 @@
 	<script src="js/plugins.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script id="venue_profile_template" type="text/x-handlebars-template">
-		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a>
 		<article class="border_b user_profile clearfix">
 			{{#venue_avatar}}
 				<img src="{{.}}" alt="{{..venue_name}}">
@@ -50,7 +49,7 @@
 				{{{venue_bio}}}
 			</section>
 			<ul class="activity_list just_two clearfix">
-				<li><a id="artista_followee_count" href="followees-archive.html?user={{../user_login}}" rel="external">{{followers.all}} <span>Seguidores</span></a></li>
+				<li><a id="artista_follower_count" href="followers-archive.html?user={{venue_slug}}" rel="external">{{followers.all}} <span>Seguidores</span></a></li>
 				<li><a class="">{{event_count}} <span>Eventos</span></a></li>
 			</ul>
 
@@ -72,12 +71,12 @@
 		<section data-role="tabs" class="tabbed_content" >
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#future_events">Eventos futuros</a></li>
-					<li><a class="ui-btn-active" href="#past_events">Eventos pasados</a></li>
+					<li><a class="ui-btn-active"  href="#future_events">Eventos futuros</a></li>
+					<li><a href="#history">Historial</a></li>
 				</ul>
 			</div>
 			<div id="future_events">
-				{{#each events.results.future}}
+				{{#each events.results.ontime}}
 					<article class="no_box border_a each_feed_element expanded clearfix">
 						<section class="info_venue">
 							{{#venue_avatar}}
@@ -117,14 +116,14 @@
 						</section>
 					</article>
 				{{/each}}
-				{{#unless events.results.future}}
+				{{#unless events.results.ontime}}
 					<article class="box border_d">
 						<h1>No hay eventos futuros</h1>
 					</article>
 				{{/unless}}
 			</div>
-			<div id="past_events">
-				{{#each events.results.past}}
+			<div id="history">
+				{{#each events.results.history}}
 					<article class="no_box border_a each_feed_element expanded clearfix">
 						<section class="info_venue">
 							{{#venue_avatar}}
@@ -164,7 +163,7 @@
 						</section>
 					</article>
 				{{/each}}
-				{{#unless events.results.past}}
+				{{#unless events.results.history}}
 					<article class="box border_d">
 						<h1>No hay eventos pasados</h1>
 					</article>

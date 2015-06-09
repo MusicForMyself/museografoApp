@@ -51,7 +51,7 @@
 			<h1><i class="fa fa-tag"></i> {{title}}</h1>
 			{{#has_description}}<p>{{../description}}</p>{{/has_description}}
 			{{#is_following}}
-				<a class="_nav_follow_category unfollow_category" id="_nav_follow_category" data-id="{{../ID}}"><i class="fa fa-check"></i> Siguiendo</a>
+				<a class="_nav_follow_category unfollow_category" id="_nav_follow_category" data-id="{{../ID}}"><i class="fa fa-check"></i></a>
 			{{/is_following}}
 			{{^is_following}}
 				<a class="_nav_follow_category follow_category" id="_nav_follow_category" data-id="{{../ID}}"><i class="fa fa-plus-circle"></i></a>
@@ -60,87 +60,95 @@
 			<div class="clearfix"></div>
 			<h2><i class="fa fa-globe"></i> Explora</h2>
 			<section class="explore_section explore_venues" id="explore_venues">
-				<h2><i class="fa fa-building"></i> Venues</h2>
-				{{#each explore_venues}}
-					<article class="each_explore_venue">
-						{{#thumbnail}}
-							<img src="{{.}}" alt="{{../title}}">
-						{{/thumbnail}}
-						{{^thumbnail}}
-							<img src="images/profile_placeholder.png" alt="{{../title}}">
-						{{/thumbnail}}
-					</article>
-				{{/each}}
+				{{#if explore_venues}}
+					<h2>Venues</h2>
+					{{#each explore_venues}}
+						<article class="each_explore_venue">
+							<a href="user.html?user={{slug}}" rel="external">
+								{{#thumbnail}}
+									<img src="{{.}}" alt="{{../title}}">
+								{{/thumbnail}}
+								{{^thumbnail}}
+									<img src="images/profile_placeholder.png" alt="{{../title}}">
+								{{/thumbnail}}
+							</a>
+						</article>
+					{{/each}}
+				{{/if}}
 			</section>
 			<section class="explore_section explore_artists" id="explore_artists">
-				<h2><i class="fa fa-user"></i> Artistas</h2>
-				{{#each explore_artists}}
-					<article class="each_explore_artist">
-						{{#thumbnail}}
-							<img src="{{.}}" alt="{{../title}}">
-						{{/thumbnail}}
-						{{^thumbnail}}
-							<img src="images/profile_placeholder.png" alt="{{../title}}">
-						{{/thumbnail}}
-					</article>
-				{{/each}}
+				{{#if explore_artists}}
+					<h2>Artistas</h2>
+					{{#each explore_artists}}
+						<article class="each_explore_artist">
+							<a href="user.html?user={{slug}}" rel="external">
+								{{#thumbnail}}
+									<img src="{{.}}" alt="{{../title}}">
+								{{/thumbnail}}
+								{{^thumbnail}}
+									<img src="images/profile_placeholder.png" alt="{{../title}}">
+								{{/thumbnail}}
+							</a>
+						</article>
+					{{/each}}
+				{{/if}}
 			</section>
 			<section class="explore_section explore_events" id="explore_events">
-				<h2><i class="fa fa-calendar"></i> Eventos</h2>
-				{{#each explore_events}}
-					<article class="no_box border_a each_feed_element expanded clearfix">
-						<section class="info_venue">
-							{{#venue_avatar}}
-								<a href="venue.html?venue={{../venue_id}}" rel="external" >
-									<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+				{{#if explore_events}}
+					<h2>Eventos</h2>
+					{{#each explore_events}}
+						<article class="no_box border_a each_feed_element expanded clearfix">
+							<section class="info_venue">
+								<a href="venue.html?venue={{venue_id}}" rel="external" >
+									{{#venue_avatar}}
+										<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+									{{/venue_avatar}}
+									{{^venue_avatar}}
+										<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+									{{/venue_avatar}}
 								</a>
-							{{/venue_avatar}}
-							{{^venue_avatar}}
-								<a href="venue.html?venue={{../venue_id}}" rel="external" >
-									<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
-								</a>
-							{{/venue_avatar}}
 
-							<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
-						</section>
-						{{#event_thumbnail}}
-							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
-								<img src="{{.}}" alt="{{../event_title}}">
-								<h2>{{../event_title}}</h2>
-							</a>
-						{{/event_thumbnail}}
-						{{^event_thumbnail}}
-							<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
-								<img src="images/event_placeholder.png" alt="{{..event_title}}">
-								<h2>{{../event_title}}</h2>
-							</a>
-						{{/event_thumbnail}}
-						<section class="info">
-							{{#address}}
-								<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
-							{{/address}}
-							{{#event_description}}
-								<p>{{{.}}} </p>
-							{{/event_description}}
-							<p>
-								{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
-								{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
-								{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
-							</p>
-						</section>
-						<footer class="footer_menu single">
-							<ul class="clearfix">
-								{{#if scheduled}}
-									<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
-								{{/if}}
-								{{#unless scheduled}}
-									<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
-								{{/unless}}
-								<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
-							</ul>
-						</footer>
-					</article>
-				{{/each}}
+								<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
+							</section>
+							{{#event_thumbnail}}
+								<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+									<img src="{{.}}" alt="{{../event_title}}">
+									<h2>{{../event_title}}</h2>
+								</a>
+							{{/event_thumbnail}}
+							{{^event_thumbnail}}
+								<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+									<img src="images/event_placeholder.png" alt="{{..event_title}}">
+									<h2>{{../event_title}}</h2>
+								</a>
+							{{/event_thumbnail}}
+							<section class="info">
+								{{#address}}
+									<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
+								{{/address}}
+								{{#event_description}}
+									<p>{{{.}}} </p>
+								{{/event_description}}
+								<p>
+									{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+									{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+									{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+								</p>
+							</section>
+							<footer class="footer_menu single">
+								<ul class="clearfix">
+									{{#if scheduled}}
+										<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+									{{/if}}
+									{{#unless scheduled}}
+										<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
+									{{/unless}}
+									<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+								</ul>
+							</footer>
+						</article>
+					{{/each}}
+				{{/if}}
 			</section>
 		</article>
 	</script>

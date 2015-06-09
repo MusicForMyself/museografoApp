@@ -196,7 +196,7 @@ html[xmlns] .clearfix {
 .article_details .timestamp>i{display:inline-block;clear:none;vertical-align:middle;font-size:1.6rem;opacity:0.7;padding:0 0.25rem;}
 .article_details .timestamp p{margin:0;font-size:0.8rem;letter-spacing:1px;display:inline-block;vertical-align:middle;}
 .each_feed_element.expanded .profile_pic{width:40px; height:40px; float:left; margin:0.5rem;}
-.each_feed_element.expanded .info_venue {float:left; width:100%; margin-top:0.5rem;}
+.each_feed_element.expanded .info_venue {float:left; width:100%; margin:0.5rem 0;}
 .each_feed_element.expanded .info_venue h2{font-size:1rem; font-family:'gotham_medium'; margin:0; text-indent:0; padding:0;}
 .each_feed_element.expanded .info_venue h3{color:#564E4E; font-family:'gotham_medium'; margin:0; font-size:0.8rem; padding-top:0.3rem; letter-spacing:1px;}
 .each_feed_element.expanded .info_venue h3 a{color:inherit; text-decoration: none;}
@@ -247,7 +247,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 
 /*** FEED BOXES ***/
 .back_button{display: block; clear: both; color: #FFF!important; width: 100%; margin: 0; letter-spacing: 1px; padding: 0rem 1rem; background: rgba(37, 31, 31, 0.8); line-height: 2.2rem; font-size: 2.2rem; border-width: 0; position: fixed; z-index: 99;}
-.back_button span{font-size:0.85rem;font-family:'roboto_light', Helvetica, Arial, sans-serif;display:inline-block;vertical-align:bottom;margin-left:0.5rem;letter-spacing:1px;font-weight:normal;width:92%;text-align:right;}
+.back_button span{font-size:0.85rem;font-family:'roboto_light', Helvetica, Arial, sans-serif;display:inline-block;vertical-align:bottom;margin-left:0.5rem;letter-spacing:1px;font-weight:normal;width:92%;text-align:right;line-height:1.6rem;}
 /*.back_button::before{content: ""; width: 28px; height: 17px; background: url('images/back_arrow.png') no-repeat; display: inline-block; background-size: 22px; vertical-align: bottom;}*/
 .each_feed_element .avatar{width: 50px; height: 50px; display: block; float: left; margin: 0.5rem;}
 .each_feed_element.agendo h2{margin:0.5rem 0 0 0;text-indent:0;line-height:1.2rem;padding-left:4.2rem;}
@@ -299,8 +299,8 @@ a.load_more i{display:block; font-size:1.5rem;}
 
 /*VIEW PROFILE*/
 .activity_list{list-style:none;margin:0rem auto 0.5rem -1.5rem;padding:0;width:120%;background:#FFFFFF;}
-.activity_list.just_two{padding-left: 11rem;}
-.activity_list.just_two li{width: 80px;vertical-align: inherit;}
+.activity_list.just_two{width: 60.5%;}
+.activity_list.just_two li{width: 90px;vertical-align: inherit;}
 .activity_list li{float:left;width:25%;text-align:center;border-right:2px solid #EFEFEF;padding:0.7rem 0 0.3rem 0;min-height:3.5rem;}
 .activity_list li:last-of-type{border:none;}
 .activity_list a{color: #474040!important; text-decoration: none; font-size: 1.2rem; line-height: 1.4rem;}
@@ -316,6 +316,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 .user_profile .user_info p{margin:0;color:#737979;font-size:0.8rem;}
 .user_profile .user_info .city{display:block;clear:both;margin:0;text-align:left;font-size:0.74rem;line-height:1rem;color:#474040;letter-spacing:0.5px;}
 .user_profile h3{font-family:'gotham_medium';font-size:1.1rem;margin:0 0 0 0.5rem;}
+.user_profile h4{margin: 1rem 0 0.5rem 0rem; text-align: left; font-size: 1rem; color: #414040;}
 .user_profile h3 span{font-family:'gotham_book';font-size:0.8rem;color:#838787;}
 .edit_profile,
 .edit_profile:visited{color:#FFF!important;font-size:0.8rem;text-decoration:none;margin:0;padding:0.3rem 0;text-indent:0.15rem;}
@@ -415,6 +416,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 }
 
 /*SINGLE EVENTO*/
+.event_single_container
 .event_thumbnail{width: 100%; height: auto;}
 .event_thumbnail img{display: block; width: 100%; height: auto; margin: 0;}
 .gallery{ width: 93%; margin: 1rem auto 0 auto; display: block; clear: both;}
@@ -426,6 +428,18 @@ a.load_more i{display:block; font-size:1.5rem;}
 .attended_event{ color: #559021!important;}
 .attend_event i{font-size:1rem;display:inline-block;vertical-align:middle; }
 
+.event_single_container .each_feed_element .info_venue{}
+.event_single_container .each_feed_element .info_venue .profile_pic{margin-left: 0;}
+.event_single_container .each_feed_element .info .artist_clickable,
+.event_single_container .each_feed_element .info .category_clickable{color:#48c;display:inline;float:none;;}
+.event_single_container .each_feed_element .info .artist_clickable::after,
+.event_single_container .each_feed_element .info .category_clickable::after{content:",";}
+.event_single_container .each_feed_element .info .artist_clickable:last-of-type::after,
+.event_single_container .each_feed_element .info .category_clickable:last-of-type::after{content:".";}
+.event_single_container .each_feed_element .info_venue .location_link{font-size:0.7rem;display:block;max-width:80%;float:left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.event_single_container .each_feed_element .info_venue h3{float:left;max-width:80%;}
+.event_single_container .each_feed_element .info_venue>p{margin:0;}
+.event_single_container .each_feed_element .info>p{margin:0.2rem 0;}
 
 .comment_form{}
 .comment_form label{text-indent:0.7rem;font-family:'roboto_light', Helvetica, Arial, sans-serif;color:#C4C4C4;letter-spacing:1px;font-size:0.7rem;}
@@ -528,7 +542,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 }
 .cat_image_wrapper>img{width:100%;height:auto;}
 .category_detail>h2{text-align:center;clear:both;font-size:1rem;margin:0;padding:0;opacity:0.45;}
-.category_detail p:first-of-type{font-size:0.8rem;line-height:1rem;font-family:'roboto_light', Helvetica, Arial, sans-serif;padding:0 1rem;margin:0 0 1rem 0;text-align:center;letter-spacing:0.5px;}
+.category_detail>p:first-of-type{font-size:0.8rem;line-height:1rem;font-family:'roboto_light', Helvetica, Arial, sans-serif;padding:0 0.8rem;margin:0 0 1rem 0;text-align:left;letter-spacing:0.5px;}
 .category_detail h1{float:left;margin:-2rem 1rem 0 1rem;font-size:1.1rem;color:#474040;width:100%;text-align:left;padding:0;text-transform:none;letter-spacing:1px;position:relative;}
 .explore{}
 .explore_section{clear:both;margin-top:0.4rem;}
