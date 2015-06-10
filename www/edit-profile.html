@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="cordova.js"></script>
 	<script id="user_profile_template" type="text/x-handlebars-template">
 		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a>
-		<article class="box border_c">
+		<article class="no_box edit_profile_container">
 			<h1>Editar Perfil</h1>
 			<form id="modify_profile" class="profile_form">
 			{{#user_avatar}}
@@ -58,11 +58,11 @@
 				  	{{/each}}
 				</select>
 				<input type="hidden" name="hidden_city" id="hidden_city" value="{{city}}">
-				<textarea data-role="none" name="bio_profile" id="bio_profile" placeholder="Bio">{{user_bio}}</textarea>
+				<textarea data-role="none" name="bio_profile" id="bio_profile" placeholder="Bio">{{user_bio_rough}}</textarea>
 				<input data-role="none" type="date" name="birthday" id="birthday" placeholder="Fecha de nacimiento" value="{{birthday}}">
 
-				<input data-role="none" type="radio" name="gender" id="gender" value="H"{{#if Hombre}} checked{{/if}}><span>H</span> &nbsp;
-				<input data-role="none" type="radio" name="gender" id="gender" value="M"{{#if Mujer}} checked{{/if}}><span>M</span> &nbsp;
+				<input data-role="none" type="radio" name="gender" id="gender" value="H"{{#if is_gender_h}} checked{{/if}}><span>H</span> &nbsp;
+				<input data-role="none" type="radio" name="gender" id="gender" value="M"{{#if is_gender_m}} checked{{/if}}><span>M</span> &nbsp;
 
 				<label for="private_profile">
 					<input data-role="none" type="checkbox" name="private_profile" id="private_profile" value="true" {{#if is_private}} checked{{/if}}>

@@ -280,9 +280,11 @@ a.load_more i{display:block; font-size:1.5rem;}
 .image_wrapper.category img{height: 150px; width: auto; display: block; margin: auto;}
 
 /*EDITA TU PERFIL*/
+.edit_profile_container{padding-top: 2.5rem;}
+.edit_profile_container h1{margin: 1rem 0 2rem 0.5rem; text-align: left; font-size: 1rem; color: #414040;}
 .profile_form{width: 92%; margin: auto;}
 .mod_user_profile {position: relative;display: block;width: 150px;height: 150px;margin: 1rem auto;}
-.mod_user_profile i{position: absolute; bottom:0; left:0; color:#FFF; opacity:0.65; font-size:1.4rem; padding:0 0.2rem;}
+.mod_user_profile i{position: absolute; bottom:0; color:#FFF; opacity:0.75; font-size:1.4rem; padding:0 0.2rem; right:0;}
 .profile_pic{display:block;margin:0 auto 1rem auto;}
 .profile_form input,
 .profile_form textarea{width: 100%; font-size: 1rem; padding: 0.3rem; margin-bottom: 0.5rem; clear: left;}
