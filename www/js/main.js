@@ -500,12 +500,24 @@
 		},
 		render_event_gallery_partial: function(event_id){
 			
-			$.getJSON(api_base_url+'events/'+event_id+'/gallery/-1/', function(response){
+			$.getJSON(api_base_url+'events/'+event_id+'/gallery/99/', function(response){
 				var source   = app.gallery_partial();
 				var template = Handlebars.compile(source);
 				$('body').append( template(response) );
 				/*Set elements into temporary variable */
 				window.event_temp_gallery_items = response.items;
+			});
+			return;
+		},
+		render_user_gallery_partial: function(user_login){
+			
+			$.getJSON(api_base_url+'user/'+user_login+'/gallery/99/', function(response){
+				console.log(response);
+				var source   = app.gallery_partial();
+				var template = Handlebars.compile(source);
+				$('body').append( template(response) );
+				/*Set elements into temporary variable */
+				window.user_temp_gallery_items = response.items;
 			});
 			return;
 		},
@@ -523,6 +535,22 @@
 			};
 			// Initializes and opens PhotoSwipe
 			window.event_gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+			return;
+		},
+		trigger_user_gallery: function(index){
+			window.user_gallery = null;
+			var pswpElement = document.querySelectorAll('.pswp')[0];
+			var items = window.user_temp_gallery_items;
+			var options = {
+				history: false,
+		        focus: false,
+
+		        showAnimationDuration: 0,
+		        hideAnimationDuration: 0,
+			    index: index
+			};
+			// Initializes and opens PhotoSwipe
+			window.user_gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
 			return;
 		}
 	};
@@ -863,9 +891,16 @@
 
 		/* Trigger event gallery from thumb */
 		$('body').on('tap','.gallery_thumb', function(e){
+			if($(this).hasClass('user')){
+				app.trigger_user_gallery($(this).data('index'));
+				setTimeout( user_gallery.init(), 600);
+				e.preventDefault();
+				return;
+			}
 			app.trigger_event_gallery($(this).data('index'));
 			setTimeout( event_gallery.init(), 600);
 			e.preventDefault();
+			return;
 		});
 
 		/* Insert new comment in event */

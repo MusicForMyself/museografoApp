@@ -8,7 +8,7 @@
 		<title>Museógrafo mobile app</title>
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
-		
+		<link rel="stylesheet" href="css/pswipe.css">
 		<link rel="stylesheet" href="style.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
@@ -28,13 +28,14 @@
 	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script src="js/plugins-gallery.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script id="user_picsmini" type="text/x-handlebars-template">
 		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i><span>Fotos de {{user_nicename}}</span></a>
 		<section class="gallery_container">
 			<div class="startgallery"></div>
 			{{#each items}}
-				<a class="gallery_thumb" data-index="{{@index}}" ><img src="{{src}}"></a>
+				<a class="gallery_thumb user" data-index="{{@index}}" ><img src="{{src}}"></a>
 			{{/each}}
 		</section>
 	</script>
@@ -44,5 +45,6 @@
 		app.render_header();
 		var GET = app.getUrlVars();
 		app.render_user_picsmini(GET.user);
+		app.render_user_gallery_partial(GET.user);
 	</script>
 </html>
