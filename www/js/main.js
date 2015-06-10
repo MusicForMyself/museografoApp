@@ -275,22 +275,13 @@
 			});
 			
 		},
-		render_event_gallery: function(event_id){
+		render_event_minigallery: function(event_id, limit){
 			
-			$.getJSON(api_base_url+'events/'+event_id+'/gallery', function(response){
+			$.getJSON(api_base_url+'events/'+event_id+'/gallery/'+limit+'/thumbnail/', function(response){
 
-				var source   = $("#event_gallery_template").html();
+				var source   = $("#mini_gallery_template").html();
 				var template = Handlebars.compile(source);
 				$('.append_gallery').prepend( template(response) ).trigger('create');
-				imagesLoaded( $('.gallery_list'), function( instance ) {
-					$('.gallery_list').cycle({
-						paused: true,
-						slides: '>li',
-						fx: 'scrollHorz',
-						swipe: true
-					});
-				});
-				
 			});
 		},
 		render_event_popup: function(event_id){
@@ -310,7 +301,7 @@
 				var source   = $("#event_single_template").html();
 				var template = Handlebars.compile(source);
 				$('.feed_container').append( template(response) ).trigger('create');
-				app.render_event_gallery(event_id);
+				app.render_event_minigallery(event_id, 5);
 				app.render_comments(event_id, 0);
 			});
 		},
@@ -331,6 +322,13 @@
 		render_user_profile: function(user_login){
 			$.getJSON( api_base_url+user+'/user/'+user_login , function(response){
 				var source   = $("#user_profile_template").html();
+				var template = Handlebars.compile(source);
+				$('.feed_container').prepend( template(response) ).trigger('create');
+			});
+		},
+		render_user_picsmini: function(user_login){
+			$.getJSON( api_base_url+'user/'+user_login+'/gallery/5/thumbnail/', function(response){
+				var source   = $("#user_picsmini").html();
 				var template = Handlebars.compile(source);
 				$('.feed_container').prepend( template(response) ).trigger('create');
 			});
@@ -466,49 +464,67 @@
 			return;
 		},
 		gallery_partial: function(){ return "\
-						<div class='pswp' tabindex='-1' role='dialog' aria-hidden='true'>\
-								<div class='pswp__bg'></div>\
-								<div class='pswp__scroll-wrap'>\
-										<div class='pswp__container'>\
-												<div class='pswp__item'></div>\
-												<div class='pswp__item'></div>\
-												<div class='pswp__item'></div>\
+						<div class='pswp' tabindex='-1' role='dialog' aria-hidden='true' data-role='none'>\
+								<div class='pswp__bg' data-role='none'></div>\
+								<div class='pswp__scroll-wrap' data-role='none'>\
+										<div class='pswp__container' data-role='none'>\
+												<div class='pswp__item' data-role='none'></div>\
+												<div class='pswp__item' data-role='none'></div>\
+												<div class='pswp__item' data-role='none'></div>\
 										</div>\
-										<div class='pswp__ui pswp__ui--hidden'>\
-												<div class='pswp__top-bar'>\
-														<div class='pswp__counter'></div>\
-														<button class='pswp__button pswp__button--close' title='Close (Esc)'></button>\
-														<div class='pswp__preloader'>\
-																<div class='pswp__preloader__icn'>\
-																	<div class='pswp__preloader__cut'>\
-																		<div class='pswp__preloader__donut'></div>\
+										<div class='pswp__ui pswp__ui--hidden' data-role='none'>\
+												<div class='pswp__top-bar' data-role='none'>\
+														<div class='pswp__counter' data-role='none'></div>\
+														<button class='pswp__button pswp__button--close' title='Close (Esc)' data-role='none'></button>\
+														<div class='pswp__preloader' data-role='none'>\
+																<div class='pswp__preloader__icn' data-role='none'>\
+																	<div class='pswp__preloader__cut' data-role='none'>\
+																		<div class='pswp__preloader__donut' data-role='none'></div>\
 																	</div>\
 																</div>\
 														</div>\
 												</div>\
-												<div class='pswp__share-modal pswp__share-modal--hidden pswp__single-tap'>\
-														<div class='pswp__share-tooltip'></div>\
+												<div class='pswp__share-modal pswp__share-modal--hidden pswp__single-tap' data-role='none'>\
+														<div class='pswp__share-tooltip' data-role='none'></div>\
 												</div>\
-												<button class='pswp__button pswp__button--arrow--left' title='Previous (arrow left)'>\
+												<button class='pswp__button pswp__button--arrow--left' title='Previous (arrow left)' data-role='none'>\
 												</button>\
-												<button class='pswp__button pswp__button--arrow--right' title='Next (arrow right)'>\
+												<button class='pswp__button pswp__button--arrow--right' title='Next (arrow right)' data-role='none'>\
 												</button>\
-												<div class='pswp__caption'>\
-														<div class='pswp__caption__center'></div>\
+												<div class='pswp__caption' data-role='none'>\
+														<div class='pswp__caption__center' data-role='none'></div>\
 												</div>\
 										</div>\
 								</div>\
 						</div>";
 		},
-		render_event_gallery_partial : function(){
+		render_event_gallery_partial: function(event_id){
 			
-			$.getJSON(api_base_url+user+'/notifications', function(response){
-				var source   = app.header_partial();
+			$.getJSON(api_base_url+'events/'+event_id+'/gallery/-1/', function(response){
+				var source   = app.gallery_partial();
 				var template = Handlebars.compile(source);
-				$('.main').prepend( template(response) ).trigger('create');
+				$('body').append( template(response) );
+				/*Set elements into temporary variable */
+				window.event_temp_gallery_items = response.items;
 			});
-			
+			return;
 		},
+		trigger_event_gallery: function(index){
+			window.event_gallery = null;
+			var pswpElement = document.querySelectorAll('.pswp')[0];
+			var items = window.event_temp_gallery_items;
+			var options = {
+				history: false,
+		        focus: false,
+
+		        showAnimationDuration: 0,
+		        hideAnimationDuration: 0,
+			    index: index
+			};
+			// Initializes and opens PhotoSwipe
+			window.event_gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+			return;
+		}
 	};
 
 	 /*      _                                       _                        _       
@@ -843,6 +859,13 @@
 				$(this).removeClass('attend_event').addClass('attended_event').html('Asistido <i class="fa fa-check-square-o">');
 				return;
 			}
+		});
+
+		/* Trigger event gallery from thumb */
+		$('body').on('tap','.gallery_thumb', function(e){
+			app.trigger_event_gallery($(this).data('index'));
+			setTimeout( event_gallery.init(), 600);
+			e.preventDefault();
 		});
 
 		/* Insert new comment in event */

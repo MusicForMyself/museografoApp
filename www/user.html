@@ -9,7 +9,7 @@
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.min.css">
+		<link rel="stylesheet" href="style.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
@@ -24,8 +24,8 @@
 			</section><!-- feed_container -->
 		</div>
 	</body>
-	<script src="js/api-sdk-0.1.min.js"></script>
-	<script src="js/main.min.js"></script>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
@@ -70,7 +70,7 @@
 					<li><a class="">{{event_count/scheduled}} <span>Agendados</span></a></li>
 					<li><a class="">{{event_count/attended}} <span>Asistidos</span></a></li>
 					<li><a class="">{{../comment_count}} <span>Reseñas</span></a></li>
-					<li><a class="">{{../upload_count}} <span>Fotos</span></a></li>
+					<li><a href="user_pics.html?user={{../user_login}}" class="">{{../upload_count}} <span>Fotos</span></a></li>
 				</ul>
 			{{/unless}}
 				<ul class="activity_list just_two clearfix">
@@ -87,14 +87,15 @@
 		</article>
 		{{^is_private}}
 			<!-- TABBED -->
+			{{^is_artista}}
 			<section data-role="tabs" class="tabbed_content" >
 				<div data-role="navbar">
 					<ul>
-						<li><a class="ui-btn-active" href="#past_events">Agenda</a></li>
-						<li><a href="#future_events">Historial</a></li>
+						<li><a class="ui-btn-active" href="#scheduled">Agenda</a></li>
+						<li><a href="#history">Historial</a></li>
 					</ul>
 				</div>
-				<div id="past_events">
+				<div id="scheduled">
 					{{#each events.results.scheduled}}
 						<article class="no_box border_a each_feed_element expanded clearfix">
 							<section class="info_venue">
@@ -150,7 +151,7 @@
 						</article>
 					{{/unless}}
 				</div>
-				<div id="future_events">
+				<div id="history">
 					{{#each events.results.history}}
 						<article class="no_box border_a each_feed_element expanded clearfix">
 							<section class="info_venue">
@@ -208,6 +209,130 @@
 				</div>
 				
 			</section>
+			{{/is_artista}}
+			{{#is_artista}}
+				<section data-role="tabs" class="tabbed_content" >
+					<div data-role="navbar">
+						<ul>
+							<li><a class="ui-btn-active" href="#ontime">Próximos</a></li>
+							<li><a href="#history">Historial</a></li>
+						</ul>
+					</div>
+					<div id="ontime">
+						{{#each events.results.ontime}}
+							<article class="no_box border_a each_feed_element expanded clearfix">
+								<section class="info_venue">
+									{{#venue_avatar}}
+										<a href="venue.html?venue={{../venue_id}}" rel="external" >
+											<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+										</a>
+									{{/venue_avatar}}
+									{{^venue_avatar}}
+										<a href="venue.html?venue={{../venue_id}}" rel="external" >
+											<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+										</a>
+									{{/venue_avatar}}
+
+									<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
+								</section>
+								{{#event_thumbnail}}
+									<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+										<img src="{{.}}" alt="{{../event_title}}">
+										<h2>{{../event_title}}</h2>
+									</a>
+								{{/event_thumbnail}}
+								{{^event_thumbnail}}
+									<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+										<img src="images/event_placeholder.png" alt="{{..event_title}}">
+										<h2>{{../event_title}}</h2>
+									</a>
+								{{/event_thumbnail}}
+								<section class="info">
+									{{#address}}
+										<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
+									{{/address}}
+									{{#event_description}}
+										<p>{{{.}}} </p>
+									{{/event_description}}
+									<p>
+										{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+										{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+										{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+									</p>
+								</section>
+								<footer class="footer_menu single">
+									<ul class="clearfix">
+										<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+										<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+									</ul>
+								</footer>
+							</article>
+						{{/each}}
+						{{#unless events.results.ontime}}
+							<article class="no_box no_events">
+								<h1>No hay eventos agendados</h1>
+							</article>
+						{{/unless}}
+					</div>
+					<div id="history">
+						{{#each events.results.history}}
+							<article class="no_box border_a each_feed_element expanded clearfix">
+								<section class="info_venue">
+									{{#venue_avatar}}
+										<a href="venue.html?venue={{../venue_id}}" rel="external" >
+											<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
+										</a>
+									{{/venue_avatar}}
+									{{^venue_avatar}}
+										<a href="venue.html?venue={{../venue_id}}" rel="external" >
+											<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
+										</a>
+									{{/venue_avatar}}
+
+									<h3><a href="venue.html?venue={{../venue_id}}" rel="external">{{venue}}</a></h3>
+								</section>
+								{{#event_thumbnail}}
+									<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+										<img src="{{.}}" alt="{{../event_title}}">
+										<h2>{{../event_title}}</h2>
+									</a>
+								{{/event_thumbnail}}
+								{{^event_thumbnail}}
+									<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
+										<img src="images/event_placeholder.png" alt="{{..event_title}}">
+										<h2>{{../event_title}}</h2>
+									</a>
+								{{/event_thumbnail}}
+								<section class="info">
+									{{#address}}
+										<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
+									{{/address}}
+									{{#event_description}}
+										<p>{{{.}}} </p>
+									{{/event_description}}
+									<p>
+										{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
+										{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
+										{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
+									</p>
+								</section>
+								<footer class="footer_menu single">
+									<ul class="clearfix">
+										<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+										<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+									</ul>
+								</footer>
+							</article>
+						{{/each}}
+						{{#unless events.results.history}}
+							<article class="no_box no_events">
+								<h1>No hay historial</h1>
+							</article>
+						{{/unless}}
+					</div>
+					
+				</section>
+			{{/is_artista}}
 		{{/is_private}}
 		{{#is_private}}
 			<article class="private_profile">

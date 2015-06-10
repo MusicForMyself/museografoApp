@@ -17,36 +17,32 @@
 	</head>
 	<body>
 		
-	<div data-role="page" class="main">
-		
-		<section class="feed_container discover_categories" data-role="content">
-			
-		</section><!-- feed_container -->
+		<div data-role="page" id="user_profile" class="main">
 
-	</div>
+			<section class="feed_container user_pics" data-role="content">
+		
+			</section><!-- feed_container -->
+		</div>
 	</body>
 	<script src="js/api-sdk-0.1.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
-	<script id="category_template" type="text/x-handlebars-template">
-		<h1><i class="fa fa-tags"></i> Explora y sigue las categorías</h1>	
-		{{#each data.pool}}
-			<article class="half_box each_category border_e">
-				<a href="subcategories.html?parent={{ID}}" rel="external">
-					<div class="image_wrapper">
-						<img src="{{thumbnail}}" alt="{{title}}">
-					</div>
-					<h2 class="box">{{title}}</h2>
-				</a>
-			</article>
-		{{/each}}
+	<script id="user_picsmini" type="text/x-handlebars-template">
+		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i><span>Fotos de {{user_nicename}}</span></a>
+		<section class="gallery_container">
+			<div class="startgallery"></div>
+			{{#each items}}
+				<a class="gallery_thumb" data-index="{{@index}}" ><img src="{{src}}"></a>
+			{{/each}}
+		</section>
 	</script>
 
 	<script type="text/javascript">
 		app.initialize();
 		app.render_header();
-		app.render_categories();
+		var GET = app.getUrlVars();
+		app.render_user_picsmini(GET.user);
 	</script>
 </html>
