@@ -125,9 +125,9 @@
 					</article>
 				{{/each}}
 				{{#unless events.results.ontime}}
-					<article class="box border_d">
-						<h1>No hay eventos futuros</h1>
-					</article>
+					<article class="no_box no_events">
+							<h1>No hay eventos próximos</h1>
+						</article>
 				{{/unless}}
 			</div>
 			<div id="history">
@@ -174,8 +174,8 @@
 					</article>
 				{{/each}}
 				{{#unless events.results.history}}
-					<article class="box border_d">
-						<h1>No hay eventos pasados</h1>
+					<article class="no_box no_events">
+						<h1>No hay historial</h1>
 					</article>
 				{{/unless}}
 			</div>

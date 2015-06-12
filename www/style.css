@@ -285,7 +285,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 .profile_form{width: 92%; margin: auto;}
 .mod_user_profile {position: relative;display: block;width: 150px;height: 150px;margin: 1rem auto;}
 .mod_user_profile i{position: absolute; bottom:0; color:#FFF; opacity:0.75; font-size:1.4rem; padding:0 0.2rem; right:0;}
-.profile_pic{display:block;margin:0 auto 1rem auto;}
+.profile_pic{display:block;margin:0 auto 1rem auto;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
 .profile_form input,
 .profile_form textarea{width: 100%; font-size: 1rem; padding: 0.3rem; margin-bottom: 0.5rem; clear: left;}
 .profile_form textarea{resize: none; height: 120px; border-color: #bbb;}
@@ -293,7 +293,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 .profile_form input[type=date]{color:#ACAAAA;}
 .profile_form input[type=submit]:hover,
 .profile_form input[type=submit]:visited,
-.profile_form input[type=submit]{width:109%; margin:0.5rem 0 1rem -0.9rem; color: #FFF; background: #838787; text-transform: uppercase; padding: 0.6rem;}
+.profile_form input[type=submit]{width:54%; margin:0.5rem auto 1rem auto; color: #FFF; background: #48c; text-transform: none; padding: 0.6rem;}
 .profile_form input[type=radio] + span{float:left;margin:0.5rem 0.2rem;font-size:1rem; clear: right;}
 .profile_form input[type=checkbox]{float:none;margin:0.5rem 0.2rem;font-size:1rem;width:auto;}
 .profile_form label[for=private_profile]{float:none;clear:both;margin:2rem 0 0 0;}
@@ -333,6 +333,12 @@ a.load_more i{display:block; font-size:1.5rem;}
 .button.unfollow_user:hover,
 .button.unfollow_user:visited,
 .button.unfollow_user{width: 100%; margin: 0; color: #FFF; background: #E74C3C; text-transform: uppercase; padding: 0.6rem;}
+
+.artist_project_mini h3{margin:0;text-align:left;font-size:1rem;color:#414040;font-weight:normal;font-family:'gotham_book';}
+.artist_project_mini .project_list{list-style: none;margin:0; padding: 0; width: 100%;}
+.artist_project_mini .project_list li{display:inline-block;vertical-align:top;width:23%;margin:0.25rem;}
+.artist_project_mini .project_list li .gallery_thumb{display:block;width:100%;}
+.artist_project_mini .project_list li .gallery_thumb img{width:100%;height:auto;margin:0;}
 
 .city_venue,
 .phone,

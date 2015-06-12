@@ -44,27 +44,28 @@
 			<article class="box no_border each_user_result clearfix">
 				<figure>
 					{{#user_thumbnail}}
-						<a href="user.html?user={{..user_login}}" rel="external"><img src="{{.}}" alt="{{..user_display_name}}"></a>
+						<a href="{{^../is_venue}}user.html?user={{../../user_login}}{{/../is_venue}}{{#../is_venue}}venue.html?venue={{../../ID}}{{/../is_venue}}" rel="external"><img src="{{.}}" alt="{{../user_display_name}}"></a>
 					{{/user_thumbnail}}
 					{{^user_thumbnail}}
-						<a href="user.html?user={{..user_login}}" rel="external"><img src="images/profile_placeholder.png" alt="{{..user_display_name}}"></a>
+						<a href="{{^../is_venue}}user.html?user={{../../user_login}}{{/../is_venue}}{{#../is_venue}}venue.html?venue={{../../ID}}{{/../is_venue}}" rel="external"><img src="images/profile_placeholder.png" alt="{{..user_display_name}}"></a>
 					{{/user_thumbnail}}
 				</figure>
 				<section class='article_details'>
-					<h2><a href="user.html?user={{user_login}}" rel="external">{{user_display_name}}</a></h2>
-					<h3>{{user_role}}</h3>
+					<h2><a href="{{^is_venue}}user.html?user={{../user_login}}{{/is_venue}}{{#is_venue}}venue.html?venue={{../ID}}{{/is_venue}}" rel="external">{{user_display_name}}</a></h2>
+					{{#is_artista}}<h3>{{../user_role}}</h3>{{/is_artista}}
+					{{#is_venue}}<h3>{{../user_role}}</h3>{{/is_venue}}
 					<section class='user_follows'>
-						<a href="user.html?user={{user_login}}" rel="external">
+						<a href="{{^is_venue}}user.html?user={{../user_login}}{{/is_venue}}{{#is_venue}}venue.html?venue={{../ID}}{{/is_venue}}" rel="external">
 							<i class="fa fa-users"></i>
 							<span>{{user_followers}}</span>
 						</a>
 						{{#if is_following}}
-							<a href="user.html?user={{user_login}}" rel="external" class="following special_icon" data-id="{{..ID}}" id="unfollow_user">
+							<a data-id="{{../ID}}" id="unfollow_user">
 								<i class="fa fa-user"></i>
 								<i class="fa fa-check superscript"></i>
 							</a>
 						{{else}}
-							<a href="user.html?user={{user_login}}" rel="external" class="special_icon" data-id="{{..ID}}" id="follow_user">
+							<a data-id="{{../ID}}" id="follow_user">
 								<i class="fa fa-user"></i>
 								<i class="fa fa-plus superscript"></i>
 							</a>

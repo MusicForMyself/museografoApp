@@ -11,6 +11,7 @@
 		
 		<link rel="stylesheet" href="style.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/pswipe.css">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
 		<script src="js/jquery1.11.1.js"></script>
@@ -29,6 +30,15 @@
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
+	<script src="js/plugins-gallery.js"></script>
+	<script id="mini_projects_template" type="text/x-handlebars-template">
+		<ul class="project_list clearfix">
+			{{#each items}}
+				<li><a class="gallery_thumb user" data-index="{{@index}}"><img src="{{src}}"></a></li>
+			{{/each}}
+		</ul>
+	</script>
+
 	<script id="user_profile_template" type="text/x-handlebars-template">
 		{{!-- <a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a> --}}
 		<article class="border_c user_profile clearfix">
@@ -83,6 +93,11 @@
 			{{else}}
 				<a class="floating_awesome_button realcircle special_icon follow_user" data-userlogin="{{user_nicename}}" data-id="{{ID}}" data-userrole="{{role_prefix}}" id="follow_user"><i class="fa fa-user"></i>
 									<i class="fa fa-plus superscript"></i></a>
+			{{/if}}
+			{{#if is_artista}}
+				<section class="artist_project_mini">
+					<h3>Proyectos destacados</h3>
+				</section>
 			{{/if}}
 		</article>
 		{{^is_private}}
@@ -347,6 +362,6 @@
 		app.render_header();
 		var GET = app.getUrlVars();
 		app.render_user_profile(GET.user);
-		app.render_event_gallery_partial(GET.user);
+		
 	</script>
 </html>

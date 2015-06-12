@@ -324,6 +324,11 @@
 				var source   = $("#user_profile_template").html();
 				var template = Handlebars.compile(source);
 				$('.feed_container').prepend( template(response) ).trigger('create');
+				if(response.is_artista){
+					console.log('correcto');
+					app.render_artist_project_partial(response.user_login);
+					app.render_artist_picsmini(response.user_login)
+				}
 			});
 		},
 		render_user_picsmini: function(user_login){
@@ -331,6 +336,13 @@
 				var source   = $("#user_picsmini").html();
 				var template = Handlebars.compile(source);
 				$('.feed_container').prepend( template(response) ).trigger('create');
+			});
+		},
+		render_artist_picsmini: function(user_login){
+			$.getJSON( api_base_url+'user/'+user_login+'/projects/99/thumbnail/', function(response){
+				var source   = $("#mini_projects_template").html();
+				var template = Handlebars.compile(source);
+				$('.artist_project_mini').append( template(response) );
 			});
 		},
 		render_my_profile: function(){
@@ -512,6 +524,18 @@
 		render_user_gallery_partial: function(user_login){
 			
 			$.getJSON(api_base_url+'user/'+user_login+'/gallery/99/', function(response){
+				console.log(response);
+				var source   = app.gallery_partial();
+				var template = Handlebars.compile(source);
+				$('body').append( template(response) );
+				/*Set elements into temporary variable */
+				window.user_temp_gallery_items = response.items;
+			});
+			return;
+		},
+		render_artist_project_partial: function(user_login){
+			
+			$.getJSON(api_base_url+'user/'+user_login+'/projects/99/', function(response){
 				console.log(response);
 				var source   = app.gallery_partial();
 				var template = Handlebars.compile(source);
