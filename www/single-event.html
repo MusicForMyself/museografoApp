@@ -9,7 +9,7 @@
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.min.css">
+		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="css/pswipe.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
@@ -27,10 +27,13 @@
 		
 	</div>
 	</body>
-	<script src="js/api-sdk-0.1.min.js"></script>
-	<script src="js/main.min.js"></script>
+	<script src="js/api-sdk-1.0.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>
 	<script src="js/plugins-gallery.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script id="event_popup_template" type="text/x-handlebars-template">
@@ -105,23 +108,20 @@
 				<p> {{#costo}}<b>Admisión:</b> {{.}} </p>{{/costo}}
 				<p> {{#event_type}}<b>Tipo de Evento:</b> {{.}} </p>{{/event_type}}
 				
-				<a role="none" data-eventid="{{ID}}" class="event_file_upload" id="event_file_upload" ><i class="fa fa-camera-retro"></i></a>
+				<a role="none" class="event_upload_trigger" id="event_upload_trigger" ><i class="fa fa-camera-retro"></i></a>
+				<a role="none" data-eventid="{{ID}}" class="event_file_upload invisibo" id="event_file_upload" ><i class="fa fa-picture-o"></i></a>
+				<a role="none" data-eventid="{{ID}}" class="event_camera_upload invisibo" id="event_camera_upload" ><i class="fa fa-camera"></i></a>
 			</section>
 
 		</article>
 	</script>
 	
 	<script type="text/javascript">
-		app.initialize();
 		app.render_header();
 		var GET = app.getUrlVars();
 		app.render_event(GET.event);
 		app.render_event_gallery_partial(GET.event);
 		app.render_event_popup(GET.event);
-		// document.addEventListener("deviceready", _onDeviceReady, false);
-		// function _onDeviceReady(){	
-		// 	app.initialize_file_transfer();
-		// }
 	</script>
 	
 </html>

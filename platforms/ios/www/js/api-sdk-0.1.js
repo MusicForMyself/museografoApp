@@ -501,7 +501,7 @@ function requestHandlerAPI(){
 							};
 
 		this.getFileFromGallery = function(destination){
-
+			
 			this.photoDestinationType = navigator.camera.DestinationType;
 			var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
 			if(destination == 'profile')

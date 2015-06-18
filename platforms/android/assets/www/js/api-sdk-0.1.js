@@ -501,9 +501,10 @@ function requestHandlerAPI(){
 							};
 
 		this.getFileFromGallery = function(destination){
-
+			
 			this.photoDestinationType = navigator.camera.DestinationType;
-			var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
+			// var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
+			var source =  navigator.camera.PictureSourceType.CAMERA;
 			if(destination == 'profile')
 				navigator.camera.getPicture(context.profileselect_win, context.fileselect_fail, { quality: 50,
 					destinationType: this.photoDestinationType.FILE_URI,

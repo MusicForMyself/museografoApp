@@ -86,7 +86,7 @@ html[xmlns] .clearfix {
 .information{color: #C4C4C4;margin: 1rem;text-align: center;font-size: 0.8rem;letter-spacing: 0.5px;font-family: 'roboto_regular', Helvetica, Arial, sans-serif;}
 
 /*REGISTER*/
-.hidden{display: none;}
+.hidden{}
 .button.gray{background: #838787;color: #FFF;display: block;padding: 0.5rem!important;margin: 0.2rem 0!important;}
 .register{font-family: 'gotham-medium'; font-size: 1rem; width: 96%; margin: auto;}
 .register p{text-transform: uppercase; text-align: center; font-family: 'gotham_book', Helvetica, Arial, sans-serif; font-size: 1rem; margin: 1rem auto 0 auto;}
@@ -280,10 +280,12 @@ a.load_more i{display:block; font-size:1.5rem;}
 .image_wrapper.category img{height: 150px; width: auto; display: block; margin: auto;}
 
 /*EDITA TU PERFIL*/
+.edit_profile_container{padding-top: 2.5rem;}
+.edit_profile_container h1{margin: 1rem 0 2rem 0.5rem; text-align: left; font-size: 1rem; color: #414040;}
 .profile_form{width: 92%; margin: auto;}
 .mod_user_profile {position: relative;display: block;width: 150px;height: 150px;margin: 1rem auto;}
-.mod_user_profile i{position: absolute; bottom:0; left:0; color:#FFF; opacity:0.65; font-size:1.4rem; padding:0 0.2rem;}
-.profile_pic{display:block;margin:0 auto 1rem auto;}
+.mod_user_profile i{position: absolute; bottom:0; color:#FFF; opacity:0.75; font-size:1.4rem; padding:0 0.2rem; right:0;}
+.profile_pic{display:block;margin:0 auto 1rem auto;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
 .profile_form input,
 .profile_form textarea{width: 100%; font-size: 1rem; padding: 0.3rem; margin-bottom: 0.5rem; clear: left;}
 .profile_form textarea{resize: none; height: 120px; border-color: #bbb;}
@@ -291,7 +293,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 .profile_form input[type=date]{color:#ACAAAA;}
 .profile_form input[type=submit]:hover,
 .profile_form input[type=submit]:visited,
-.profile_form input[type=submit]{width:109%; margin:0.5rem 0 1rem -0.9rem; color: #FFF; background: #838787; text-transform: uppercase; padding: 0.6rem;}
+.profile_form input[type=submit]{width:54%; margin:0.5rem auto 1rem auto; color: #FFF; background: #48c; text-transform: none; padding: 0.6rem;}
 .profile_form input[type=radio] + span{float:left;margin:0.5rem 0.2rem;font-size:1rem; clear: right;}
 .profile_form input[type=checkbox]{float:none;margin:0.5rem 0.2rem;font-size:1rem;width:auto;}
 .profile_form label[for=private_profile]{float:none;clear:both;margin:2rem 0 0 0;}
@@ -332,6 +334,12 @@ a.load_more i{display:block; font-size:1.5rem;}
 .button.unfollow_user:visited,
 .button.unfollow_user{width: 100%; margin: 0; color: #FFF; background: #E74C3C; text-transform: uppercase; padding: 0.6rem;}
 
+.artist_project_mini h3{margin:0;text-align:left;font-size:1rem;color:#414040;font-weight:normal;font-family:'gotham_book';}
+.artist_project_mini .project_list{list-style: none;margin:0; padding: 0; width: 100%;}
+.artist_project_mini .project_list li{display:inline-block;vertical-align:top;width:23%;margin:0.25rem;}
+.artist_project_mini .project_list li .gallery_thumb{display:block;width:100%;}
+.artist_project_mini .project_list li .gallery_thumb img{width:100%;height:auto;margin:0;}
+
 .city_venue,
 .phone,
 .hours{font-size: 0.75rem;color: #474040;letter-spacing: 0.2px;}
@@ -356,6 +364,15 @@ a.load_more i{display:block; font-size:1.5rem;}
 .ui-page-theme-a .ui-btn.ui-btn-active{color:#474040;border:none;letter-spacing:1px;background-color:#FFF!important;}
 .no_events{text-align: center; font-size: 0.4rem; color: #767575; letter-spacing: 0.5px; min-height: 120px;}
 .chech_attended{ color: #559021; display: block; text-align: right; }
+
+/*User attachments archive*/
+.feed_container.user_pics{}
+.user_pics .gallery_thumb{display:inline-block;width:21.4%;margin:0.25rem 0.25rem;vertical-align:top;}
+.user_pics .gallery_thumb img{display:block;width:100%; height: auto;}
+.user_pics .gallery_thumb:first-of-type,
+.user_pics .gallery_thumb:nth-of-type(5n){margin: 0.25rem 0.25rem 0.25rem 0.5rem;}
+.user_pics .gallery_thumb:nth-of-type(4n){margin: 0.25rem 0.5rem 0.25rem 0.25rem;}
+.startgallery{display:block;clear:both;margin:3rem 0 0 0;height:1px;width:100%;}
 
 /*FOLLOW THIS VENUES*/
 .box.venue{position:relative;}
@@ -419,9 +436,11 @@ a.load_more i{display:block; font-size:1.5rem;}
 .event_single_container
 .event_thumbnail{width: 100%; height: auto;}
 .event_thumbnail img{display: block; width: 100%; height: auto; margin: 0;}
-.gallery{ width: 93%; margin: 1rem auto 0 auto; display: block; clear: both;}
+.gallery{ width: 100%; margin: 0; display: block; clear: both;}
 .gallery ul{ list-style: none; margin: 0; padding: 0;}
-.gallery ul li{ width: 100%;}
+.gallery ul li{ width: 17.5%; float: left; margin: 0 0.25rem;}
+.gallery ul li:last-of-type{margin: 0 0 0 0.25rem;}
+.gallery ul li:first-of-type{margin: 0 0 0 0.5rem;}
 .gallery ul li img{ width: 100%; height: auto; display: block;}
 .attend_event,
 .attended_event{ right: 0; display: block; text-align: right; margin: 0 1rem; font-family: 'gotham_book', Arial, Helvetica, sans-serif; font-size: 0.8rem; color: #838787!important;}
@@ -807,186 +826,5 @@ a.category_follow.select_me.ui-link{font-size:1.4em;}
   }
 }
 
-
-/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */
-/*
-    Styles for basic PhotoSwipe functionality (sliding area, open/close transitions)
-*/
-/* pswp = photoswipe */
-.pswp {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  -ms-touch-action: none;
-  touch-action: none;
-  z-index: 1500;
-  -webkit-text-size-adjust: 100%;
-  /* create separate layer, to avoid paint on window.onscroll in webkit/blink */
-  -webkit-backface-visibility: hidden;
-  outline: none; }
-  .pswp * {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box; }
-  .pswp img {
-    max-width: none; }
-
-/* style is added when JS option showHideOpacity is set to true */
-.pswp--animate_opacity {
-  /* 0.001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */
-  opacity: 0.001;
-  will-change: opacity;
-  /* for open/close transition */
-  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
-          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }
-
-.pswp--open {
-  display: block; }
-
-.pswp--zoom-allowed .pswp__img {
-  /* autoprefixer: off */
-  cursor: -webkit-zoom-in;
-  cursor: -moz-zoom-in;
-  cursor: zoom-in; }
-
-.pswp--zoomed-in .pswp__img {
-  /* autoprefixer: off */
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab; }
-
-.pswp--dragging .pswp__img {
-  /* autoprefixer: off */
-  cursor: -webkit-grabbing;
-  cursor: -moz-grabbing;
-  cursor: grabbing; }
-
-/*
-    Background is added as a separate element.
-    As animating opacity is much faster than animating rgba() background-color.
-*/
-.pswp__bg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  will-change: opacity; }
-
-.pswp__scroll-wrap {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; }
-
-.pswp__container,
-.pswp__zoom-wrap {
-  -ms-touch-action: none;
-  touch-action: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0; }
-
-/* Prevent selection and tap highlights */
-.pswp__container,
-.pswp__img {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-      user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none; }
-
-.pswp__zoom-wrap {
-  position: absolute;
-  width: 100%;
-  -webkit-transform-origin: left top;
-  -ms-transform-origin: left top;
-  transform-origin: left top;
-  /* for open/close transition */
-  -webkit-transition: -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);
-          transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1); }
-
-.pswp__bg {
-  will-change: opacity;
-  /* for open/close transition */
-  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
-          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }
-
-.pswp--animated-in .pswp__bg,
-.pswp--animated-in .pswp__zoom-wrap {
-  -webkit-transition: none;
-  transition: none; }
-
-.pswp__container,
-.pswp__zoom-wrap {
-  -webkit-backface-visibility: hidden;
-  will-change: transform; }
-
-.pswp__item {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  overflow: hidden; }
-
-.pswp__img {
-  position: absolute;
-  width: auto;
-  height: auto;
-  top: 0;
-  left: 0;
-  -webkit-transition: opacity 0.15s;
-          transition: opacity 0.15s; }
-
-/*
-    stretched thumbnail or div placeholder element (see below)
-    style is added to avoid flickering in webkit/blink when layers overlap
-*/
-.pswp__img--placeholder {
-  -webkit-backface-visibility: hidden; }
-
-/*
-    div element that matches size of large image
-    large image loads on top of it
-*/
-.pswp__img--placeholder--blank {
-  background: #222; }
-
-.pswp--ie .pswp__img {
-  width: 100% !important;
-  height: auto !important;
-  left: 0;
-  top: 0; }
-
-/*
-    Error message appears when image is not loaded
-    (JS option errorMsg controls markup)
-*/
-.pswp__error-msg {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  line-height: 16px;
-  margin-top: -8px;
-  color: #CCC; }
-
-.pswp__error-msg a {
-  color: #CCC;
-  text-decoration: underline; }
 .user_profile .bio{display:block;float:none;clear:both;position:relative;}
 .user_profile .bio p{display:block;clear:both;margin:0 0 1rem 0;text-align:left;font-size:0.74rem;line-height:1rem;color:#737979;}

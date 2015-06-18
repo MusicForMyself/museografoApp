@@ -9,7 +9,7 @@
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.min.css">
+		<link rel="stylesheet" href="style.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
@@ -28,14 +28,14 @@
 
 	</div>
 	</body>
-	<script src="js/api-sdk-0.1.min.js"></script>
-	<script src="js/main.min.js"></script>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script id="user_profile_template" type="text/x-handlebars-template">
 		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a>
-		<article class="box border_c">
+		<article class="no_box edit_profile_container">
 			<h1>Editar Perfil</h1>
 			<form id="modify_profile" class="profile_form">
 			{{#user_avatar}}
@@ -51,18 +51,18 @@
 				<input data-role="none" type="text" name="last_name" id="last_name" placeholder="Apellido" value="{{last_name}}">
 				<input data-role="none" type="text" name="nickname" id="nickname" placeholder="Nickname" value="{{nickname}}">
 				<input data-role="none" type="mail" name="email" id="email" placeholder="E-mail" value="{{user_email}}">
-				<select name="city" id="city">
+				{{!-- <select name="city" id="city">
 					<option value="_none">Selecciona una ciudad</option>
 					{{#each cities}}
 				  		<option value="{{.}}">{{.}}</option>
 				  	{{/each}}
-				</select>
+				</select> --}}
 				<input type="hidden" name="hidden_city" id="hidden_city" value="{{city}}">
-				<textarea data-role="none" name="bio_profile" id="bio_profile" placeholder="Bio">{{user_bio}}</textarea>
+				<textarea data-role="none" name="bio_profile" id="bio_profile" placeholder="Bio">{{user_bio_rough}}</textarea>
 				<input data-role="none" type="date" name="birthday" id="birthday" placeholder="Fecha de nacimiento" value="{{birthday}}">
 
-				<input data-role="none" type="radio" name="gender" id="gender" value="H"{{#if Hombre}} checked{{/if}}><span>H</span> &nbsp;
-				<input data-role="none" type="radio" name="gender" id="gender" value="M"{{#if Mujer}} checked{{/if}}><span>M</span> &nbsp;
+				<input data-role="none" type="radio" name="gender" id="gender" value="H"{{#if is_gender_h}} checked{{/if}}><span>H</span> &nbsp;
+				<input data-role="none" type="radio" name="gender" id="gender" value="M"{{#if is_gender_m}} checked{{/if}}><span>M</span> &nbsp;
 
 				<label for="private_profile">
 					<input data-role="none" type="checkbox" name="private_profile" id="private_profile" value="true" {{#if is_private}} checked{{/if}}>

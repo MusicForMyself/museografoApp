@@ -9,7 +9,7 @@
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.min.css">
+		<link rel="stylesheet" href="style.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
@@ -27,8 +27,8 @@
 
 	</div>
 	</body>
-	<script src="js/api-sdk-0.1.min.js"></script>
-	<script src="js/main.min.js"></script>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
@@ -71,7 +71,7 @@
 		<section data-role="tabs" class="tabbed_content" >
 			<div data-role="navbar">
 				<ul>
-					<li><a class="ui-btn-active"  href="#future_events">Eventos futuros</a></li>
+					<li><a class="ui-btn-active"  href="#future_events">Próximos</a></li>
 					<li><a href="#history">Historial</a></li>
 				</ul>
 			</div>
@@ -125,9 +125,9 @@
 					</article>
 				{{/each}}
 				{{#unless events.results.ontime}}
-					<article class="box border_d">
-						<h1>No hay eventos futuros</h1>
-					</article>
+					<article class="no_box no_events">
+							<h1>No hay eventos próximos</h1>
+						</article>
 				{{/unless}}
 			</div>
 			<div id="history">
@@ -174,8 +174,8 @@
 					</article>
 				{{/each}}
 				{{#unless events.results.history}}
-					<article class="box border_d">
-						<h1>No hay eventos pasados</h1>
+					<article class="no_box no_events">
+						<h1>No hay historial</h1>
 					</article>
 				{{/unless}}
 			</div>

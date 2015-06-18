@@ -9,7 +9,8 @@
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.min.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css/pswipe.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
@@ -26,8 +27,8 @@
 		
 	</div>
 	</body>
-	<script src="js/api-sdk-0.1.min.js"></script>
-	<script src="js/main.min.js"></script>
+	<script src="js/api-sdk-0.1.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script src="js/plugins-gallery.js"></script>
@@ -47,12 +48,11 @@
 		</div>
 	</script>
 
-	<script id="event_gallery_template" type="text/x-handlebars-template">
-		<section class="gallery">
-			<ul class="gallery_list">
-				<div class="cycle-pager"></div>
-				{{#each images}}
-					<li><img src="{{this}}"></li>
+	<script id="mini_gallery_template" type="text/x-handlebars-template">
+		<section class="gallery ">
+			<ul class="gallery_list clearfix">
+				{{#each items}}
+					<li><a class="gallery_thumb" data-index="{{@index}}"><img src="{{src}}"></a></li>
 				{{/each}}
 			</ul>
 		</section>
@@ -64,7 +64,7 @@
 			<section class="event_thumbnail">
 				<img src="{{event_thumbnail}}">
 			</section>
-			<section class="append_gallery hidden"></section>
+			<section class="append_gallery"></section>
 			{{#if scheduled}}
 				{{#attended}}
 					<a class="attended_event" id="attended_event" >Asistido <i class="fa fa-check-square-o"></i></a>

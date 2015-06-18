@@ -1,0 +1,77 @@
+	<div id='spinner' class='spinner'>
+		<div class='spinner-container container1'>
+			<div class='circle1'></div>
+			<div class='circle2'></div>
+			<div class='circle3'></div>
+			<div class='circle4'></div>
+		</div>
+		<div class='spinner-container container2'>
+			<div class='circle1'></div>
+			<div class='circle2'></div>
+			<div class='circle3'></div>
+			<div class='circle4'></div>
+		</div>
+		<div class='spinner-container container3'>
+			<div class='circle1'></div>
+			<div class='circle2'></div>
+			<div class='circle3'></div>
+			<div class='circle4'></div>
+		</div>
+	</div>
+	<div data-role='panel' id='main_drop' class='menu' data-position='left' data-display='push'>
+		<ul>
+			<li class='menu_profile'><a href='my-profile.html' rel='external'><img class='slight_radius' src='{{profile_pic}}'></a></li>
+			<li class='menu_profile_name'><a href='my-profile.html' rel='external'><h1>{{user_login}}</h1></a></li>
+			<li class='feed'><a href='feed.html?filter_feed=all' rel='external'><i class='fa fa-newspaper-o'></i> Eventos</a></li>
+			<li class='feed'><a href='timeline.html' rel='external'><i class='fa fa-home'></i> Actividad</a></li>
+			<li class='agenda'><a href='my-events.html' rel='external'><i class='fa fa-calendar'></i> Mi agenda</a></li>
+			<li class='profile'><a href='follow-categories.html' rel='external'><i class='fa fa-tags'></i> Intereses</a></li>
+			<li class='profile settings'><a href='my-profile.html' rel='external'><i class='fa fa-user'></i> Mi Perfil</a></li>
+			<li class='logout settings'><a id='logout'><i class='fa fa-sign-out'></i> Cerrar sesión</a></li>
+			<li class='disclaimer'>Todos los derechos &reg; Museógrafo 2015</li>
+			<li class='disclaimer'><a href='mailto:hola@marat.mx'>hola@marat.mx</a></li>
+			<li class='disclaimer'><a onclick='window.open('http://app.museografo.com/aviso-de-privacidad', '_blank', 'location=yes');'>Aviso de privacidad</a></li>
+		</ul>
+	</div>
+	<div data-role='panel' id='notifications_drop' class='menu' data-position='right' data-display='push'>
+		<ul>
+			<li class='divider'>Notificaciones</li>
+			{{#if count}}
+				{{#each pool}}
+					{{#if follow}}
+						<li class='each_notification {{#if estatus}}read{{/if}} clearfix'>
+							<a href='user.html?user={{user_login}}' rel='external' data-id='{{alerta_id}}' class='plus_btn right'><p><strong>{{user_login}}</strong> te ha empezado a seguir.</p>
+							<i class='fa fa-plus-circle'></i></a>
+						</li>
+					{{/if}}
+					{{#if vote}}
+						<li class='each_notification {{#if estatus}}read{{/if}} clearfix'>
+							<a href='single-event.html?event={{objeto_id}}' rel='external' data-id='{{alerta_id}}' class='plus_btn right'><p><strong>{{user_login}}</strong> votó tu comentario en el evento <strong>{{event_title}}</strong>.</p>
+							<i class='fa fa-plus-circle'></i></a>
+						</li>
+					{{/if}}
+					{{#if recommend}}
+						<li class='each_notification {{#if estatus}}read{{/if}} clearfix' >
+							<a href='single-event.html?event={{objeto_id}}' data-id='{{alerta_id}}' rel='external' class='plus_btn right'><p><strong>{{user_login}}</strong> te ha recomendado el evento <strong>{{event_title}}</strong>.</p>
+							<i class='fa fa-plus-circle'></i></a>
+						</li>
+					{{/if}}
+				{{/each}}
+			{{/if}}
+			{{#unless pool}}
+					<li class='clearfix'>
+						<p><strong>No tienes notificaciones</strong></p>
+					</li>
+			{{/unless}}
+		</ul>
+	</div>
+	<div data-role='header' data-tap-toggle='false' class='fixed_header' data-position='fixed'>
+		<a data-role='none' data-corners='false' href='#main_drop'  class='ui-btn-left menu_trigger'><i class='fa fa-bars'></i></a>
+		<h1 class='page_title'>
+			<form id='search_form' method='GET' action='search.html' data-ajax='false'>
+				<input type='search' data-corners='false' name='searchbox' id='searchbox' placeholder='¿Qué estás buscando?'>
+				<input type='submit' data-role='none' class='invisibo_submito' id='searchbox_submit' value=''>
+			</form>
+		</h1>
+		<a data-role='none' href='#notifications_drop' data-corners='false' class='ui-btn-right circle notifications notifications_trigger'>{{count}}</a>
+	</div>

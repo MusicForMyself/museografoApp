@@ -53,14 +53,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -78,6 +70,18 @@
                         },
                         {
                             "xml": "<feature name=\"Toast\"><param name=\"ios-package\" value=\"Toast\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -99,9 +103,6 @@
         "com.oauthio.plugins.oauthio": {
             "PACKAGE_NAME": "com.museografo.app"
         },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.museografo.app"
-        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.museografo.app"
         },
@@ -118,6 +119,12 @@
             "PACKAGE_NAME": "com.museografo.app"
         },
         "nl.x-services.plugins.toast": {
+            "PACKAGE_NAME": "com.museografo.app"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.museografo.app"
+        },
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.museografo.app"
         }
     },

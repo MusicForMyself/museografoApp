@@ -46,7 +46,7 @@ html[xmlns] .clearfix {
 .no_box{width: 100%;display: block;clear: both;padding: 0;}
 .no_box .close{position:absolute;right:0.5rem;top:0.5rem;font-size:1.3rem;}
 .no_box.pad{padding: 0 8%;}
-.hidden{display: none;}
+.hidden, .invisibo{display: none!important;}
 .box{width: 93%; background-color: #FFF; display: block; margin: 0.8rem auto;}
 .half_box{width:46%; display:inline-block; vertical-align:top; position: relative;}
 .half_box a,
@@ -199,7 +199,7 @@ html[xmlns] .clearfix {
 .each_feed_element.expanded .info_venue {float:left; width:100%; margin:0.5rem 0;}
 .each_feed_element.expanded .info_venue h2{font-size:1rem; font-family:'gotham_medium'; margin:0; text-indent:0; padding:0;}
 .each_feed_element.expanded .info_venue h3{color:#564E4E; font-family:'gotham_medium'; margin:0; font-size:0.8rem; padding-top:0.3rem; letter-spacing:1px;}
-.each_feed_element.expanded .info_venue h3 a{color:inherit; text-decoration: none;}
+.each_feed_element.expanded .info_venue h3 a{ text-decoration: none;}
 .each_feed_element.expanded img:not('.profile_pic'){}
 .each_feed_element.expanded .info{padding:0 0.5rem;line-height:1.2rem;font-size:0.8rem;color:#474040!important;font-family:'roboto_light', Helvetica, Arial, sans-serif;letter-spacing:0.4px;}
 .each_feed_element.expanded .footer_menu{display:block;float:none;width:100%;height:auto;}
@@ -437,7 +437,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 .event_thumbnail{width: 100%; height: auto;}
 .event_thumbnail img{display: block; width: 100%; height: auto; margin: 0;}
 .gallery{ width: 100%; margin: 0; display: block; clear: both;}
-.gallery ul{ list-style: none; margin: 0; padding: 0;}
+.gallery ul{ list-style: none; margin: 0; padding: 0; width: 100%;}
 .gallery ul li{ width: 17.5%; float: left; margin: 0 0.25rem;}
 .gallery ul li:last-of-type{margin: 0 0 0 0.25rem;}
 .gallery ul li:first-of-type{margin: 0 0 0 0.5rem;}
@@ -472,10 +472,20 @@ a.load_more i{display:block; font-size:1.5rem;}
 .each_feed_element.expanded.single h2{ font-family: 'gotham_book'; margin-bottom: 0.5rem;}
 .each_feed_element.expanded.single h2 b{ font-family: 'gotham_medium';}
 
-.event_file_upload{font-size: 1.6rem; margin: 0; display: block; text-align: center; background: #FCFCFC; padding: 0.4rem 0;}
-.event_file_upload i{display: block;}
-.event_file_upload::after{content: " Publicar una foto"; font-size: 0.8rem;}
-
+.event_file_upload,
+.event_upload_trigger,
+.event_camera_upload{font-size: 1.6rem; margin: 0; display: block; text-align: center; background: #FCFCFC; padding: 0.4rem 0;}
+.event_file_upload i,
+.event_upload_trigger i,
+.event_camera_upload i{display: block;}
+.event_file_upload::after,
+.event_upload_trigger::after,
+.event_camera_upload::after{ font-size: 0.8rem;}
+.event_upload_trigger::after{content: " Publicar una foto";}
+.event_file_upload::after{content: " Galería";}
+.event_camera_upload::after{content: " Cámara";}
+.event_file_upload,
+.event_camera_upload{width:50%; float: left;}
 /*RECOMEND POPUP*/
 .ui-popup-screen{background: #FFFFFF;}
 .ui-popup.ui-content{ background: #FFF; width: 230px; padding: 0.5rem!important; font-family: 'gotham_medium', Arial, Helvetica, sans-serif; font-size: 0.8rem;}
