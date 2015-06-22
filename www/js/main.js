@@ -53,7 +53,9 @@
 			// window.location.assign('index.html');
 		},
 		registerPartials: function() {
+			console.log(registeringPartials);
 			if (window.XMLHttpRequest) {
+				console.log("window.httprequesst");
 				var template = null;
 				var partialsDir = "/views/partials/";
 				/* Add files to be loaded here */
@@ -64,6 +66,7 @@
 					xhr.open("GET", partialsDir+filename+".hbs"); 
 					xhr.onload = function() {
 					    template = xhr.response;
+					    console.log(xhr);
 				  		if(template != null) Handlebars.registerPartial(filename, template);
 					};
 					xhr.send();
@@ -183,6 +186,7 @@
 		render_header : function(){
 			$.getJSON(api_base_url+user+'/notifications', function(response){
 				var source   = Handlebars.partials.header;
+				console.log(Handlebars);
 				var template = Handlebars.compile(source);
 				$('.main').prepend( template(response) ).trigger('create');
 			});
