@@ -7,17 +7,26 @@ function requestHandlerAPI(){
 
 	/*** Attributes ***/
 	this.token = null;
-
+	this.version = "1.0";
+	this.app_build = "1.4.1";
+	this.device_model = (typeof device != 'undefined') ? device.model : 'not set';
+	this.device_platform = (typeof device != 'undefined') ? device.platform : 'not set';
+	this.device_platform_version = (typeof device != 'undefined') ? device.version : 'not set';
+	this.device_info = {
+							sdk_version: this.version,
+							build: this.app_build,
+							model: this.device_model,
+							platform: this.device_platform,
+							version: this.device_platform_version
+						};
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
 	window.api_base_url = "http://museografo.com/rest/v1/"; 
-
 	/* Development local API URL */
 	// window.api_base_url = "http://museografo.dev/rest/v1/";
 	
 	this.ls = window.localStorage;
-
 	/* Constructor */
 	this.construct = function(app_context){
 					console.log('Initialized rest API Los Maquiladores sdk v0.1');
@@ -26,20 +35,22 @@ function requestHandlerAPI(){
 					/* For chaining purposes ::) */
 					return this;
 				};
-	
-	/*** Methods ***/
-		
+		/*** Methods ***/
 		/* 
 		 * Manage pseudo Log in process to use protected API calls
 		 * @param data_login JSON {user_login, user_password}
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.loginNative =  function(data_login){
-								var response = this.makeRequest('auth/login', {user_login : data_login.user_login, user_password: data_login.user_password, request_token: apiRH.get_request_token() });
-								console.log(response);
+								
+								var data_object = {
+													user_login : data_login.user_login, 
+													user_password: data_login.user_password, 
+													request_token: apiRH.get_request_token() 
+												  };
+								var response = this.makeRequest('auth/login/', data_object);
 								return (response.success) ? response.data : false;
 							};
-
 		/* 
 		 * Register a new user account the old fashioned way
 		 * @param data_login JSON {user_login, user_password}
@@ -60,7 +71,6 @@ function requestHandlerAPI(){
 								console.log(response);
 								return (response.success) ? response.data : false;
 							};
-
 		/* 
 		 * Log Out from the API and disable token server side
 		 * @param user_data JSON {user_login : 'username', request_token : 'XY0XXX0Y0XYYYXXX'}
@@ -69,7 +79,6 @@ function requestHandlerAPI(){
 		this.logOut =  function(user_data){
 								return this.makeRequest('auth/'+user_data.user_login+'/logout/', { request_token: user_data.request_token });
 							};
-
 		/* 
 		 * Creates an internal user to make calls to the API
 		 * @param username String
@@ -124,8 +133,6 @@ function requestHandlerAPI(){
 											var_return = (response.success) ? true : false;
 											return var_return;
 									};
-
-
 		/* 
 		 * Save user data client side to execute auth requests to the API
 		 * @return null
@@ -142,14 +149,12 @@ function requestHandlerAPI(){
 																					user_profile: 	data.profile_url,
 																				}));
 									};
-
 		/* 
 		 * Request new passive token from the API 
 		 * @return new generated token
 		 */
 		this.request_token = function(){
 								var response_data = this.getRequest('auth/getToken/', null);
-									console.log(response_data);
 								/* Verify we got a nice token */
 								if( response_data.success !== false){
 									this.token = response_data.data.request_token;
@@ -165,7 +170,6 @@ function requestHandlerAPI(){
 		this.set_user_token = function(){
 								
 							};
-
 		/* 
 		 * Wrapper for the getRequest, makeRequest methods 
 		 * @param type Request type (POST, GET, PUT, DELETE)
@@ -179,7 +183,6 @@ function requestHandlerAPI(){
 						if(type === 'GET')  return this.getRequest(endpoint, data);
 						if(type === 'PUT')  return this.putRequest(endpoint, data);
 					};
-
 		/* 
 		 * Check if the Request object has a token
 		 * @return stored token, false if no token is stored
@@ -188,7 +191,6 @@ function requestHandlerAPI(){
 		this.has_token = function(){
 							return (typeof this.token != 'undefined' || this.token !== '') ? this.token : false;
 						};
-
 		/* 
 		 * Check if the Request object has a valid token
 		 * @return stored token, false if no token is stored
@@ -201,12 +203,16 @@ function requestHandlerAPI(){
 								if(!museo_log_info) return false;
 
 									var user 		= museo_log_info.user_id;
-									var response 	= this.makeRequest('auth/user/checkToken/', {user_id : user, request_token : apiRH.get_request_token()});
+									var data_object =   {
+															user_id : user, 
+															request_token : apiRH.get_request_token(),
+															device_info: this.device_info
+														};
+									var response 	= this.makeRequest('auth/user/checkToken/', data_object);
 									var var_return 	= (response.success) ? true : false;
 							}
 							return var_return;
 						};
-
 		/* 
 		 * Request token getter
 		 * @return stored token, null if no token is stored
@@ -214,7 +220,6 @@ function requestHandlerAPI(){
 		this.get_request_token = function(){
 									return this.token;
 								};
-
 		/* 
 		 * Executes a POST call
 		 * @param endpoint API endpoint to make the call to
@@ -242,39 +247,6 @@ function requestHandlerAPI(){
 								});
 								return result;
 							};
-
-		/* 
-		 * Executes a GET call
-		 * @param endpoint API endpoint to make the call to
-		 * @param data JSON encoded data 
-		 * *****(SEND data = NULL for closed endpoints)*****
-		 * @return JSON encoded response
-		 * @see API documentation
-		 */
-		 // DEPRECATED USE OF REGULAR AJAX USE jsonp
-		// this.getRequest = function(endpoint, data){
-		// 					var result = {};
-		// 					// endpoint = (data === null) ? endpoint : endpoint+data; 
-		// 					console.log(window.api_base_url+endpoint);
-		// 					$.ajax({
-		// 						type: 'GET',
-		// 						url: window.api_base_url+endpoint,
-		// 						data: data,
-		// 						contentType: 'application/json; charset=UTF-8',
-		// 						dataType: 'json',
-		// 						processData: false
-		// 					})
-		// 					 .done(function(response){
-		// 						result = response;
-		// 					 })
-		// 					 .fail(function(e){
-		// 						result = false;
-		// 						console.log(JSON.stringify(e));
-		// 					 });
-		// 					 return result;
-		// 				};
-
-
 		/* 
 		 * Executes a GET call
 		 * @param endpoint API endpoint to make the call to
@@ -289,14 +261,11 @@ function requestHandlerAPI(){
 							var result = {};
 							endpoint = (data === null) ? endpoint : endpoint+data; 
 							$.getJSON( window.api_base_url+endpoint, function( response ){
-								console.log(response);
 								result = response;
 								sdk_app_context.hideLoader();
 							});
 							return result;
 						};
-
-
 		/* 
 		 * Executes a PUT call
 		 * @param endpoint API endpoint to make the call to
@@ -326,7 +295,6 @@ function requestHandlerAPI(){
 							 });
 							 return result;
 						};
-
 		/* 
 		 * Perform OAuth authentication 
 		 * @param provider String Values: 'facebook', 'twitter', 'google_plus'
@@ -343,7 +311,6 @@ function requestHandlerAPI(){
 								 });
 								return;
 							};
-
 		/* 
 		 * Log in callback for Twitter provider
 		 * @return Bool TRUE if authentication was successful
@@ -354,7 +321,6 @@ function requestHandlerAPI(){
 									//Get profile info
 									response.get('/1.1/account/verify_credentials.json')
 									 .done(function(response) {
-										console.log(response);
 										var email = response.screen_name+"@fake.mail";
 										var username = response.screen_name;
 										var found = apiRH.create_internal_user(username, email, {'twitter_username': username}, window.localStorage.getItem('request_token'));
@@ -370,7 +336,6 @@ function requestHandlerAPI(){
 										console.log(error);
 									});
 								};
-
 		/* 
 		 * Log in callback for Facebook provider
 		 * @return Bool TRUE if authentication was successful
@@ -380,14 +345,11 @@ function requestHandlerAPI(){
 		this.loginCallbackFB = function(response){
 									response.me()
 									 .done(function(response){
-										console.log(response);
 										var email = response.email;
 										var username = response.lastname+"_"+response.id;
 										var found = apiRH.create_internal_user(username, email, [], window.localStorage.getItem('request_token'));
-										if(found){
-											app.toast('El usuario ya existe');
-											return;
-										}
+										if(found)
+											return app.toast('El usuario ya existe');
 										window.location.assign('feed.html?filter_feed=all');
 										return;
 									})
@@ -395,7 +357,6 @@ function requestHandlerAPI(){
 										console.log(error);
 									});
 								};
-
 		/* 
 		 * Log in callback for Google Plus provider
 		 * @return Bool TRUE if authentication was successful
@@ -420,8 +381,6 @@ function requestHandlerAPI(){
 									});
 									
 								};
-
-
 		this.transfer_win = function (r) {
 									app.toast("Se ha publicado una imagen");
 									window.location.reload(true);
@@ -430,16 +389,12 @@ function requestHandlerAPI(){
 									app.toast("Imagen de perfil modificada");
 									window.location.reload(true);
 								};
-
 		this.transfer_fail = function (error) {
 								console.log(error);
 								alert("An error has occurred: Code = " + error.code);
 								console.log("upload error source " + error.source);
 								console.log("upload error target " + error.target);
 							};
-
-		
-
 		/*
 		 * Initialize File transfer
 		 * @param fileURL
@@ -462,7 +417,6 @@ function requestHandlerAPI(){
 									var event_id = ls.getItem('museo_last_selected_event');
 									ft.upload(fileURL, encodeURI(api_base_url+"transfers/"+user+"/event_upload/"+event_id+"/"), context.transfer_win, context.transfer_fail, this.transfer_options);
 								};
-		
 		/*
 		 * Initialize Profile File transfer
 		 * @param fileURL
@@ -483,27 +437,29 @@ function requestHandlerAPI(){
 									var ft = new FileTransfer();
 									ft.upload(fileURL, encodeURI(api_base_url+"transfers/"+user+"/profile/"), context.profile_transfer_win, context.transfer_fail, this.transfer_options);
 								};
-
 		this.fileselect_win = function (r) {
 								if(!r && r == '')
 									return;
 								context.initializeEventFileTransfer(r);
 							};
-
 		this.profileselect_win = function (r) {
 								if(!r && r == '')
 									return;
 								context.initializeProfileFileTransfer(r);
 							};
-
 		this.fileselect_fail = function (error) {
 								alert("An error has occurred: " + error);
 							};
+		/*
+		 * @param String destination Upload destination Options: "profile", "event"
+		 * @param String source Source to get media file from Options: "camera", "gallery"
+		 * @note Before getFileFromDevice
+		 */
+		this.getFileFromDevice = function(destination, source){
 
-		this.getFileFromGallery = function(destination){
-			
 			this.photoDestinationType = navigator.camera.DestinationType;
 			var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
+			if(source == "camera") source =  navigator.camera.PictureSourceType.CAMERA;
 			if(destination == 'profile')
 				navigator.camera.getPicture(context.profileselect_win, context.fileselect_fail, { quality: 50,
 					destinationType: this.photoDestinationType.FILE_URI,
@@ -514,6 +470,7 @@ function requestHandlerAPI(){
 						destinationType: this.photoDestinationType.FILE_URI,
 						sourceType: source,
 						mediaType: navigator.camera.MediaType.ALLMEDIA  });
+			return;
 		};
 
 		

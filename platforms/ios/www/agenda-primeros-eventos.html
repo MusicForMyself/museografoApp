@@ -17,12 +17,15 @@
 		<script src='cordova.js'></script>
 		<script src="js/jquery1.11.1.js"></script>
 		<script src="js/plugins.min.js"></script>
+		<script type="text/javascript">
+			app.initialize();
+		</script>
 		<script src="js/jquery.mobile-1.4.3.min.js"></script>
 		
 		<!-- Load app's main scripts and styles -->
-		<script src="js/api-sdk-0.1.js"></script>
-		<script src="js/main.js"></script>
-		<link rel="stylesheet" href="style.css">
+		<script src="js/api-sdk-1.0.min.js"></script>
+		<script src="js/main.min.js"></script>
+		<link rel="stylesheet" href="style.min.css">
 
 	</head>
 	<body>
@@ -73,7 +76,6 @@
 		{{/each }}
 	</script>
 	<script>
-		app.initialize();
 		app.render_header();
 		app.render_schedule_first_events();
 	</script>

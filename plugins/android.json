@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -32,7 +36,7 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 1
+                            "count": 2
                         }
                     ]
                 }
@@ -50,6 +54,9 @@
             "PACKAGE_NAME": "com.museografo.app"
         },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.museografo.app"
+        },
+        "nl.x-services.plugins.socialsharing": {
             "PACKAGE_NAME": "com.museografo.app"
         }
     },

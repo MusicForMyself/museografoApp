@@ -9,7 +9,7 @@
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
@@ -26,10 +26,13 @@
 
 	</div>
 	</body>
-	<script src="js/api-sdk-0.1.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/api-sdk-1.0.min.js"></script>
+	<script src="js/main.min.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<!-- FEED ELEMENT TEMPLATE -->
 	<script id="event_entry_template" type="text/x-handlebars-template">
@@ -39,10 +42,10 @@
 				<article class="no_box {{#if agendo}}border_c{{/if}} {{#if media}}border_g{{/if}} {{#if resena}}border_c{{/if}} {{#if siguiendo}}border_f{{/if}} each_feed_element {{type}} clearfix">
 					<section class="activity_user clearfix" id="activity_user">
 						{{#if siguiendo}}
-							<a href="user.html?user={{user_login}}" rel="external"><img class="avatar" src="{{user_avatar}}" alt="{{user_nicename}}"></a>
+							<a href="{{^is_venue}}user.html?user={{../user_login}}{{/is_venue}}{{#is_venue}}venue.html?venue={{../user_id}}{{/is_venue}}" rel="external"><img class="avatar" src="{{user_avatar}}" alt="{{user_nicename}}"></a>
 							<a class="user_clickable" href="user.html?user={{user_login}}" rel="external" data-user-id="{{user_login}}">{{user_nicename}}</a> 
 							<section class="copy_activity">
-								<p>acaba de seguir a <a href="user.html?user={{postuser_login}}" rel="external">{{postuser_name}}</a></p>
+								<p>acaba de seguir a <a href="{{^followed/is_venue}}user.html?user={{../followed/user_login}}{{/followed/is_venue}}{{#followed/is_venue}}venue.html?venue={{../followed/user_id}}{{/followed/is_venue}}" rel="external">{{followed/user_nicename}}</a></p>
 							</section>
 						{{/if}}
 						{{#if agendo}}
@@ -144,7 +147,6 @@
 	</script>
 	
 	<script type="text/javascript">
-		app.initialize();
 		app.render_header();
 		app.get_user_timeline(0);
 	</script>

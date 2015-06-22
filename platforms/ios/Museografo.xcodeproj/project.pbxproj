@@ -54,6 +54,9 @@
 		251F8ECF719C4CF69F4D0581 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCFBCAE2BDB4FD885EA189A /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5F11E5C2225341F08AE1B1E3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBF124CEC8A4CE5AD9C7976 /* CoreLocation.framework */; };
 		0F489D8981A8492E9EA39B7E /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 44551668AE9E469DB5F14CAD /* CDVDevice.m */; };
+		0234D03EC14F4C6F942AD220 /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 066F9B622E21477C9EB3867D /* SocialSharing.m */; };
+		4DF5A9A5705B4FA6B6F6D4E0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CF1DAD48BF149B0BBEEA96E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		158538D1604B4AF0B7840D08 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5ABB068C6840A0BC6A965C /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +150,10 @@
 		0FBF124CEC8A4CE5AD9C7976 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		44551668AE9E469DB5F14CAD /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		B5E3E8D874BB4017A30EB6B7 /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		066F9B622E21477C9EB3867D /* SocialSharing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "SocialSharing.m"; path = "nl.x-services.plugins.socialsharing/SocialSharing.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		3700A55274BF45E9BC75C40D /* SocialSharing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SocialSharing.h"; path = "nl.x-services.plugins.socialsharing/SocialSharing.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		9CF1DAD48BF149B0BBEEA96E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		3D5ABB068C6840A0BC6A965C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +168,8 @@
 				D574C833EC094B5EB56AB960 /* QuartzCore.framework in Frameworks */,
 				251F8ECF719C4CF69F4D0581 /* ImageIO.framework in Frameworks */,
 				5F11E5C2225341F08AE1B1E3 /* CoreLocation.framework in Frameworks */,
+				4DF5A9A5705B4FA6B6F6D4E0 /* Social.framework in Frameworks */,
+				158538D1604B4AF0B7840D08 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +245,8 @@
 				23C2D3952AF148998017A093 /* QuartzCore.framework */,
 				7DCFBCAE2BDB4FD885EA189A /* ImageIO.framework */,
 				0FBF124CEC8A4CE5AD9C7976 /* CoreLocation.framework */,
+				9CF1DAD48BF149B0BBEEA96E /* Social.framework */,
+				3D5ABB068C6840A0BC6A965C /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,6 +287,8 @@
 				83FE9149CE3143D2AA95A9D4 /* CDVExif.h */,
 				44551668AE9E469DB5F14CAD /* CDVDevice.m */,
 				B5E3E8D874BB4017A30EB6B7 /* CDVDevice.h */,
+				066F9B622E21477C9EB3867D /* SocialSharing.m */,
+				3700A55274BF45E9BC75C40D /* SocialSharing.h */,
 			);
 			name = Plugins;
 			path = "Museografo/Plugins";
@@ -472,6 +485,7 @@
 				A73EAD109020447E95D6F04A /* CDVCamera.m in Sources */,
 				09485C1AC7574E1B8E1FAA9F /* CDVJpegHeaderWriter.m in Sources */,
 				0F489D8981A8492E9EA39B7E /* CDVDevice.m in Sources */,
+				0234D03EC14F4C6F942AD220 /* SocialSharing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
