@@ -7,10 +7,18 @@ function requestHandlerAPI(){
 
 	/*** Attributes ***/
 	this.token = null;
-	this.version = 1.0;
+	this.version = "1.0";
+	this.app_build = "1.4.1";
 	this.device_model = (typeof device != 'undefined') ? device.model : 'not set';
 	this.device_platform = (typeof device != 'undefined') ? device.platform : 'not set';
 	this.device_platform_version = (typeof device != 'undefined') ? device.version : 'not set';
+	this.device_info = {
+							sdk_version: this.version,
+							build: this.app_build,
+							model: this.device_model,
+							platform: this.device_platform,
+							version: this.device_platform_version
+						};
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
@@ -37,7 +45,6 @@ function requestHandlerAPI(){
 								var data_object = {
 												user_login : data_login.user_login, 
 												user_password: data_login.user_password, 
-												request_token: apiRH.get_request_token() };
 												request_token: apiRH.get_request_token() };
 								var response = this.makeRequest('auth/login/', $data_object);
 								console.log(response);

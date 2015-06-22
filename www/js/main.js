@@ -29,7 +29,7 @@
 			/* Check if has any token */
 			if(apiRH.has_token()){
 				/* Check if has a valid token */
-				var response = apiRH.has_valid_token()
+				var response = apiRH.has_valid_token();
 				if(response){
 					var data_id = $(this).data('id');
 					console.log('You okay, now you can start making calls');
@@ -40,7 +40,7 @@
 					return;
 				}else{
 					/* Token is not valid, user needs to authenticate */
-					console.log("Your token is not valid anymore (or never was D:)");
+					console.log("Your token is not valid anymore (or has not been activated yet)");
 					// window.location.assign('index.html');
 					return;
 				}
@@ -65,7 +65,7 @@
 					xhr.onload = function() {
 					    template = xhr.response;
 				  		if(template != null) Handlebars.registerPartial(filename, template);
-					}
+					};
 					xhr.send();
 				});
 			} else {
