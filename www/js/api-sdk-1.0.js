@@ -43,11 +43,11 @@ function requestHandlerAPI(){
 		 */
 		this.loginNative =  function(data_login){
 								var data_object = {
-												user_login : data_login.user_login, 
-												user_password: data_login.user_password, 
-												request_token: apiRH.get_request_token() };
-								var response = this.makeRequest('auth/login/', $data_object);
-								console.log(response);
+													user_login : data_login.user_login, 
+													user_password: data_login.user_password, 
+													request_token: apiRH.get_request_token() 
+												  };
+								var response = this.makeRequest('auth/login/', data_object);
 								return (response.success) ? response.data : false;
 							};
 		/* 
@@ -202,7 +202,12 @@ function requestHandlerAPI(){
 								if(!museo_log_info) return false;
 
 									var user 		= museo_log_info.user_id;
-									var response 	= this.makeRequest('auth/user/checkToken/', {user_id : user, request_token : apiRH.get_request_token()});
+									var data_object =   {
+															user_id : user, 
+															request_token : apiRH.get_request_token(),
+															device_info: this.device_info
+														};
+									var response 	= this.makeRequest('auth/user/checkToken/', data_object);
 									var var_return 	= (response.success) ? true : false;
 							}
 							return var_return;
