@@ -7,10 +7,18 @@ function requestHandlerAPI(){
 
 	/*** Attributes ***/
 	this.token = null;
-	this.version = 1.0;
+	this.version = "1.0";
+	this.app_build = "1.4.1";
 	this.device_model = (typeof device != 'undefined') ? device.model : 'not set';
 	this.device_platform = (typeof device != 'undefined') ? device.platform : 'not set';
 	this.device_platform_version = (typeof device != 'undefined') ? device.version : 'not set';
+	this.device_info = {
+							sdk_version: this.version,
+							build: this.app_build,
+							model: this.device_model,
+							platform: this.device_platform,
+							version: this.device_platform_version
+						};
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
@@ -198,10 +206,16 @@ function requestHandlerAPI(){
 								console.log("Looks like you already have a token, let's check if it is valid");
 								var museo_log_info = (typeof this.ls.getItem('museo_log_info') != undefined) ? JSON.parse(this.ls.getItem('museo_log_info')) : null;
 								if(!museo_log_info) return false;
-
-									var user 		= museo_log_info.user_id;
-									var response 	= this.makeRequest('auth/user/checkToken/', {user_id : user, request_token : apiRH.get_request_token()});
-									var var_return 	= (response.success) ? true : false;
+								var user 		= museo_log_info.user_id;
+								var data_object = {
+													user_id : user, 
+													request_token : apiRH.get_request_token(),
+													device_info: context.device_info
+												  };
+												  console.log(context.device_info);
+								var response 	= this.makeRequest('auth/user/checkToken/', data_object);
+								console.log(response);
+								var var_return 	= (response.success) ? true : false;
 							}
 							return var_return;
 						};
