@@ -17,6 +17,9 @@
 		<script src='cordova.js'></script>
 		<script src="js/jquery1.11.1.js"></script>
 		<script src="js/plugins.min.js"></script>
+		<script type="text/javascript">
+			app.initialize();
+		</script>
 		<script src="js/jquery.mobile-1.4.3.min.js"></script>
 		
 		<!-- Load app's main scripts and styles -->
@@ -73,7 +76,6 @@
 		{{/each }}
 	</script>
 	<script>
-		app.initialize();
 		app.render_header();
 		app.render_schedule_first_events();
 	</script>

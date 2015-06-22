@@ -107,5 +107,6 @@
 		if(app.isObjEmpty(GET)) GET.filter_feed = 'all';
 		app.set_selected_filter(GET.filter_feed);
 		app.get_events_feed(0, GET.filter_feed);
+		sdk_app_context.hideLoader();
 	</script>
 </html>

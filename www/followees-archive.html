@@ -21,7 +21,7 @@
 		
 		
 		<section id="search_results_container" class="results_container" data-role="content">
-			<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i></a>
+			
 			<section class="feed_container">
 				
 
@@ -35,11 +35,14 @@
 	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<!-- SEARCH ELEMENT TEMPLATE -->
 	<script id="follower_entry_template" type="text/x-handlebars-template">
+		<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i><span>{{queried_user_display_name}} sigue a...</span></a>
 		
-		<h1>{{queried_user_display_name}} sigue a estos {{label}}</h1>
 		{{#each pool}}
 			<article class="box no_border each_user_result clearfix">
 				<figure>
@@ -81,7 +84,6 @@
 	</script>
 	
 	<script type="text/javascript">
-		app.initialize();
 		app.render_header();
 		var GET = app.getUrlVars();
 		app.get_user_followees(GET.user, GET.type);

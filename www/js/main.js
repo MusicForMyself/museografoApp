@@ -309,11 +309,15 @@
 			$.getJSON( api_base_url+'user/'+user+'/search/'+search_term+'/'+offset , function(response){
 				var source   = $("#search_entry_template").html();
 				var template = Handlebars.compile(source);
-				offset++;
+				console.log(response);
 				$('.feed_container').append( template(response.data) ).trigger('create');
 				/* To do: send block length from the app, change hardcoded 10 */
 				if($('#load_more_results').length > 0)
 					$('#load_more_results').remove();
+				if(response.data == 0){
+					$('.feed_container').append( "<a class='load_more' data-role='none'>No hay resultados para tu búsqueda</a>" );
+					return;
+				}
 				if(response.data.results.length < 10){
 					$('.feed_container').append( "<a class='load_more' data-role='none'>No hay más resultados</a>" );
 					return;

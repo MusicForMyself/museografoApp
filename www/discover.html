@@ -30,6 +30,9 @@
 	<script src="js/main.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script id="event_popup_template" type="text/x-handlebars-template">
 		<div data-role="popup" class="ui-content" id="recomend_pop" data-position-to="window" data-transition="slide">
@@ -109,7 +112,6 @@
 	</script>
 	
 	<script type="text/javascript">
-		app.initialize();
 		app.render_header();
 		var GET = app.getUrlVars();
 		app.render_event(GET.event);
