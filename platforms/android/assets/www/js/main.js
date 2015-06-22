@@ -53,7 +53,7 @@
 			// window.location.assign('index.html');
 		},
 		registerPartials: function() {
-			console.log(registeringPartials);
+			console.log("registeringPartials");
 			if (window.XMLHttpRequest) {
 				console.log("window.httprequesst");
 				var template = null;
