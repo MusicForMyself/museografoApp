@@ -29,7 +29,7 @@
 			/* Check if has any token */
 			if(apiRH.has_token()){
 				/* Check if has a valid token */
-				var response = apiRH.has_valid_token()
+				var response = apiRH.has_valid_token();
 				if(response){
 					var data_id = $(this).data('id');
 					console.log('You okay, now you can start making calls');
@@ -40,7 +40,7 @@
 					return;
 				}else{
 					/* Token is not valid, user needs to authenticate */
-					console.log("Your token is not valid anymore (or never was D:)");
+					console.log("Your token is not valid anymore (or has not been activated yet)");
 					// window.location.assign('index.html');
 					return;
 				}
@@ -53,7 +53,9 @@
 			// window.location.assign('index.html');
 		},
 		registerPartials: function() {
+			console.log("registeringPartials");
 			if (window.XMLHttpRequest) {
+				console.log("window.httprequesst");
 				var template = null;
 				var partialsDir = "/views/partials/";
 				/* Add files to be loaded here */
@@ -64,8 +66,9 @@
 					xhr.open("GET", partialsDir+filename+".hbs"); 
 					xhr.onload = function() {
 					    template = xhr.response;
+					    console.log(xhr);
 				  		if(template != null) Handlebars.registerPartial(filename, template);
-					}
+					};
 					xhr.send();
 				});
 			} else {
@@ -183,6 +186,7 @@
 		render_header : function(){
 			$.getJSON(api_base_url+user+'/notifications', function(response){
 				var source   = Handlebars.partials.header;
+				console.log(Handlebars);
 				var template = Handlebars.compile(source);
 				$('.main').prepend( template(response) ).trigger('create');
 			});
@@ -309,11 +313,15 @@
 			$.getJSON( api_base_url+'user/'+user+'/search/'+search_term+'/'+offset , function(response){
 				var source   = $("#search_entry_template").html();
 				var template = Handlebars.compile(source);
-				offset++;
+				console.log(response);
 				$('.feed_container').append( template(response.data) ).trigger('create');
 				/* To do: send block length from the app, change hardcoded 10 */
 				if($('#load_more_results').length > 0)
 					$('#load_more_results').remove();
+				if(response.data == 0){
+					$('.feed_container').append( "<a class='load_more' data-role='none'>No hay resultados para tu búsqueda</a>" );
+					return;
+				}
 				if(response.data.results.length < 10){
 					$('.feed_container').append( "<a class='load_more' data-role='none'>No hay más resultados</a>" );
 					return;

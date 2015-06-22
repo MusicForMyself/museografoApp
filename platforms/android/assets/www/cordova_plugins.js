@@ -48,6 +48,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/nl.x-services.plugins.socialsharing/www/SocialSharing.js",
+        "id": "nl.x-services.plugins.socialsharing.SocialSharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
         "id": "cordova-plugin-inappbrowser.inappbrowser",
         "clobbers": [
@@ -63,6 +70,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.0.0",
     "cordova-plugin-camera": "1.1.0",
     "cordova-plugin-device": "1.0.0",
+    "nl.x-services.plugins.socialsharing": "4.3.19-dev",
     "cordova-plugin-inappbrowser": "1.0.0"
 }
 // BOTTOM OF METADATA

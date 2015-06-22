@@ -1,0 +1,24 @@
+<section class='comments border_c no_box clearfix'>
+	<h2>Reseñas ({{comment_count}})</h2>
+	{{#each pool}}
+	<article class='each_comment'>
+		<img src='{{author_thumbnail}}' class='comment_user_thumb'>
+		<h3>{{author_name}}</h3>
+		<p>{{content}}</p>
+		{{!-- <div class='votes'>
+			<a class='downvote'><i class='fa fa-thumbs-down'></i></a>
+			<a class='upvote'><i class='fa fa-thumbs-up'></i></a>
+		</div> --}}
+	</article>
+	{{/each}}
+	{{#unless pool}}
+	<p class='information'>¡Se el primero en reseñar este evento!</p>
+	{{/unless}}
+	<section id='comment_form' class='comment_form'>
+		<form id=''>
+			<label for='comment_content'>Escribe tu reseña:</label>
+			<textarea name='comment_content' id='comment_content'></textarea>
+		</form>
+	</section>
+	<a class='comment_btn' id='comment_button' data-role='none'><i class='fa fa-share'></i></a>
+</section>

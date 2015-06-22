@@ -7,16 +7,24 @@ function requestHandlerAPI(){
 
 	/*** Attributes ***/
 	this.token = null;
-	this.version = 1.0;
+	this.version = "1.0";
+	this.app_build = "1.4.1";
 	this.device_model = (typeof device != 'undefined') ? device.model : 'not set';
 	this.device_platform = (typeof device != 'undefined') ? device.platform : 'not set';
 	this.device_platform_version = (typeof device != 'undefined') ? device.version : 'not set';
+	this.device_info = {
+							sdk_version: this.version,
+							build: this.app_build,
+							model: this.device_model,
+							platform: this.device_platform,
+							version: this.device_platform_version
+						};
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
-	// window.api_base_url = "http://museografo.com/rest/v1/"; 
+	window.api_base_url = "http://museografo.com/rest/v1/"; 
 	/* Development local API URL */
-	window.api_base_url = "http://museografo.dev/rest/v1/";
+	// window.api_base_url = "http://museografo.dev/rest/v1/";
 	
 	this.ls = window.localStorage;
 	/* Constructor */
@@ -34,6 +42,7 @@ function requestHandlerAPI(){
 		 * @return status Bool true is successfully logged in; false if an error ocurred
 		 */
 		this.loginNative =  function(data_login){
+								
 								var data_object = {
 													user_login : data_login.user_login, 
 													user_password: data_login.user_password, 
@@ -43,9 +52,8 @@ function requestHandlerAPI(){
 																platform: context.device_platform, 
 																version: context.device_platform_version 
 															}
-												};
+												  };
 								var response = this.makeRequest('auth/login/', data_object);
-								console.log(response);
 								return (response.success) ? response.data : false;
 							};
 		/* 
@@ -200,7 +208,12 @@ function requestHandlerAPI(){
 								if(!museo_log_info) return false;
 
 									var user 		= museo_log_info.user_id;
-									var response 	= this.makeRequest('auth/user/checkToken/', {user_id : user, request_token : apiRH.get_request_token()});
+									var data_object =   {
+															user_id : user, 
+															request_token : apiRH.get_request_token(),
+															device_info: this.device_info
+														};
+									var response 	= this.makeRequest('auth/user/checkToken/', data_object);
 									var var_return 	= (response.success) ? true : false;
 							}
 							return var_return;

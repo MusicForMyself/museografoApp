@@ -1,14 +1,14 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com 'self';">
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 		<title>Museógrafo mobile app</title>
 		<!-- Vendor styles -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css" />
 		
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
@@ -47,42 +47,41 @@
 	<!-- SEARCH ELEMENT TEMPLATE -->
 	<script id="search_entry_template" type="text/x-handlebars-template">
 		{{#each results}}
-			{{#if is_user}}
-				<article class="no_box {{#if museografo}}border_c{{/if}} {{#if artista}}border_d{{/if}} {{#if venue}}border_b{{/if}} each_user_result clearfix">
+			{{#if display_user}}
+				<article class="no_box {{#if is_usuario}}border_c{{/if}} {{#if is_artista}}border_d{{/if}} {{#if is_venue}}border_b{{/if}} each_user_result clearfix">
 					<figure>
 						{{#user_thumbnail}}
-							<a href="user.html?user={{..user_login}}" rel="external"><img class="slight_radius" src="{{.}}" alt="{{..user_display_name}}"></a>
+							<a href="{{^../is_venue}}user.html?user={{../../user_login}}{{/../is_venue}}{{#../is_venue}}venue.html?venue={{../../ID}}{{/../is_venue}}" rel="external"><img class="slight_radius" src="{{.}}" alt="{{..user_display_name}}"></a>
 						{{/user_thumbnail}}
 						{{^user_thumbnail}}
-							<a href="user.html?user={{..user_login}}" rel="external"><img class="slight_radius" src="images/profile_placeholder.png" alt="{{..user_display_name}}"></a>
+							<a href="{{^../is_venue}}user.html?user={{../../user_login}}{{/../is_venue}}{{#../is_venue}}venue.html?venue={{../../ID}}{{/../is_venue}}" rel="external"><img class="slight_radius" src="images/profile_placeholder.png" alt="{{..user_display_name}}"></a>
 						{{/user_thumbnail}}
 					</figure>
 					<section class='article_details'>
-						<h2><a href="user.html?user={{user_login}}" rel="external">{{user_display_name}}</a></h2>
+						<h2><a href="{{^../is_venue}}user.html?user={{../../user_login}}{{/../is_venue}}{{#../is_venue}}venue.html?venue={{../../ID}}{{/../is_venue}}" rel="external">{{user_display_name}}</a></h2>
 						<h3>{{user_role}}</h3>
-						<section class='user_follows'>
-							<a class="user_followers" href="user.html?user={{user_login}}" rel="external">
-								<span>{{user_followers}}</span> seguidores
+						
+					</section>
+					<section class='user_follows'>
+						<a class="user_followers" href="{{^../is_venue}}user.html?user={{../../user_login}}{{/../is_venue}}{{#../is_venue}}venue.html?venue={{../../ID}}{{/../is_venue}}" rel="external">
+							<span>{{user_followers}}</span> seguidores
+						</a>
+						{{#if is_following}}
+							<a class="unfollow_user following special_icon" data-id="{{./ID}}" data-userrole="{{./role_prefix}}" id="unfollow_user">
+								<i class="fa fa-user"></i>
+								<i class="fa fa-check superscript"></i>
 							</a>
-							{{#if is_following}}
-								<a class="unfollow_user following special_icon" data-id="{{./ID}}" data-userrole="{{./role_prefix}}" id="unfollow_user">
-									<i class="fa fa-user"></i>
-									<i class="fa fa-check superscript"></i>
-								</a>
-							{{else}}
-								<a class="follow_user special_icon" data-id="{{./ID}}" data-userrole="{{./role_prefix}}" id="follow_user">
-									<i class="fa fa-user"></i>
-									<i class="fa fa-plus superscript"></i>
-								</a>
-							{{/if}}
-							<a class="special_icon">
-								
+						{{else}}
+							<a class="follow_user special_icon" data-id="{{./ID}}" data-userrole="{{./role_prefix}}" id="follow_user">
+								<i class="fa fa-user"></i>
+								<i class="fa fa-plus superscript"></i>
 							</a>
-						</section>
+						{{/if}}
+						<a class="special_icon"></a>
 					</section>
 				</article>
 			{{/if}}
-			{{#if is_event}}
+			{{#if display_event}}
 				<article class="no_box border_a each_feed_element expanded clearfix">
 					<section class="info_venue">
 						{{#venue_avatar}}
@@ -136,7 +135,7 @@
 					</footer>
 				</article>
 			{{/if}}
-			{{#if is_category}}
+			{{#if display_category}}
 				<article class="no_box border_e each_user_result clearfix">
 					<figure>
 						
