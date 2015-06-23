@@ -21,11 +21,16 @@
 		</div> <!-- END main -->
 	</body>
 	<!-- Load app's main scripts and styles -->
+	<!-- Templates -->
+	<script src="js/handlebars-runtime.js"></script>
+	<script src="views/partials/header.js"></script>
 	<script src="js/api-sdk-1.0.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script type="text/javascript">
+		/* Initialize app object and perform initial login check */
+		window.is_home = true;
 		app.initialize();
 	</script>
 	<script type="text/javascript" src="cordova.js"></script>
@@ -74,8 +79,6 @@
 		</section> <!-- END register -->
 	</script>
 	<script type="text/javascript">
-		/* Initialize app object and perform initial login check */
-		window.is_home = true;
 		app.render_login_content();
 	</script>
 </html>

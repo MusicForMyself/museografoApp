@@ -53,27 +53,31 @@
 			// window.location.assign('index.html');
 		},
 		registerPartials: function() {
-			console.log("registeringPartials");
-			if (window.XMLHttpRequest) {
-				console.log("window.httprequesst");
-				var template = null;
-				var partialsDir = "/views/partials/";
-				/* Add files to be loaded here */
-				var filenames = ['header', 'comments', 'gallery_base'];
-				filenames.forEach(function (filename) {
-				  	var blob = null;
-					var xhr = new XMLHttpRequest(); 
-					xhr.open("GET", partialsDir+filename+".hbs"); 
-					xhr.onload = function() {
-					    template = xhr.response;
-					    console.log(xhr);
-				  		if(template != null) Handlebars.registerPartial(filename, template);
-					};
-					xhr.send();
-				});
-			} else {
-			  app.toast("Compatibility Error loading partial files");
-			}
+			var template = null;
+			/* Add files to be loaded here */
+			var filenames = ['header', 'comments', 'gallery_base'];
+			filenames.forEach(function (filename) {
+				$.ajax({
+		            url : 'views/partials/' + filename + '.hbs',
+		            success : function(response) {
+			                if (Handlebars.templates === undefined)
+			                    Handlebars.templates = {};
+			            Handlebars.templates[filename] = Handlebars.compile(response);
+		            }
+		        });
+			});
+			
+		},
+		registerTemplate : function(name) {
+		    $.ajax({
+	            url : 'views/' + name + '.hbs',
+	            success : function(response) {
+		                if (Handlebars.templates === undefined)
+		                    Handlebars.templates = {};
+		            Handlebars.templates[name] = Handlebars.compile(response);
+	            }
+	        });
+	        return;
 		},
 		bindEvents: function() {
 			document.addEventListener('deviceready', app.onDeviceReady, false);
@@ -153,9 +157,9 @@
 		get_events_feed : function(offset, filter){
 
 			$.getJSON(api_base_url+user+'/events/feed/'+offset+'/'+filter , function(response){
-				var source   = $("#event_feed_entry_template").html();
-				var template = Handlebars.compile(source);
-				$('.feed_container').html( template(response) );
+				app.registerTemplate('feed');
+				var template = Handlebars.templates.feed(response);
+				$('.feed_container').html( template );
 			}).fail(function(err){
 				console.log(err);
 			});
@@ -185,10 +189,8 @@
 		},
 		render_header : function(){
 			$.getJSON(api_base_url+user+'/notifications', function(response){
-				var source   = Handlebars.partials.header;
-				console.log(Handlebars);
-				var template = Handlebars.compile(source);
-				$('.main').prepend( template(response) ).trigger('create');
+				var template = Handlebars.templates.header(response);
+				$('.main').prepend( template ).trigger('create');
 			});
 		},
 		render_event_minigallery: function(event_id, limit){
@@ -207,9 +209,8 @@
 		},
 		render_comments: function(event_id, offset){
 			$.getJSON(api_base_url+'events/comments/'+event_id+'/'+offset, function(response){
-				var source   = Handlebars.partials.comments;
-				var template = Handlebars.compile(source);
-				$('.main').append( template(response.data) );
+				var template   = Handlebars.templates.comments(response.data);
+				$('.main').append( template );
 			});
 		},
 		render_event: function(event_id){
@@ -388,9 +389,8 @@
 		render_event_gallery_partial: function(event_id){
 			
 			$.getJSON(api_base_url+'events/'+event_id+'/gallery/99/', function(response){
-				var source   = Handlebars.partials.gallery_base;
-				var template = Handlebars.compile(source);
-				$('body').append( template(response) );
+				var template = Handlebars.templates.gallery_base(response);
+				$('body').append( template);
 				/*Set elements into temporary variable */
 				window.event_temp_gallery_items = response.items;
 			});
@@ -399,9 +399,8 @@
 		render_user_gallery_partial: function(user_login){
 			
 			$.getJSON(api_base_url+'user/'+user_login+'/gallery/99/', function(response){
-				var source   = Handlebars.partials.gallery_base;
-				var template = Handlebars.compile(source);
-				$('body').append( template(response) );
+				var template = Handlebars.templates.gallery_base(response);
+				$('body').append( template );
 				/*Set elements into temporary variable */
 				window.user_temp_gallery_items = response.items;
 			});
@@ -410,9 +409,8 @@
 		render_artist_project_partial: function(user_login){
 			
 			$.getJSON(api_base_url+'user/'+user_login+'/projects/99/', function(response){
-				var source   = Handlebars.partials.gallery_base;
-				var template = Handlebars.compile(source);
-				$('body').append( template(response) );
+				var template = Handlebars.templates.gallery_base(response);
+				$('body').append( template );
 				/*Set elements into temporary variable */
 				window.user_temp_gallery_items = response.items;
 			});

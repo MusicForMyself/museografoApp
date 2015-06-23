@@ -53,27 +53,44 @@
 			// window.location.assign('index.html');
 		},
 		registerPartials: function() {
-			console.log("registeringPartials");
-			if (window.XMLHttpRequest) {
-				console.log("window.httprequesst");
-				var template = null;
-				var partialsDir = "/views/partials/";
-				/* Add files to be loaded here */
-				var filenames = ['header', 'comments', 'gallery_base'];
-				filenames.forEach(function (filename) {
-				  	var blob = null;
-					var xhr = new XMLHttpRequest(); 
-					xhr.open("GET", partialsDir+filename+".hbs"); 
-					xhr.onload = function() {
-					    template = xhr.response;
-					    console.log(xhr);
-				  		if(template != null) Handlebars.registerPartial(filename, template);
-					};
-					xhr.send();
-				});
-			} else {
-			  app.toast("Compatibility Error loading partial files");
-			}
+			// if (window.XMLHttpRequest) {
+			// 	var template = null;
+			// 	var partialsDir = "/app/www/views/partials/";
+			// 	/* Add files to be loaded here */
+			// 	var filenames = ['header', 'comments', 'gallery_base'];
+			// 	filenames.forEach(function (filename) {
+			// 	 //  	var blob = null;
+			// 		// var xhr = new XMLHttpRequest(); 
+			// 		// xhr.open("GET", partialsDir+filename+".hbs", true); 
+				    
+			// 		// xhr.onload = function() {
+			// 		//     console.log("lol");
+			// 		//     template = xhr.response;
+			// 	 //  		if(template != null) Handlebars.registerPartial(filename, template);
+			// 		// };
+			// 		// xhr.send();
+			// 	});
+			// } else {
+			//   app.toast("Compatibility Error loading partial files");
+			// }
+		},
+		getTemplate : function(name) {
+		    console.log("templates function working");
+		    if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
+		        console.log("template undefined");
+		        $.ajax({
+		            url : 'views/partials/' + name + '.handlebars',
+		            success : function(data) {
+		                console.log("success compiling template");
+		                if (Handlebars.templates === undefined) {
+		                    Handlebars.templates = {};
+		                }
+		            Handlebars.templates[name] = Handlebars.compile(data);
+		            },
+		        async : false
+		        });
+		    }
+		    return Handlebars.templates[name];
 		},
 		bindEvents: function() {
 			document.addEventListener('deviceready', app.onDeviceReady, false);
@@ -185,9 +202,8 @@
 		},
 		render_header : function(){
 			$.getJSON(api_base_url+user+'/notifications', function(response){
-				var source   = Handlebars.partials.header;
 				console.log(Handlebars);
-				var template = Handlebars.compile(source);
+				var template = app.getTemplate('header');
 				$('.main').prepend( template(response) ).trigger('create');
 			});
 		},
