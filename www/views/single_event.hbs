@@ -26,6 +26,9 @@
 				<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
 			</ul>
 		</footer>
+		<ul class="activity_list single clearfix">
+			<li><a>{{scheduled_count}} <span>Agendado</span></a></li>
+		</ul>
 		{{#event_description}}<article class="event_description">{{{.}}}</article>{{/event_description}}
 		<section class="info_venue">
 			<p>Se presenta en:</p>
