@@ -87,6 +87,7 @@
 		// deviceready Event Handler
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
+
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
@@ -108,7 +109,8 @@
 		},
 		// Update DOM on a Received Event
 		receivedEvent: function(id) {
-			if(id == 'deviceready'){
+			if(id == 'deviceready' && typeof navigator.splashscreen != 'undefined'){
+				navigator.splashscreen.hide();
 			}
 		},
 		getUrlVars: function() {
@@ -160,8 +162,11 @@
 				app.registerTemplate('feed');
 				var template = Handlebars.templates.feed(response);
 				$('.feed_container').html( template );
+				app.set_selected_filter(filter);
 			}).fail(function(err){
 				console.log(err);
+			}).done(function(err){
+				app.render_header();
 			});
 		},
 		get_user_timeline : function(offset){
@@ -184,6 +189,8 @@
 				return;
 			}).fail(function(err){
 				console.log(err);
+			}).done(function(err){
+				app.render_header();
 			});
 			
 		},
@@ -197,15 +204,15 @@
 			
 			$.getJSON(api_base_url+'events/'+event_id+'/gallery/'+limit+'/thumbnail/', function(response){
 
-				var source   = $("#mini_gallery_template").html();
-				var template = Handlebars.compile(source);
-				$('.append_gallery').prepend( template(response) ).trigger('create');
+				app.registerTemplate('mini_event_gallery');
+				var template = Handlebars.templates.mini_event_gallery(response);
+				$('.append_gallery').prepend( template ).trigger('create');
 			});
 		},
 		render_event_popup: function(event_id){
-			var source   = $("#event_popup_template").html();
-			var template = Handlebars.compile(source);
-			$('.main').append( template({'event_id': event_id}) ).trigger('create');
+			app.registerTemplate('event_popup');
+			var template = Handlebars.templates.event_popup({'event_id': event_id});
+			$('.main').append( template ).trigger('create');
 		},
 		render_comments: function(event_id, offset){
 			$.getJSON(api_base_url+'events/comments/'+event_id+'/'+offset, function(response){
@@ -214,13 +221,16 @@
 			});
 		},
 		render_event: function(event_id){
+			app.render_header();
 			$.getJSON(api_base_url+user+'/events/'+event_id, function(response){
-				var source   = $("#event_single_template").html();
-				var template = Handlebars.compile(source);
-				$('.feed_container').append( template(response) ).trigger('create');
-				app.render_event_minigallery(event_id, 5);
-				app.render_comments(event_id, 0);
+				app.registerTemplate('single_event');
+				var template = Handlebars.templates.single_event(response);
+				$('.feed_container').append( template ).trigger('create');
 			});
+			app.render_event_minigallery(event_id, 5);
+			app.render_comments(event_id, 0);
+			app.render_event_gallery_partial(event_id);
+			app.render_event_popup(event_id);
 		},
 		render_my_schedule: function(offset){
 			$.getJSON(api_base_url+user+'/scheduled_feed/'+offset, function(response){

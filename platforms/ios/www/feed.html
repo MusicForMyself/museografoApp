@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com;">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.museografo.dev *.museografo.com http://museografo.com; img-src *; style-src 'self' 'unsafe-inline'; connect-src *.museografo.dev *.museografo.com http://museografo.com 'self';">
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 		<title>Museógrafo mobile app</title>
@@ -19,13 +19,6 @@
 		
 	<div data-role="page" class="main">
 		<section data-role="content">
-			<section class="tab_container clearfix">
-				<a class="tab_button" data-rel="all" data-role="none" data-enhance="false" href="feed.html?filter_feed=all" rel="external"><i class="fa fa-newspaper-o"></i></a>
-				<a class="tab_button" data-rel="most_popular" data-role="none" data-enhance="false" href="feed.html?filter_feed=most_popular" rel="external"><i class="fa fa-star"></i></a>
-				<a class="tab_button" data-rel="ending" data-role="none" data-enhance="false" href="feed.html?filter_feed=ending" rel="external"><i class="fa fa-clock-o"></i></a>
-				<a class="tab_button" data-rel="boosted" data-role="none" data-enhance="false" href="feed.html?filter_feed=boosted" rel="external"><i class="fa fa-thumbs-o-up"></i></a>
-			</section>
-			
 			<section class="feed_container event_feed">
 
 			</section><!-- feed_container -->
@@ -34,79 +27,19 @@
 
 	</div>
 	</body>
+
 	<script src="js/api-sdk-1.0.min.js"></script>
 	<script src="js/main.min.js"></script>
-	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script type="text/javascript">
 		app.initialize();
 	</script>
 	<script type="text/javascript" src="cordova.js"></script>
-	<!-- FEED ELEMENT TEMPLATE -->
-	<script id="event_feed_entry_template" type="text/x-handlebars-template">
-		<h1>{{filter_nice}}</h1>
-		{{#each results}}
-			<article class="no_box border_a each_feed_element expanded clearfix">
-				<section class="info_venue">
-					{{#venue_avatar}}
-						<a href="venue.html?venue={{../venue_id}}" rel="external" >
-							<img class="profile_pic" src="{{.}}" alt="{{../venue}}">
-						</a>
-					{{/venue_avatar}}
-					{{^venue_avatar}}
-						<a href="venue.html?venue={{../venue_id}}" rel="external" >
-							<img class="profile_pic" src="images/profile_placeholder.png" alt="{{../venue}}">
-						</a>
-					{{/venue_avatar}}
-
-					<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
-				</section>
-				{{#event_thumbnail}}
-					<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
-						<img src="{{.}}" alt="{{../event_title}}">
-						<h2>{{../event_title}}</h2>
-					</a>
-				{{/event_thumbnail}}
-				{{^event_thumbnail}}
-					<a class="event_thumb_wrapper" href="single-event.html?event={{../ID}}" rel="external">
-						<img src="images/event_placeholder.png" alt="{{..event_title}}">
-						<h2>{{../event_title}}</h2>
-					</a>
-				{{/event_thumbnail}}
-				<section class="info">
-					{{#address}}
-						<a class="address_link" href="geo:{{../latlong}}"><i class="fa fa-map-marker"></i> {{.}}</a>
-					{{/address}}
-					{{#event_description}}
-						<p>{{{.}}} </p>
-					{{/event_description}}
-					<p>
-						{{#date_start}}<b>Inaugura:</b> {{.}} <br>{{/date_start}}
-						{{#date_end}}<b>Termina:</b> {{.}} <br>{{/date_end}}
-						{{#event_type}}<span class="event_type">{{.}}</span>{{/event_type}}
-					</p>
-				</section>
-				<footer class="footer_menu single">
-					<ul class="clearfix">
-						{{#if scheduled}}
-							<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
-						{{/if}}
-						{{#unless scheduled}}
-							<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
-						{{/unless}}
-						<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
-					</ul>
-				</footer>
-			</article>
-		{{/each}}
-	</script>
 
 	<script type="text/javascript">
-		app.render_header();
 		var GET = app.getUrlVars();
 		if(app.isObjEmpty(GET)) GET.filter_feed = 'all';
-		app.set_selected_filter(GET.filter_feed);
 		app.get_events_feed(0, GET.filter_feed);
-		sdk_app_context.hideLoader();
 	</script>
 </html>

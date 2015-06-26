@@ -1,12 +1,4 @@
 {
-    "cordova-plugin-splashscreen": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-splashscreen"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-console": {
         "source": {
             "type": "registry",
@@ -19,31 +11,6 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-file"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-file-transfer": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-file-transfer"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "com.oauthio.plugins.oauthio": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/oauth-io/oauth-phonegap",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "nl.x-services.plugins.toast": {
-        "source": {
-            "type": "registry",
-            "id": "nl.x-services.plugins.toast"
         },
         "is_top_level": true,
         "variables": {}
@@ -63,14 +30,6 @@
             "id": "org.apache.cordova.inappbrowser"
         },
         "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-inappbrowser": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-inappbrowser"
-        },
-        "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-camera": {
@@ -94,6 +53,47 @@
             "type": "git",
             "url": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
             "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-splashscreen": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-splashscreen"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file-transfer"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "nl.x-services.plugins.toast": {
+        "source": {
+            "type": "registry",
+            "id": "nl.x-services.plugins.toast"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.oauthio.plugins.oauthio": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/oauth-io/oauth-phonegap",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
         },
         "is_top_level": true,
         "variables": {}

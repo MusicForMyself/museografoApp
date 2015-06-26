@@ -29,7 +29,7 @@ function requestHandlerAPI(){
 	this.ls = window.localStorage;
 	/* Constructor */
 	this.construct = function(app_context){
-					console.log('Initialized rest API Los Maquiladores sdk v0.1');
+					console.log('Initialized rest API Museógrafo sdk v1.0');
 					if(this.ls.getItem('request_token')) this.token = this.ls.getItem('request_token');
 					sdk_app_context = app_context;
 					/* For chaining purposes ::) */
@@ -46,7 +46,12 @@ function requestHandlerAPI(){
 								var data_object = {
 													user_login : data_login.user_login, 
 													user_password: data_login.user_password, 
-													request_token: apiRH.get_request_token() 
+													request_token: apiRH.get_request_token(),
+													parts:  {
+																model: context.device_model, 
+																platform: context.device_platform, 
+																version: context.device_platform_version 
+															}
 												  };
 								var response = this.makeRequest('auth/login/', data_object);
 								return (response.success) ? response.data : false;
@@ -458,17 +463,17 @@ function requestHandlerAPI(){
 		this.getFileFromDevice = function(destination, source){
 
 			this.photoDestinationType = navigator.camera.DestinationType;
-			var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
-			if(source == "camera") source =  navigator.camera.PictureSourceType.CAMERA;
+			var sourcetype =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
+			if(source == "camera") sourcetype =  navigator.camera.PictureSourceType.CAMERA;
 			if(destination == 'profile')
 				navigator.camera.getPicture(context.profileselect_win, context.fileselect_fail, { quality: 50,
 					destinationType: this.photoDestinationType.FILE_URI,
-					sourceType: source,
+					sourceType: sourcetype,
 					mediaType: navigator.camera.MediaType.ALLMEDIA  });
 			if(destination == 'event')
 				navigator.camera.getPicture(context.fileselect_win, context.fileselect_fail, { quality: 50,
 						destinationType: this.photoDestinationType.FILE_URI,
-						sourceType: source,
+						sourceType: sourcetype,
 						mediaType: navigator.camera.MediaType.ALLMEDIA  });
 			return;
 		};

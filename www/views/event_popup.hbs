@@ -1,0 +1,12 @@
+<div data-role="popup" class="ui-content" id="recomend_pop" data-position-to="window" data-transition="slide">
+	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close_dialog" >Close</a>
+	Recomendar evento a:
+	<form id="recomend_to" class="recomend_to">
+		<input type="text" name="user_rec" id="user_rec" placeholder="username">
+		<ul class='hidden_list' id='hidden_list'>
+		</ul>
+		<input type="hidden" name="event_id" value="{{event_id}}">
+		<textarea id="comment" name="comment" rows="3" placeholder="mensaje"></textarea>
+		<input type="submit" value="Recomendar!">
+	</form>
+</div>

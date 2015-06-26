@@ -14,8 +14,6 @@
 		<link rel="icon" href="images/favicon.ico" sizes="32x32">
 		<!-- Vendor libraries and plugins -->
 		<script src="js/jquery1.11.1.js"></script>
-		<!-- Templates -->
-		<script  src="js/handlebars-runtime.js"></script>
 	</head>
 	<body>
 		
@@ -30,8 +28,8 @@
 	</div>
 	</body>
 
-	<script src="js/api-sdk-1.0.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/api-sdk-1.0.min.js"></script>
+	<script src="js/main.min.js"></script>
 	<script src="js/plugins.min.js"></script>
 	<script src="js/jquery.mobile-1.4.3.min.js"></script>
 	<script type="text/javascript">
@@ -40,11 +38,8 @@
 	<script type="text/javascript" src="cordova.js"></script>
 
 	<script type="text/javascript">
-		app.render_header();
 		var GET = app.getUrlVars();
 		if(app.isObjEmpty(GET)) GET.filter_feed = 'all';
-		app.set_selected_filter(GET.filter_feed);
 		app.get_events_feed(0, GET.filter_feed);
-		sdk_app_context.hideLoader();
 	</script>
 </html>

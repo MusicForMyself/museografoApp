@@ -87,6 +87,7 @@
 		// deviceready Event Handler
 		onDeviceReady: function() {
 			app.receivedEvent('deviceready');
+
 			/*   ___    _         _   _     
 			*  / _ \  / \  _   _| |_| |__  
 			* | | | |/ _ \| | | | __| '_ \ 
@@ -108,7 +109,8 @@
 		},
 		// Update DOM on a Received Event
 		receivedEvent: function(id) {
-			if(id == 'deviceready'){
+			if(id == 'deviceready' && typeof navigator.splashscreen != 'undefined'){
+				navigator.splashscreen.hide();
 			}
 		},
 		getUrlVars: function() {
@@ -160,8 +162,11 @@
 				app.registerTemplate('feed');
 				var template = Handlebars.templates.feed(response);
 				$('.feed_container').html( template );
+				app.set_selected_filter(filter);
 			}).fail(function(err){
 				console.log(err);
+			}).done(function(err){
+				app.render_header();
 			});
 		},
 		get_user_timeline : function(offset){
@@ -184,6 +189,8 @@
 				return;
 			}).fail(function(err){
 				console.log(err);
+			}).done(function(err){
+				app.render_header();
 			});
 			
 		},
@@ -214,6 +221,7 @@
 			});
 		},
 		render_event: function(event_id){
+			app.render_header();
 			$.getJSON(api_base_url+user+'/events/'+event_id, function(response){
 				var source   = $("#event_single_template").html();
 				var template = Handlebars.compile(source);

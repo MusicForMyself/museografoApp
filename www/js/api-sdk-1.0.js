@@ -463,17 +463,17 @@ function requestHandlerAPI(){
 		this.getFileFromDevice = function(destination, source){
 
 			this.photoDestinationType = navigator.camera.DestinationType;
-			var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
-			if(source == "camera") source =  navigator.camera.PictureSourceType.CAMERA;
+			var sourcetype =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
+			if(source == "camera") sourcetype =  navigator.camera.PictureSourceType.CAMERA;
 			if(destination == 'profile')
 				navigator.camera.getPicture(context.profileselect_win, context.fileselect_fail, { quality: 50,
 					destinationType: this.photoDestinationType.FILE_URI,
-					sourceType: source,
+					sourceType: sourcetype,
 					mediaType: navigator.camera.MediaType.ALLMEDIA  });
 			if(destination == 'event')
 				navigator.camera.getPicture(context.fileselect_win, context.fileselect_fail, { quality: 50,
 						destinationType: this.photoDestinationType.FILE_URI,
-						sourceType: source,
+						sourceType: sourcetype,
 						mediaType: navigator.camera.MediaType.ALLMEDIA  });
 			return;
 		};
