@@ -1,0 +1,55 @@
+<a class="back_button" onclick="history.go(-1);"><i class="fa fa-angle-left"></i><span>{{event_title}}</span></a>
+<article class="no_box border_a each_feed_element expanded single clearfix">
+	<section class="event_thumbnail">
+		<img src="{{event_thumbnail}}">
+	</section>
+	<section class="append_gallery"></section>
+	{{#if scheduled}}
+		{{#attended}}
+			<a class="attended_event" id="attended_event" >Asistido <i class="fa fa-check-square-o"></i></a>
+		{{/attended}}
+		{{^attended}}
+			<a class="attend_event" id="attend_event" data-eventid="{{../ID}}" >Asistí <i class="fa fa-square-o"></i></a>
+		{{/attended}}
+	{{/if}}
+	<section class="info">
+		<footer class="footer_menu single clearfix">
+			<input type="hidden" value="{{ID}}" id="hidden_event_id">
+			<ul class="clearfix">
+				{{#if scheduled}}
+					<li data-id="{{ID}}" class="active unschedule_this special_icon"><i class="fa fa-calendar"></i><i class="fa fa-check superscript"></i></li>
+				{{/if}}
+				{{#unless scheduled}}
+					<li class="schedule_this" data-id="{{ID}}"><i class="fa fa-calendar"></i></li>
+				{{/unless}}
+				<li><a href="#recomend_pop" data-rel="popup" data-transition="flip"><i class="fa fa-paper-plane-o"></i></a></li>
+				<li><a onclick="window.plugins.socialsharing.share('{{event_title}}', null, null, '{{event_uri}}')"><i class="fa fa-share-alt"></i></a></li>
+			</ul>
+		</footer>
+		<ul class="activity_list single clearfix">
+			<li><a>{{scheduled_count}} <span>Agendado</span></a></li>
+		</ul>
+		{{#event_description}}<article class="event_description">{{{.}}}</article>{{/event_description}}
+		<section class="info_venue">
+			<p>Se presenta en:</p>
+			<img class="profile_pic" src="{{venue_avatar}}">
+			<h3><a href="venue.html?venue={{venue_id}}" rel="external">{{venue}}</a></h3>
+			{{#address}}<a href="geo:{{../latlong}}" class="location_link"><i class="fa fa-map-marker"></i> {{.}}</a>{{/address}}
+		</section>
+		{{#latlong}}
+			<a href="geo:{{.}}"><img src="http://maps.googleapis.com/maps/api/staticmap?center={{.}}&zoom=16&size=320x120&markers=color:blue%7Ccolor:blue%7Clabel:C%7C{{.}}&sensor=false" alt="{{../venue}}"></a>
+		{{/latlong}}
+		{{#if artists}}<p> <b>Artistas:</b>{{#each artists}} <a class="artist_clickable" href="user.html?user={{slug}}" rel="external">{{name}}</a>{{/each}}</p>{{/if}}
+		{{#if categories}}<p> <b>Categorías:</b>{{#each categories}} <a class="category_clickable" href="{{#is_last_of_branch}}category_detail.html?cat_id={{/is_last_of_branch}}{{^is_last_of_branch}}subcategories.html?parent={{/is_last_of_branch}}{{ID}}" rel="external">{{name}}</a>{{/each}}</p>{{/if}}
+		<p> {{#date_start}}<b>Inaugura:</b> {{.}}</p>{{/date_start}}
+		<p> {{#date_end}}<b>Termina:</b> {{.}}</p>{{/date_end}}
+		<p> {{!-- <b>Horario:</b> {{lol}}  --}}
+		<p> {{#costo}}<b>Admisión:</b> {{.}} </p>{{/costo}}
+		<p> {{#event_type}}<b>Tipo de Evento:</b> {{.}} </p>{{/event_type}}
+		
+		<a role="none" class="event_upload_trigger" id="event_upload_trigger" ><i class="fa fa-camera-retro"></i></a>
+		<a role="none" data-eventid="{{ID}}" class="event_file_upload invisibo" id="event_file_upload" ><i class="fa fa-picture-o"></i></a>
+		<a role="none" data-eventid="{{ID}}" class="event_camera_upload invisibo" id="event_camera_upload" ><i class="fa fa-camera"></i></a>
+	</section>
+
+</article>
