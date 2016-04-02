@@ -12,11 +12,13 @@ li { font-size: 1.4em; } /* =14px? */
 
 body{margin:0; padding:0; background-color: #E7E7E7; }
 *{text-shadow:none!important; box-sizing: border-box;}
-.ui-page-theme-a{background-color: #F9F9F9;min-height: 640px!important;}
+.ui-page-theme-a{background-color: #Fff;min-height: 65px!important;}
 body, input, select, textarea, button, .ui-btn{ font-family: 'gotham_book';}
-.home_header{ width: 100%; height: 200px;}
+h2{margin:0;}
+header.home_header.ui-header.ui-bar-inherit{background-color:#fff;border:none;}
+.home_header{ width: 100%; height: 68px;}
 .home_header img{display: block; position: absolute; top:0; left:0; width: 100%; height: 200px; z-index: 1;}
-.logo{width: 30%; height: 200px; background: url('images/logo.png') no-repeat center center; margin: 0 auto!important; background-size: contain; position: relative; z-index: 10;}
+.logo{width: 70px; height: 60px; background: url('images/logo.png') no-repeat; background-size: contain; position: relative; z-index: 10;top:10px;margin:0!important;left:10px;}
 p b{font-family: 'gotham_medium';}
 
 
@@ -86,9 +88,21 @@ html[xmlns] .clearfix {
 .information{color: #C4C4C4;margin: 1rem;text-align: center;font-size: 0.8rem;letter-spacing: 0.5px;font-family: 'roboto_regular', Helvetica, Arial, sans-serif;}
 
 /*REGISTER*/
-.hidden{}
+section#login_redes{position:relative;top:120px;width:95%;margin:0 auto;}
+
+section.registro{display:inline-block;position:absolute;top:43px;left:160px;font-family:'gotham_medium';}
+section.ingreso{position:absolute;top:140px; left:15px;display:inline-block;font-family:'gotham_medium';}
+section.login_area{width:95%;margin:129px auto 0 auto;}
+
+form#login_form input{border:1px solid #000;}
+form#register_form{width:95%;margin:0 auto; }
+form#register_form input{border:1px solid #000;box-shadow: none;}
+
+.ui-page-theme-a .ui-btn{border:none;box-shadow: none; background-color: #fff}
+
+::-webkit-input-placeholder {color: black;font-family: 'gotham_medium'}
 .button.gray{background: #838787;color: #FFF;display: block;padding: 0.5rem!important;margin: 0.2rem 0!important;}
-.register{font-family: 'gotham-medium'; font-size: 1rem; width: 96%; margin: auto;}
+.register{font-family: 'gotham_medium'; font-size: 1rem; width: 96%; margin: auto;}
 .register p{text-transform: uppercase; text-align: center; font-family: 'gotham_book', Helvetica, Arial, sans-serif; font-size: 1rem; margin: 1rem auto 0 auto;}
 .ui-btn.button,
 .ui-btn.button:hover{text-shadow:none; font-weight:100; font-size:1rem; padding:0.3rem; margin:0;}
@@ -98,14 +112,14 @@ html[xmlns] .clearfix {
 .ui-btn.button.facebook,
 .ui-btn.button.facebook:hover,
 .ui-btn.button.twitter,
-.ui-btn.button.twitter:hover{background: url('images/login_sprite.png') no-repeat; background-position: 50% -1px; width: 100%; height: 40px; display: block; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; background-color: #3C5A99; cursor: pointer;}
+.ui-btn.button.twitter:hover{background: url('images/login_sprite.png') no-repeat; background-position: 50% -1px; width: 100%; height: 40px; display: block; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; background-color: #3C5A99; cursor: pointer;}
 .ui-btn.button.twitter,
 .ui-btn.button.twitter:hover{background-position: 50% -42px;background-color: #44c8f5;margin-top: 0.5rem;}
 .register input[type=text],
 .register input[type=password]{width:100%;height:35px;}
-.register input[type=submit].ui-btn.join{ color:#F2F2F2; text-shadow:none; background-color:#48c!important; opacity:1; width:100%; text-transform:none; font-size:1rem; padding:0.5rem; font-family:'gotham_book', Helvetica, Arial, sans-serif; -webkit-border-radius:2px; -moz-border-radius:2px; border-radius:2px; border:none; letter-spacing:0.6px;}
+.register input[type=submit].ui-btn.join{ color:#Fff; text-shadow:none; background-color:#000!important; opacity:1; width:30%; text-transform:none; font-size:1rem; padding:0.5rem; font-family:'gotham_book', Helvetica, Arial, sans-serif; -webkit-border-radius:0px; -moz-border-radius:0px; border-radius:0px; border:none; letter-spacing:0.6px;}
 
-.ui-corner-all{border-radius: 4px!important;}
+.ui-corner-all{border-radius: 0px!important;}
 
 
 
@@ -133,7 +147,7 @@ html[xmlns] .clearfix {
 #notifications_drop li p strong{font-family: 'gotham_medium';}
 
 /*HEADER*/
-.ui-page-theme-a .fixed_header{background-color:#353333;padding:0.5rem 0;padding-top:1.6rem;top:0;border:none;}
+.ui-page-theme-a .fixed_header{background-color:#fff;padding:0.5rem 0;padding-top:1.6rem;top:0;border-bottom:2px solid #000;}
 .ui-header .menu_trigger{width: 30px; height: 27px; display: block; font-size: 1.6rem; color: #FFF!important; text-align: center; line-height: 1.6rem; margin: 1.3rem auto 0.2rem auto;}
 .ui-header .ui-title.page_title{text-align: center; color: #FFF; margin: 0 auto; text-shadow: none; font-family: 'gotham_book'; padding: 0; font-size: 1.2rem;}
 .ui-header .ui-title.page_title form{width:15rem;display:block;margin:0 auto;height:1.8rem;}
@@ -168,6 +182,10 @@ html[xmlns] .clearfix {
 }
 .ui-btn.ui-input-clear:after{margin-left:-2px;margin-top:-7px;width:15px;height:15px;background-size:66%;}
 .circle.notifications{background:#FF0000;border: 2px solid #FFF;text-align:center;line-height:26px;font-size:0.85rem;text-decoration:none;color:#FFF!important; margin: 1.25rem 0.4rem 0.2rem auto;}
+
+.ui-input-search input{background:#fff!important;display:none;}
+::after{border:1px solid #000;position:relative;top:0px;padding:10px;}
+div.ui-input-search{border:none!important;position:relative;top:10px;}
 
 
 /*FEED*/

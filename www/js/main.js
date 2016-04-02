@@ -152,6 +152,7 @@
 				var source   = $("#login_screen_template").html();
 				var template = Handlebars.compile(source);
 				$('#index_container').html( template(response.data) );
+				$('.enhanced_select').chosen({disable_search_threshold: 20});
 			}).fail(function(err){
 				console.log(JSON.stringify(err));
 			});
@@ -472,6 +473,32 @@
 		// $( ".fixed_header" ).toolbar({ position: "fixed" });
 
 		/* Log In with a regular ol' account */
+/*
+HOLKAN
+*/
+
+		// $("#login_form").hide();
+		$("#register_form").hide();
+		$(".registro").click(function(){
+			$("#register_form").fadeIn("fast");
+			$("#login_form").hide();
+			$(".registro").animate({top:"140px",left:"15px"});
+			$(".ingreso").animate({top:"47px",left:"160px"});
+		});
+		$(".ingreso").click(function(){
+			$("#login_form").fadeIn("fast");
+			$("#register_form").hide();
+			$(".ingreso").animate({top:"140px",left:"15px"});
+			$(".registro").animate({top:"47px",left:"160px"});
+		});
+
+
+
+
+
+/*
+ENDHOLKAN
+*/
 		$('#login_form').submit(function(e){
 			app.showLoader();
 			e.preventDefault();
