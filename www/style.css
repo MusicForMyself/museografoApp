@@ -87,16 +87,6 @@ html[xmlns] .clearfix {
 
 .information{color: #C4C4C4;margin: 1rem;text-align: center;font-size: 0.8rem;letter-spacing: 0.5px;font-family: 'roboto_regular', Helvetica, Arial, sans-serif;}
 
-/*REGISTER*/
-section#login_redes{position:relative;top:120px;width:95%;margin:0 auto;}
-
-section.registro{display:inline-block;position:absolute;top:43px;left:160px;font-family:'gotham_medium';}
-section.ingreso{position:absolute;top:140px; left:15px;display:inline-block;font-family:'gotham_medium';}
-section.login_area{width:95%;margin:129px auto 0 auto;}
-
-form#login_form input{border:1px solid #000;}
-form#register_form{width:95%;margin:0 auto; }
-form#register_form input{border:1px solid #000;box-shadow: none;}
 
 .ui-page-theme-a .ui-btn{border:none;box-shadow: none; background-color: #fff}
 
@@ -118,6 +108,7 @@ form#register_form input{border:1px solid #000;box-shadow: none;}
 .register input[type=text],
 .register input[type=password]{width:100%;height:35px;}
 .register input[type=submit].ui-btn.join{ color:#Fff; text-shadow:none; background-color:#000!important; opacity:1; width:30%; text-transform:none; font-size:1rem; padding:0.5rem; font-family:'gotham_book', Helvetica, Arial, sans-serif; -webkit-border-radius:0px; -moz-border-radius:0px; border-radius:0px; border:none; letter-spacing:0.6px;}
+
 
 .ui-corner-all{border-radius: 0px!important;}
 
@@ -180,11 +171,11 @@ form#register_form input{border:1px solid #000;box-shadow: none;}
     font-size: 0.85rem;
     line-height: 1.1rem;
 }
-.ui-btn.ui-input-clear:after{margin-left:-2px;margin-top:-7px;width:15px;height:15px;background-size:66%;}
+.ui-btn.ui-input-clear:after{margin-left:-2px;margin-top:-7px;/*width:15px;height:15px;*/background-size:66%;}
 .circle.notifications{background:#FF0000;border: 2px solid #FFF;text-align:center;line-height:26px;font-size:0.85rem;text-decoration:none;color:#FFF!important; margin: 1.25rem 0.4rem 0.2rem auto;}
 
 .ui-input-search input{background:#fff!important;display:none;}
-::after{border:1px solid #000;position:relative;top:0px;padding:10px;}
+/*::after{border:1px solid #000;position:relative;top:0px;}*/
 div.ui-input-search{border:none!important;position:relative;top:10px;}
 
 
@@ -214,7 +205,7 @@ div.ui-input-search{border:none!important;position:relative;top:10px;}
 .article_details .timestamp>i{display:inline-block;clear:none;vertical-align:middle;font-size:1.6rem;opacity:0.7;padding:0 0.25rem;}
 .article_details .timestamp p{margin:0;font-size:0.8rem;letter-spacing:1px;display:inline-block;vertical-align:middle;}
 .each_feed_element.expanded .profile_pic{width:40px; height:40px; float:left; margin:0.5rem;}
-.each_feed_element.expanded .info_venue {float:left; width:100%; margin:0.5rem 0;}
+.each_feed_element.expanded .info_venue {float:left; width:100%; margin:0;}
 .each_feed_element.expanded .info_venue h2{font-size:1rem; font-family:'gotham_medium'; margin:0; text-indent:0; padding:0;}
 .each_feed_element.expanded .info_venue h3{color:#564E4E; font-family:'gotham_medium'; margin:0; font-size:0.8rem; padding-top:0.3rem; letter-spacing:1px;}
 .each_feed_element.expanded .info_venue h3 a{ text-decoration: none;}
@@ -381,7 +372,7 @@ a.load_more i{display:block; font-size:1.5rem;}
 .ui-tabs.tabbed_content .ui-navbar{max-width: 100%;margin: auto;}
 .ui-tabs.tabbed_content .ui-navbar li a{font-size: 0.8rem;padding: 0.7rem 0;color: #474040;border: none;letter-spacing: 1px;background-color: #F2EFEF;}
 .ui-tabs.tabbed_content .ui-navbar li a:focus{outline: none;box-shadow: none;}
-.ui-page-theme-a .ui-btn.ui-btn-active{color:#474040;border:none;letter-spacing:1px;background-color:#FFF!important;}
+.ui-page-theme-a .ui-btn.ui-btn-active{color:#000;border:none;letter-spacing:1px;background-color:#FFF!important;}
 .no_events{text-align: center; font-size: 0.4rem; color: #767575; letter-spacing: 0.5px; min-height: 120px;}
 .chech_attended{ color: #559021; display: block; text-align: right; }
 
@@ -859,3 +850,66 @@ a.category_follow.select_me.ui-link{font-size:1.4em;}
 
 .user_profile .bio{display:block;float:none;clear:both;position:relative;}
 .user_profile .bio p{display:block;clear:both;margin:0 0 1rem 0;text-align:left;font-size:0.74rem;line-height:1rem;color:#737979;}
+
+
+
+
+
+
+/*ADAPTABLE*/
+@media screen and (max-width: 375px){
+    section#login_redes{position:relative;top:120px;width:95%;margin:0 auto;}
+    section.registro{display:inline-block;position:absolute;top:43px;left:240px;font-family:'gotham_medium';}
+    section.ingreso{position:absolute;top:140px; left:15px;display:inline-block;font-family:'gotham_medium';}
+    section.login_area{width:95%;margin:129px auto 0 auto;}
+    form#register_form{width:95%;margin:0 auto; }
+
+/*h*/
+input[type=text], textarea{outline:none;border:1px solid black;}
+input[type=password], textarea{outline:none;border:1px solid black;}
+.ui-page-theme-a .ui-body-inherit{border-color:#000;}
+
+select#user_country{border:2px solid black;border-radius:0!important;height:37px;width:100%;}
+select#user_province{border:2px solid black;border-radius:0!important;height:37px;width:100%;background:#fff;}     
+}
+
+/*h*/
+@media screen and (max-width: 320px){
+
+/*HEADER*/
+.ui-page-theme-a .fixed_header{background-color:#fff;padding:0.5rem 0;padding-top:1.6rem;top:0;border-bottom:2px solid #000;}
+.ui-header .menu_trigger{width: 30px; height: 30px;display: block; font-size: 2.3rem; color: #000!important; text-align: center; line-height: 1.6rem;margin: 1.3rem auto 0.2rem auto;}
+.ui-input-search::after{border:1px solid black;padding:10px;margin-left:27px;}
+h1.page_title{height:45px;}
+
+.ui-btn-right.notifications{width:40px;height:40px;border-radius: 20px;margin:25px 144px 0 0;}
+
+a.tab_button{padding-bottom:0;}
+/*REGISTER*/
+section#login_redes{position:relative;top:120px;width:95%;margin:0 auto;}
+
+section.registro{display:inline-block;position:absolute;top:43px;left:160px;font-family:'gotham_medium';}
+section.ingreso{position:absolute;top:140px; left:15px;display:inline-block;font-family:'gotham_medium';}
+section.login_area{width:95%;margin:129px auto 0 auto;}
+
+form#register_form{width:95%;margin:0 auto; }
+
+input[type=text], textarea{outline:none;border:1px solid black;}
+input[type=password], textarea{outline:none;border:1px solid black;}
+.ui-page-theme-a .ui-body-inherit{border-color:#000;}
+
+select#user_country{border:2px solid black;border-radius:0!important;height:37px;width:100%;}
+select#user_province{border:2px solid black;border-radius:0!important;height:37px;width:100%;background:#fff;}
+
+
+/*FEED*/
+.ui-mobile a img.profile_pic{border-radius:20px;}
+.ui-mobile a img{width:90%;margin:0 auto;}
+article.each_feed_element section.info_venue{position:absolute;top:-20px;z-index: 10}
+section.info p:first-child{display:none;}
+.each_feed_element h2{position:absolute;top:30px;left:15%;background:rgba(255,255,255,0.8);color:#000;width:80%;}
+.border_a{border:none;}
+.ui-page-theme-a a{color:#000;}
+
+}/*end media*/
+/*h*/

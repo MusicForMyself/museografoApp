@@ -476,8 +476,6 @@
 /*
 HOLKAN
 */
-
-		// $("#login_form").hide();
 		$("#register_form").hide();
 		$(".registro").click(function(){
 			$("#register_form").fadeIn("fast");
@@ -491,7 +489,6 @@ HOLKAN
 			$(".ingreso").animate({top:"140px",left:"15px"});
 			$(".registro").animate({top:"47px",left:"160px"});
 		});
-
 
 
 
