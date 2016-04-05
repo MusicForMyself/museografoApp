@@ -882,9 +882,10 @@ select#user_province{border:2px solid black;border-radius:0!important;height:37p
 .ui-input-search::after{border:1px solid black;padding:10px;margin-left:27px;}
 h1.page_title{height:45px;}
 
-.ui-btn-right.notifications{width:40px;height:40px;border-radius: 20px;margin:25px 144px 0 0;}
+.ui-btn-right.notifications{width:40px;height:40px;border-radius: 20px;margin:25px 144px 0 0;border:1px solid blue; background:none;color:#000!important;}
 
 a.tab_button{padding-bottom:0;}
+
 /*REGISTER*/
 section#login_redes{position:relative;top:120px;width:95%;margin:0 auto;}
 
@@ -906,10 +907,27 @@ select#user_province{border:2px solid black;border-radius:0!important;height:37p
 .ui-mobile a img.profile_pic{border-radius:20px;}
 .ui-mobile a img{width:90%;margin:0 auto;}
 article.each_feed_element section.info_venue{position:absolute;top:-20px;z-index: 10}
-section.info p:first-child{display:none;}
+/*section.info p:first-child{display:none;}*/
 .each_feed_element h2{position:absolute;top:30px;left:15%;background:rgba(255,255,255,0.8);color:#000;width:80%;}
 .border_a{border:none;}
 .ui-page-theme-a a{color:#000;}
+
+/*INFO*/
+.no_box.border_a .info{width:70%;margin:0 auto;}
+
+/*FOOTER_MENU*/
+
+.footer_menu ul{float:none;margin-left:15%;}
+.footer_menu ul li{color:#7a7a7a;}
+.footer_menu.single ul li:first-child{margin:0 100px 0 0 ;}
+.footer_menu.single ul li:last-child{margin:0 0 0 0 ;}
+
+
+/*PANEL*/
+.menu{background:#fff!important;}
+.menu li{background-color:#fff;border:none;}
+.menu li.settings{background-color:#fff;border:none;}
+.menu li a.ui-link{color:#000;}
 
 }/*end media*/
 /*h*/
